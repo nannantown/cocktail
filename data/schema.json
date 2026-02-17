@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Cocktail",
+  "description": "カクテルレシピのスキーマ定義",
+  "type": "object",
+  "required": ["id", "name", "category", "glass", "method", "ingredients", "instructions"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "一意の識別子（英語スラッグ）"
+    },
+    "name": {
+      "type": "object",
+      "properties": {
+        "ja": { "type": "string", "description": "日本語名" },
+        "en": { "type": "string", "description": "英語名" }
+      },
+      "required": ["ja", "en"]
+    },
+    "category": {
+      "type": "string",
+      "enum": ["standard", "tropical", "short", "long", "shot", "hot", "non-alcohol"],
+      "description": "カクテルのカテゴリ"
+    },
+    "base_spirit": {
+      "type": "string",
+      "enum": ["gin", "vodka", "rum", "tequila", "whiskey", "brandy", "liqueur", "wine", "beer", "none"],
+      "description": "ベースとなるスピリッツ"
+    },
+    "glass": {
+      "type": "string",
+      "enum": ["cocktail", "old-fashioned", "highball", "collins", "champagne-flute", "wine", "shot", "copper-mug", "hurricane", "margarita", "irish-coffee"],
+      "description": "使用するグラスの種類"
+    },
+    "method": {
+      "type": "string",
+      "enum": ["shake", "stir", "build", "blend", "layer"],
+      "description": "作り方（技法）"
+    },
+    "ingredients": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "amount"],
+        "properties": {
+          "name": { "type": "string", "description": "材料名" },
+          "amount": { "type": "string", "description": "分量（例: 30ml, 1tsp, 適量）" }
+        }
+      }
+    },
+    "instructions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "作り方の手順"
+    },
+    "garnish": {
+      "type": "string",
+      "description": "ガーニッシュ（飾り）"
+    },
+    "taste": {
+      "type": "string",
+      "enum": ["sweet", "dry", "sour", "bitter", "sweet-sour", "refreshing"],
+      "description": "味わいの傾向"
+    },
+    "alcohol_strength": {
+      "type": "string",
+      "enum": ["strong", "medium", "weak", "none"],
+      "description": "アルコール度数の強さ"
+    },
+    "description": {
+      "type": "string",
+      "description": "カクテルの説明・由来"
+    }
+  }
+}

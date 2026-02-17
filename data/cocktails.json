@@ -1,0 +1,465 @@
+[
+  {
+    "id": "martini",
+    "name": { "ja": "マティーニ", "en": "Martini" },
+    "category": "short",
+    "base_spirit": "gin",
+    "glass": "cocktail",
+    "method": "stir",
+    "ingredients": [
+      { "name": "ドライジン", "amount": "45ml" },
+      { "name": "ドライベルモット", "amount": "15ml" }
+    ],
+    "instructions": [
+      "ミキシンググラスに氷を入れ、ジンとドライベルモットを注ぐ",
+      "バースプーンで手早くステアする",
+      "カクテルグラスに注ぐ",
+      "オリーブを飾る"
+    ],
+    "garnish": "オリーブ",
+    "taste": "dry",
+    "alcohol_strength": "strong",
+    "description": "カクテルの王様と呼ばれる定番中の定番。シンプルながらバーテンダーの技量が問われる一杯。"
+  },
+  {
+    "id": "manhattan",
+    "name": { "ja": "マンハッタン", "en": "Manhattan" },
+    "category": "short",
+    "base_spirit": "whiskey",
+    "glass": "cocktail",
+    "method": "stir",
+    "ingredients": [
+      { "name": "ライウイスキー", "amount": "45ml" },
+      { "name": "スイートベルモット", "amount": "15ml" },
+      { "name": "アンゴスチュラビターズ", "amount": "1dash" }
+    ],
+    "instructions": [
+      "ミキシンググラスに氷を入れる",
+      "ライウイスキー、スイートベルモット、ビターズを注ぐ",
+      "ステアしてカクテルグラスに注ぐ",
+      "マラスキーノチェリーを飾る"
+    ],
+    "garnish": "マラスキーノチェリー",
+    "taste": "sweet",
+    "alcohol_strength": "strong",
+    "description": "カクテルの女王と称される。ニューヨークのマンハッタン島が名前の由来。"
+  },
+  {
+    "id": "old-fashioned",
+    "name": { "ja": "オールドファッションド", "en": "Old Fashioned" },
+    "category": "standard",
+    "base_spirit": "whiskey",
+    "glass": "old-fashioned",
+    "method": "build",
+    "ingredients": [
+      { "name": "バーボンウイスキー", "amount": "45ml" },
+      { "name": "角砂糖", "amount": "1個" },
+      { "name": "アンゴスチュラビターズ", "amount": "2dashes" },
+      { "name": "水", "amount": "少量" }
+    ],
+    "instructions": [
+      "ロックグラスに角砂糖を入れ、ビターズと少量の水を加える",
+      "角砂糖をバースプーンで潰しながら溶かす",
+      "氷を入れ、バーボンを注ぐ",
+      "軽くステアする",
+      "オレンジピールを絞りかけ、グラスに落とす"
+    ],
+    "garnish": "オレンジピール、マラスキーノチェリー",
+    "taste": "bitter",
+    "alcohol_strength": "strong",
+    "description": "最も古いカクテルのひとつ。ウイスキー本来の味わいを活かしたシンプルな一杯。"
+  },
+  {
+    "id": "gimlet",
+    "name": { "ja": "ギムレット", "en": "Gimlet" },
+    "category": "short",
+    "base_spirit": "gin",
+    "glass": "cocktail",
+    "method": "shake",
+    "ingredients": [
+      { "name": "ドライジン", "amount": "45ml" },
+      { "name": "ライムジュース", "amount": "15ml" },
+      { "name": "シュガーシロップ", "amount": "1tsp" }
+    ],
+    "instructions": [
+      "シェーカーに全ての材料と氷を入れる",
+      "しっかりシェークする",
+      "カクテルグラスに注ぐ"
+    ],
+    "garnish": "ライム",
+    "taste": "sour",
+    "alcohol_strength": "strong",
+    "description": "レイモンド・チャンドラーの小説『長いお別れ』で有名になった。ギムレットには早すぎる。"
+  },
+  {
+    "id": "daiquiri",
+    "name": { "ja": "ダイキリ", "en": "Daiquiri" },
+    "category": "short",
+    "base_spirit": "rum",
+    "glass": "cocktail",
+    "method": "shake",
+    "ingredients": [
+      { "name": "ホワイトラム", "amount": "45ml" },
+      { "name": "ライムジュース", "amount": "15ml" },
+      { "name": "シュガーシロップ", "amount": "1tsp" }
+    ],
+    "instructions": [
+      "シェーカーに全ての材料と氷を入れる",
+      "しっかりシェークする",
+      "カクテルグラスに注ぐ"
+    ],
+    "garnish": "なし",
+    "taste": "sweet-sour",
+    "alcohol_strength": "medium",
+    "description": "キューバ生まれの爽やかなカクテル。ヘミングウェイが愛した一杯としても有名。"
+  },
+  {
+    "id": "margarita",
+    "name": { "ja": "マルガリータ", "en": "Margarita" },
+    "category": "short",
+    "base_spirit": "tequila",
+    "glass": "margarita",
+    "method": "shake",
+    "ingredients": [
+      { "name": "テキーラ", "amount": "30ml" },
+      { "name": "コアントロー", "amount": "15ml" },
+      { "name": "ライムジュース", "amount": "15ml" }
+    ],
+    "instructions": [
+      "グラスのリムを塩でスノースタイルにする",
+      "シェーカーに全ての材料と氷を入れる",
+      "しっかりシェークする",
+      "マルガリータグラスに注ぐ"
+    ],
+    "garnish": "塩（スノースタイル）、ライム",
+    "taste": "sour",
+    "alcohol_strength": "medium",
+    "description": "テキーラベースの代表的カクテル。塩のスノースタイルが特徴的。"
+  },
+  {
+    "id": "moscow-mule",
+    "name": { "ja": "モスコミュール", "en": "Moscow Mule" },
+    "category": "long",
+    "base_spirit": "vodka",
+    "glass": "copper-mug",
+    "method": "build",
+    "ingredients": [
+      { "name": "ウォッカ", "amount": "45ml" },
+      { "name": "ライムジュース", "amount": "15ml" },
+      { "name": "ジンジャービア", "amount": "適量" }
+    ],
+    "instructions": [
+      "銅製マグカップに氷を入れる",
+      "ウォッカとライムジュースを注ぐ",
+      "ジンジャービアで満たす",
+      "軽くステアする"
+    ],
+    "garnish": "ライムウェッジ",
+    "taste": "refreshing",
+    "alcohol_strength": "medium",
+    "description": "銅製マグカップで提供されるのが伝統的。ジンジャーの爽やかな刺激が特徴。"
+  },
+  {
+    "id": "mojito",
+    "name": { "ja": "モヒート", "en": "Mojito" },
+    "category": "long",
+    "base_spirit": "rum",
+    "glass": "collins",
+    "method": "build",
+    "ingredients": [
+      { "name": "ホワイトラム", "amount": "45ml" },
+      { "name": "ライムジュース", "amount": "20ml" },
+      { "name": "シュガーシロップ", "amount": "15ml" },
+      { "name": "ミントの葉", "amount": "6〜8枚" },
+      { "name": "炭酸水", "amount": "適量" }
+    ],
+    "instructions": [
+      "グラスにミントの葉とシュガーシロップを入れ、軽くマドルする",
+      "ライムジュースとラムを加える",
+      "クラッシュドアイスを入れる",
+      "炭酸水で満たし、軽くステアする"
+    ],
+    "garnish": "ミントの枝",
+    "taste": "refreshing",
+    "alcohol_strength": "medium",
+    "description": "キューバ・ハバナ発祥。ミントとライムの爽快な組み合わせが夏に最適。"
+  },
+  {
+    "id": "negroni",
+    "name": { "ja": "ネグローニ", "en": "Negroni" },
+    "category": "short",
+    "base_spirit": "gin",
+    "glass": "old-fashioned",
+    "method": "build",
+    "ingredients": [
+      { "name": "ドライジン", "amount": "30ml" },
+      { "name": "カンパリ", "amount": "30ml" },
+      { "name": "スイートベルモット", "amount": "30ml" }
+    ],
+    "instructions": [
+      "ロックグラスに氷を入れる",
+      "全ての材料を注ぐ",
+      "軽くステアする",
+      "オレンジピールを絞りかける"
+    ],
+    "garnish": "オレンジスライス",
+    "taste": "bitter",
+    "alcohol_strength": "strong",
+    "description": "イタリア・フィレンツェ生まれの食前酒。カンパリの苦味が特徴的な大人の味わい。"
+  },
+  {
+    "id": "gin-tonic",
+    "name": { "ja": "ジントニック", "en": "Gin and Tonic" },
+    "category": "long",
+    "base_spirit": "gin",
+    "glass": "highball",
+    "method": "build",
+    "ingredients": [
+      { "name": "ドライジン", "amount": "45ml" },
+      { "name": "トニックウォーター", "amount": "適量" }
+    ],
+    "instructions": [
+      "グラスに氷を入れる",
+      "ジンを注ぐ",
+      "トニックウォーターで満たす",
+      "軽くステアする（混ぜすぎない）",
+      "ライムを添える"
+    ],
+    "garnish": "ライムウェッジ",
+    "taste": "refreshing",
+    "alcohol_strength": "medium",
+    "description": "世界で最も飲まれているカクテルのひとつ。シンプルだが奥深い。"
+  },
+  {
+    "id": "whiskey-sour",
+    "name": { "ja": "ウイスキーサワー", "en": "Whiskey Sour" },
+    "category": "short",
+    "base_spirit": "whiskey",
+    "glass": "old-fashioned",
+    "method": "shake",
+    "ingredients": [
+      { "name": "バーボンウイスキー", "amount": "45ml" },
+      { "name": "レモンジュース", "amount": "20ml" },
+      { "name": "シュガーシロップ", "amount": "15ml" },
+      { "name": "卵白", "amount": "1個分（お好みで）" }
+    ],
+    "instructions": [
+      "シェーカーに全ての材料を入れ、氷なしでドライシェークする（卵白を使う場合）",
+      "氷を加えてしっかりシェークする",
+      "ロックグラスに氷を入れて注ぐ"
+    ],
+    "garnish": "オレンジスライス、マラスキーノチェリー",
+    "taste": "sweet-sour",
+    "alcohol_strength": "medium",
+    "description": "サワーカクテルの代表格。卵白を加えるとクリーミーな泡が生まれる。"
+  },
+  {
+    "id": "cosmopolitan",
+    "name": { "ja": "コスモポリタン", "en": "Cosmopolitan" },
+    "category": "short",
+    "base_spirit": "vodka",
+    "glass": "cocktail",
+    "method": "shake",
+    "ingredients": [
+      { "name": "シトラスウォッカ", "amount": "30ml" },
+      { "name": "コアントロー", "amount": "15ml" },
+      { "name": "クランベリージュース", "amount": "30ml" },
+      { "name": "ライムジュース", "amount": "15ml" }
+    ],
+    "instructions": [
+      "シェーカーに全ての材料と氷を入れる",
+      "しっかりシェークする",
+      "カクテルグラスに注ぐ"
+    ],
+    "garnish": "オレンジピール",
+    "taste": "sweet-sour",
+    "alcohol_strength": "medium",
+    "description": "ドラマ『セックス・アンド・ザ・シティ』で人気に。美しいピンク色が特徴。"
+  },
+  {
+    "id": "sidecar",
+    "name": { "ja": "サイドカー", "en": "Sidecar" },
+    "category": "short",
+    "base_spirit": "brandy",
+    "glass": "cocktail",
+    "method": "shake",
+    "ingredients": [
+      { "name": "ブランデー", "amount": "30ml" },
+      { "name": "コアントロー", "amount": "15ml" },
+      { "name": "レモンジュース", "amount": "15ml" }
+    ],
+    "instructions": [
+      "シェーカーに全ての材料と氷を入れる",
+      "しっかりシェークする",
+      "カクテルグラスに注ぐ"
+    ],
+    "garnish": "レモンピール",
+    "taste": "sweet-sour",
+    "alcohol_strength": "strong",
+    "description": "ブランデーベースの代表的カクテル。第一次世界大戦頃にパリで生まれたとされる。"
+  },
+  {
+    "id": "pina-colada",
+    "name": { "ja": "ピニャコラーダ", "en": "Pina Colada" },
+    "category": "tropical",
+    "base_spirit": "rum",
+    "glass": "hurricane",
+    "method": "blend",
+    "ingredients": [
+      { "name": "ホワイトラム", "amount": "30ml" },
+      { "name": "ココナッツミルク", "amount": "30ml" },
+      { "name": "パイナップルジュース", "amount": "80ml" }
+    ],
+    "instructions": [
+      "ブレンダーに全ての材料とクラッシュドアイスを入れる",
+      "滑らかになるまでブレンドする",
+      "大きめのグラスに注ぐ"
+    ],
+    "garnish": "パイナップル、マラスキーノチェリー",
+    "taste": "sweet",
+    "alcohol_strength": "weak",
+    "description": "プエルトリコの国民的カクテル。ココナッツとパイナップルのトロピカルな味わい。"
+  },
+  {
+    "id": "espresso-martini",
+    "name": { "ja": "エスプレッソマティーニ", "en": "Espresso Martini" },
+    "category": "short",
+    "base_spirit": "vodka",
+    "glass": "cocktail",
+    "method": "shake",
+    "ingredients": [
+      { "name": "ウォッカ", "amount": "30ml" },
+      { "name": "コーヒーリキュール", "amount": "20ml" },
+      { "name": "エスプレッソ", "amount": "30ml" },
+      { "name": "シュガーシロップ", "amount": "1tsp" }
+    ],
+    "instructions": [
+      "エスプレッソを抽出し、少し冷ます",
+      "シェーカーに全ての材料と氷を入れる",
+      "力強くシェークして泡を立てる",
+      "カクテルグラスに注ぐ"
+    ],
+    "garnish": "コーヒー豆3粒",
+    "taste": "bitter",
+    "alcohol_strength": "medium",
+    "description": "1983年にロンドンで誕生。コーヒーの苦味とウォッカのキレが絶妙にマッチ。"
+  },
+  {
+    "id": "mai-tai",
+    "name": { "ja": "マイタイ", "en": "Mai Tai" },
+    "category": "tropical",
+    "base_spirit": "rum",
+    "glass": "old-fashioned",
+    "method": "shake",
+    "ingredients": [
+      { "name": "ホワイトラム", "amount": "30ml" },
+      { "name": "ダークラム", "amount": "15ml" },
+      { "name": "オレンジキュラソー", "amount": "15ml" },
+      { "name": "ライムジュース", "amount": "15ml" },
+      { "name": "オルゲートシロップ", "amount": "10ml" }
+    ],
+    "instructions": [
+      "シェーカーにダークラム以外の材料と氷を入れる",
+      "しっかりシェークする",
+      "クラッシュドアイスを入れたグラスに注ぐ",
+      "ダークラムをフロートさせる"
+    ],
+    "garnish": "ミント、ライム、パイナップル",
+    "taste": "sweet-sour",
+    "alcohol_strength": "medium",
+    "description": "ティキカルチャーを代表するカクテル。マイタイはタヒチ語で「最高」の意味。"
+  },
+  {
+    "id": "irish-coffee",
+    "name": { "ja": "アイリッシュコーヒー", "en": "Irish Coffee" },
+    "category": "hot",
+    "base_spirit": "whiskey",
+    "glass": "irish-coffee",
+    "method": "build",
+    "ingredients": [
+      { "name": "アイリッシュウイスキー", "amount": "30ml" },
+      { "name": "ホットコーヒー", "amount": "120ml" },
+      { "name": "ブラウンシュガー", "amount": "1tsp" },
+      { "name": "生クリーム", "amount": "適量" }
+    ],
+    "instructions": [
+      "耐熱グラスを温めておく",
+      "ブラウンシュガーを入れ、ホットコーヒーを注ぐ",
+      "アイリッシュウイスキーを加えて混ぜる",
+      "軽くホイップした生クリームをフロートさせる"
+    ],
+    "garnish": "なし",
+    "taste": "sweet",
+    "alcohol_strength": "medium",
+    "description": "アイルランド・シャノン空港で生まれたホットカクテル。寒い日に体を温める一杯。"
+  },
+  {
+    "id": "shirley-temple",
+    "name": { "ja": "シャーリーテンプル", "en": "Shirley Temple" },
+    "category": "non-alcohol",
+    "base_spirit": "none",
+    "glass": "collins",
+    "method": "build",
+    "ingredients": [
+      { "name": "ジンジャーエール", "amount": "適量" },
+      { "name": "グレナデンシロップ", "amount": "20ml" },
+      { "name": "レモンジュース", "amount": "10ml" }
+    ],
+    "instructions": [
+      "グラスに氷を入れる",
+      "グレナデンシロップとレモンジュースを注ぐ",
+      "ジンジャーエールで満たす",
+      "軽くステアする"
+    ],
+    "garnish": "マラスキーノチェリー",
+    "taste": "sweet",
+    "alcohol_strength": "none",
+    "description": "子役スター、シャーリー・テンプルにちなんだノンアルコールカクテル。"
+  },
+  {
+    "id": "b52",
+    "name": { "ja": "B-52", "en": "B-52" },
+    "category": "shot",
+    "base_spirit": "liqueur",
+    "glass": "shot",
+    "method": "layer",
+    "ingredients": [
+      { "name": "コーヒーリキュール（カルーア）", "amount": "15ml" },
+      { "name": "ベイリーズ", "amount": "15ml" },
+      { "name": "グランマルニエ", "amount": "15ml" }
+    ],
+    "instructions": [
+      "ショットグラスにコーヒーリキュールを注ぐ",
+      "バースプーンの背を使い、ベイリーズを静かに重ねる",
+      "同様にグランマルニエを重ねる",
+      "3層のレイヤーが美しく分かれるように注意する"
+    ],
+    "garnish": "なし",
+    "taste": "sweet",
+    "alcohol_strength": "strong",
+    "description": "美しい3層のレイヤードショット。火をつけて提供されることもある。"
+  },
+  {
+    "id": "spritz",
+    "name": { "ja": "スプリッツ", "en": "Aperol Spritz" },
+    "category": "long",
+    "base_spirit": "wine",
+    "glass": "wine",
+    "method": "build",
+    "ingredients": [
+      { "name": "アペロール", "amount": "60ml" },
+      { "name": "プロセッコ", "amount": "90ml" },
+      { "name": "炭酸水", "amount": "少量" }
+    ],
+    "instructions": [
+      "ワイングラスに大きめの氷を入れる",
+      "プロセッコを注ぐ",
+      "アペロールを加える",
+      "炭酸水を少量加えて軽くステアする"
+    ],
+    "garnish": "オレンジスライス",
+    "taste": "sweet",
+    "alcohol_strength": "weak",
+    "description": "イタリア発祥の食前酒。オレンジ色が美しく、夏の定番ドリンク。"
+  }
+]

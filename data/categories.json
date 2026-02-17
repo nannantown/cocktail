@@ -1,0 +1,9 @@
+[
+  { "id": "standard", "name": { "ja": "スタンダード", "en": "Standard" }, "description": "古典的な定番カクテル" },
+  { "id": "tropical", "name": { "ja": "トロピカル", "en": "Tropical" }, "description": "南国風のフルーティーなカクテル" },
+  { "id": "short", "name": { "ja": "ショート", "en": "Short" }, "description": "小さめのグラスで提供される、アルコール度数の高いカクテル" },
+  { "id": "long", "name": { "ja": "ロング", "en": "Long" }, "description": "大きめのグラスで提供される、ゆっくり楽しむカクテル" },
+  { "id": "shot", "name": { "ja": "ショット", "en": "Shot" }, "description": "ショットグラスで一気に飲むカクテル" },
+  { "id": "hot", "name": { "ja": "ホット", "en": "Hot" }, "description": "温かいカクテル" },
+  { "id": "non-alcohol", "name": { "ja": "ノンアルコール", "en": "Non-Alcoholic" }, "description": "アルコールを含まないカクテル（モクテル）" }
+]
