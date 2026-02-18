@@ -18,49 +18,45 @@ const GLASS_EMOJI = {
   'irish-coffee-glass': '☕', 'champagne-flute': '🥂',
 };
 
-// ===== Category labels =====
+// ===== Labels =====
 const CATEGORY_LABELS = {
   short: 'ショート', long: 'ロング', tropical: 'トロピカル',
   standard: 'スタンダード', shot: 'ショット', hot: 'ホット', 'non-alcohol': 'ノンアル',
 };
-
 const METHOD_LABELS = {
   shake: 'シェーク', stir: 'ステア', build: 'ビルド', blend: 'ブレンド', layer: 'レイヤー',
 };
-
 const TASTE_LABELS = {
   sweet: '甘口', dry: '辛口', sour: '酸味', bitter: '苦味',
   'sweet-sour': '甘酸', refreshing: '爽快',
 };
-
 const STRENGTH_LABELS = {
   strong: '強め', medium: '普通', weak: '軽め', none: 'ノンアル',
 };
 
-// ===== Bottle type sections for inventory =====
+// ===== Inventory sections =====
 const BOTTLE_SECTIONS = [
-  { type: 'spirit', label: '🥃 スピリッツ', open: true },
-  { type: 'liqueur', label: '🍷 リキュール', open: false },
-  { type: 'vermouth', label: '🍶 ベルモット', open: false },
-  { type: 'bitters', label: '💧 ビターズ', open: false },
-  { type: 'mixer', label: '🫧 ミキサー', open: false },
-  { type: 'juice', label: '🍋 ジュース', open: false },
-  { type: 'syrup', label: '🍯 シロップ', open: false },
-  { type: 'fresh', label: '🌿 フレッシュ', open: false },
-  { type: 'garnish', label: '🍒 ガーニッシュ', open: false },
-  { type: 'pantry', label: '🧂 パントリー', open: false },
-  { type: 'other', label: '📦 その他', open: false },
+  { type: 'spirit', label: 'スピリッツ', open: true },
+  { type: 'liqueur', label: 'リキュール', open: false },
+  { type: 'vermouth', label: 'ベルモット', open: false },
+  { type: 'bitters', label: 'ビターズ', open: false },
+  { type: 'mixer', label: 'ミキサー', open: false },
+  { type: 'juice', label: 'ジュース', open: false },
+  { type: 'syrup', label: 'シロップ', open: false },
+  { type: 'fresh', label: 'フレッシュ', open: false },
+  { type: 'garnish', label: 'ガーニッシュ', open: false },
+  { type: 'pantry', label: 'パントリー', open: false },
+  { type: 'other', label: 'その他', open: false },
 ];
-
 const TOOL_SECTIONS = [
-  { category: 'mixing', label: '🔧 ミキシングツール', open: true },
-  { category: 'measuring', label: '📏 計量', open: false },
-  { category: 'garnish', label: '🔪 ガーニッシュ', open: false },
-  { category: 'glassware', label: '🍸 グラスウェア', open: false },
-  { category: 'other', label: '🧊 その他', open: false },
+  { category: 'mixing', label: 'ミキシングツール', open: true },
+  { category: 'measuring', label: '計量', open: false },
+  { category: 'garnish', label: 'ガーニッシュ', open: false },
+  { category: 'glassware', label: 'グラスウェア', open: false },
+  { category: 'other', label: 'その他', open: false },
 ];
 
-// ===== CocktailDB image search mapping =====
+// ===== CocktailDB search mapping =====
 const COCKTAILDB_NAMES = {
   'martini': 'Dry Martini', 'manhattan': 'Manhattan', 'old-fashioned': 'Old Fashioned',
   'gimlet': 'Gimlet', 'daiquiri': 'Daiquiri', 'margarita': 'Margarita',
@@ -88,11 +84,10 @@ async function loadData() {
 
 // ===== Inventory Persistence =====
 function saveInventory() {
-  const data = {
+  localStorage.setItem('homeBarInventory', JSON.stringify({
     bottles: [...state.inventory.bottles],
     tools: [...state.inventory.tools],
-  };
-  localStorage.setItem('homeBarInventory', JSON.stringify(data));
+  }));
 }
 
 function loadInventory() {
@@ -110,21 +105,15 @@ function analyzeCocktail(cocktail) {
   const missingBottles = [];
   const haveBottles = [];
   for (const ing of cocktail.ingredients) {
-    if (state.inventory.bottles.has(ing.bottle_id)) {
-      haveBottles.push(ing);
-    } else {
-      missingBottles.push(ing);
-    }
+    if (state.inventory.bottles.has(ing.bottle_id)) haveBottles.push(ing);
+    else missingBottles.push(ing);
   }
 
   const missingTools = [];
   const haveTools = [];
   for (const toolId of cocktail.required_tools) {
-    if (state.inventory.tools.has(toolId)) {
-      haveTools.push(toolId);
-    } else {
-      missingTools.push(toolId);
-    }
+    if (state.inventory.tools.has(toolId)) haveTools.push(toolId);
+    else missingTools.push(toolId);
   }
 
   const totalItems = cocktail.ingredients.length + cocktail.required_tools.length;
@@ -132,13 +121,9 @@ function analyzeCocktail(cocktail) {
   const progress = totalItems > 0 ? haveItems / totalItems : 0;
 
   let status;
-  if (missingBottles.length === 0 && missingTools.length === 0) {
-    status = 'unlocked';
-  } else if (missingBottles.length + missingTools.length <= 2) {
-    status = 'almost';
-  } else {
-    status = 'locked';
-  }
+  if (missingBottles.length === 0 && missingTools.length === 0) status = 'unlocked';
+  else if (missingBottles.length + missingTools.length <= 2) status = 'almost';
+  else status = 'locked';
 
   return { status, missingBottles, haveBottles, missingTools, haveTools, progress };
 }
@@ -151,36 +136,27 @@ function getRecommendations() {
   ];
 
   const results = [];
-
   for (const item of allItems) {
     const tempBottles = new Set(state.inventory.bottles);
     const tempTools = new Set(state.inventory.tools);
-
     if (item.itemType === 'bottle') tempBottles.add(item.id);
     else tempTools.add(item.id);
 
     const newlyUnlocked = [];
     for (const cocktail of state.cocktails) {
-      const current = analyzeCocktail(cocktail);
-      if (current.status === 'unlocked') continue;
-
+      if (analyzeCocktail(cocktail).status === 'unlocked') continue;
       const allIngs = cocktail.ingredients.every(i => tempBottles.has(i.bottle_id));
       const allToolsOk = cocktail.required_tools.every(t => tempTools.has(t));
-      if (allIngs && allToolsOk) {
-        newlyUnlocked.push(cocktail);
-      }
+      if (allIngs && allToolsOk) newlyUnlocked.push(cocktail);
     }
-
-    if (newlyUnlocked.length > 0) {
-      results.push({ item, newlyUnlocked });
-    }
+    if (newlyUnlocked.length > 0) results.push({ item, newlyUnlocked });
   }
 
   results.sort((a, b) => b.newlyUnlocked.length - a.newlyUnlocked.length);
   return results.slice(0, 6);
 }
 
-// ===== Bottle/Tool name lookups =====
+// ===== Helpers =====
 function getBottleName(id) {
   const b = state.bottles.find(b => b.id === id);
   return b ? b.name.ja : id;
@@ -189,8 +165,6 @@ function getToolName(id) {
   const t = state.tools.find(t => t.id === id);
   return t ? t.name.ja : id;
 }
-
-// Count how many cocktails use a given bottle or tool
 function countUsage(itemId, itemType) {
   let count = 0;
   for (const c of state.cocktails) {
@@ -203,62 +177,53 @@ function countUsage(itemId, itemType) {
   return count;
 }
 
+const checkSvg = '<svg width="10" height="10" fill="none" stroke="#0a0a0a" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>';
+const chevronSvg = '<svg class="chevron" width="10" height="10" fill="currentColor" viewBox="0 0 20 20"><path d="M6.293 7.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"/></svg>';
+
 // ===== Render: Inventory =====
 function renderInventory() {
   const panel = document.getElementById('inventory-panel');
   let html = '';
 
-  // Bottle sections
-  html += '<div class="mb-4"><h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">ボトル・材料</h3>';
+  html += '<div class="inv-heading">ボトル・材料</div>';
   for (const section of BOTTLE_SECTIONS) {
     const items = state.bottles.filter(b => b.type === section.type);
     if (items.length === 0) continue;
     const checkedCount = items.filter(b => state.inventory.bottles.has(b.id)).length;
-    html += `<details class="inventory-section mb-1" ${section.open ? 'open' : ''}>
-      <summary class="flex items-center gap-2 py-2 px-2 rounded-lg hover:bg-white/5">
-        <svg class="chevron w-3 h-3 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path d="M6.293 7.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"/></svg>
-        <span class="text-sm">${section.label}</span>
-        <span class="ml-auto text-xs text-gray-500">${checkedCount}/${items.length}</span>
-      </summary>
-      <div class="ml-2">`;
+    html += `<details class="inv-section" ${section.open ? 'open' : ''}>
+      <summary>${chevronSvg}<span>${section.label}</span><span class="inv-section-count">${checkedCount}/${items.length}</span></summary>
+      <div>`;
     for (const item of items) {
       const checked = state.inventory.bottles.has(item.id);
       const usage = countUsage(item.id, 'bottle');
       html += `<div class="inv-item ${checked ? 'checked' : ''}" data-type="bottle" data-id="${item.id}">
-        <div class="inv-checkbox"><svg class="w-3 h-3 text-bar-bg" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+        <div class="inv-checkbox">${checkSvg}</div>
         <span>${item.name.ja}</span>
         <span class="inv-badge">${usage}杯</span>
       </div>`;
     }
     html += '</div></details>';
   }
-  html += '</div>';
 
-  // Tool sections
-  html += '<div><h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">ツール・グラス</h3>';
+  html += '<div class="inv-heading">ツール・グラス</div>';
   for (const section of TOOL_SECTIONS) {
     const items = state.tools.filter(t => t.category === section.category);
     if (items.length === 0) continue;
     const checkedCount = items.filter(t => state.inventory.tools.has(t.id)).length;
-    html += `<details class="inventory-section mb-1" ${section.open ? 'open' : ''}>
-      <summary class="flex items-center gap-2 py-2 px-2 rounded-lg hover:bg-white/5">
-        <svg class="chevron w-3 h-3 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path d="M6.293 7.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"/></svg>
-        <span class="text-sm">${section.label}</span>
-        <span class="ml-auto text-xs text-gray-500">${checkedCount}/${items.length}</span>
-      </summary>
-      <div class="ml-2">`;
+    html += `<details class="inv-section" ${section.open ? 'open' : ''}>
+      <summary>${chevronSvg}<span>${section.label}</span><span class="inv-section-count">${checkedCount}/${items.length}</span></summary>
+      <div>`;
     for (const item of items) {
       const checked = state.inventory.tools.has(item.id);
       const usage = countUsage(item.id, 'tool');
       html += `<div class="inv-item ${checked ? 'checked' : ''}" data-type="tool" data-id="${item.id}">
-        <div class="inv-checkbox"><svg class="w-3 h-3 text-bar-bg" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+        <div class="inv-checkbox">${checkSvg}</div>
         <span>${item.name.ja}</span>
         <span class="inv-badge">${usage}杯</span>
       </div>`;
     }
     html += '</div></details>';
   }
-  html += '</div>';
 
   panel.innerHTML = html;
 }
@@ -269,8 +234,8 @@ function renderCocktails() {
   const emptyState = document.getElementById('empty-state');
 
   const filtered = state.cocktails.filter(c => {
-    const analysis = analyzeCocktail(c);
-    if (state.filters.status !== 'all' && analysis.status !== state.filters.status) return false;
+    const a = analyzeCocktail(c);
+    if (state.filters.status !== 'all' && a.status !== state.filters.status) return false;
     if (state.filters.category !== 'all' && c.category !== state.filters.category) return false;
     if (state.filters.method !== 'all' && c.method !== state.filters.method) return false;
     return true;
@@ -283,47 +248,40 @@ function renderCocktails() {
   }
   emptyState.classList.add('hidden');
 
-  // Sort: unlocked first, then almost, then locked
   const statusOrder = { unlocked: 0, almost: 1, locked: 2 };
-  filtered.sort((a, b) => {
-    const sa = analyzeCocktail(a).status;
-    const sb = analyzeCocktail(b).status;
-    return statusOrder[sa] - statusOrder[sb];
-  });
+  filtered.sort((a, b) => statusOrder[analyzeCocktail(a).status] - statusOrder[analyzeCocktail(b).status]);
 
   let html = '';
   for (const cocktail of filtered) {
-    const analysis = analyzeCocktail(cocktail);
+    const a = analyzeCocktail(cocktail);
     const glassToolId = cocktail.required_tools.find(t => t.endsWith('-glass') || t === 'copper-mug');
     const emoji = GLASS_EMOJI[glassToolId] || '🍸';
     const imgUrl = state.images[cocktail.id];
-    const justUnlocked = analysis.status === 'unlocked' && !state.previouslyUnlocked.has(cocktail.id);
+    const justUnlocked = a.status === 'unlocked' && !state.previouslyUnlocked.has(cocktail.id);
 
-    const progressColor = analysis.status === 'unlocked' ? 'bg-emerald-400'
-      : analysis.status === 'almost' ? 'bg-amber-400' : 'bg-gray-500';
+    const fillClass = a.status === 'unlocked' ? 'fill-success' : a.status === 'almost' ? 'fill-warning' : 'fill-neutral';
 
-    const statusBadge = analysis.status === 'unlocked'
+    const statusBadge = a.status === 'unlocked'
       ? '<span class="status-badge unlocked-badge">UNLOCKED</span>'
-      : analysis.status === 'almost'
-      ? `<span class="status-badge almost-badge">あと${analysis.missingBottles.length + analysis.missingTools.length}</span>`
-      : `<span class="status-badge locked-badge">🔒 ${analysis.missingBottles.length + analysis.missingTools.length}不足</span>`;
+      : a.status === 'almost'
+      ? `<span class="status-badge almost-badge">あと${a.missingBottles.length + a.missingTools.length}</span>`
+      : `<span class="status-badge locked-badge">${a.missingBottles.length + a.missingTools.length}不足</span>`;
 
-    // Missing items (max 3 shown)
     let missingHtml = '';
-    if (analysis.status !== 'unlocked') {
+    if (a.status !== 'unlocked') {
       const allMissing = [
-        ...analysis.missingBottles.map(i => getBottleName(i.bottle_id)),
-        ...analysis.missingTools.map(t => getToolName(t)),
+        ...a.missingBottles.map(i => getBottleName(i.bottle_id)),
+        ...a.missingTools.map(t => getToolName(t)),
       ];
       const shown = allMissing.slice(0, 3);
-      missingHtml = '<div class="flex flex-wrap gap-1 mt-2">'
-        + shown.map(name => `<span class="missing-tag">✕ ${name}</span>`).join('')
+      missingHtml = '<div class="missing-row">'
+        + shown.map(name => `<span class="missing-tag">${name}</span>`).join('')
         + (allMissing.length > 3 ? `<span class="missing-tag">+${allMissing.length - 3}</span>` : '')
         + '</div>';
     }
 
     html += `
-    <div class="cocktail-card ${analysis.status} ${justUnlocked ? 'just-unlocked' : ''}" data-cocktail-id="${cocktail.id}">
+    <div class="cocktail-card ${a.status} ${justUnlocked ? 'just-unlocked' : ''}" data-cocktail-id="${cocktail.id}">
       <div class="card-image gradient-${cocktail.category}">
         ${imgUrl
           ? `<img src="${imgUrl}" alt="${cocktail.name.ja}" loading="lazy">`
@@ -331,16 +289,12 @@ function renderCocktails() {
         ${statusBadge}
       </div>
       <div class="card-progress">
-        <div class="card-progress-fill ${progressColor}" style="width: ${Math.round(analysis.progress * 100)}%"></div>
+        <div class="card-progress-fill ${fillClass}" style="width: ${Math.round(a.progress * 100)}%"></div>
       </div>
-      <div class="p-4">
-        <div class="flex items-start justify-between gap-2 mb-1">
-          <div>
-            <h3 class="font-bold text-base">${cocktail.name.ja}</h3>
-            <p class="text-xs text-gray-500">${cocktail.name.en}</p>
-          </div>
-        </div>
-        <div class="flex flex-wrap gap-1.5 mt-2">
+      <div class="card-body">
+        <div class="card-name">${cocktail.name.ja}</div>
+        <div class="card-name-en">${cocktail.name.en}</div>
+        <div class="badge-row">
           <span class="method-badge method-${cocktail.method}">${METHOD_LABELS[cocktail.method]}</span>
           <span class="taste-badge">${TASTE_LABELS[cocktail.taste] || cocktail.taste}</span>
           <span class="taste-badge">${STRENGTH_LABELS[cocktail.alcohol_strength]}</span>
@@ -368,34 +322,30 @@ function renderRecommendations() {
   for (const rec of recs) {
     const item = rec.item;
     const isBottle = item.itemType === 'bottle';
-    const icon = isBottle ? '🍾' : '🔧';
-    const typeName = isBottle ? (item.type === 'spirit' ? 'スピリッツ' : item.type) : item.category;
-
     html += `
     <div class="rec-card">
-      <div class="flex items-center gap-2 mb-2">
-        <span class="text-lg">${icon}</span>
+      <div class="rec-header">
+        <span class="rec-icon">${isBottle ? '🍾' : '🔧'}</span>
         <div>
-          <p class="font-bold text-sm">${item.name.ja}</p>
-          <p class="text-xs text-gray-500">${item.price_range || ''}</p>
+          <div class="rec-name">${item.name.ja}</div>
+          <div class="rec-price">${item.price_range || ''}</div>
         </div>
-        <span class="ml-auto bg-emerald-500/20 text-emerald-400 text-xs font-bold px-2 py-1 rounded-full">+${rec.newlyUnlocked.length}杯</span>
+        <span class="rec-badge">+${rec.newlyUnlocked.length}杯</span>
       </div>
-      <div class="flex flex-wrap gap-1">
-        ${rec.newlyUnlocked.map(c => `<span class="text-xs bg-white/5 px-2 py-0.5 rounded">${c.name.ja}</span>`).join('')}
+      <div class="rec-cocktails">
+        ${rec.newlyUnlocked.map(c => `<span>${c.name.ja}</span>`).join('')}
       </div>
     </div>`;
   }
   list.innerHTML = html;
 }
 
-// ===== Render: Progress Stats =====
+// ===== Render: Progress =====
 function renderProgress() {
   const unlocked = state.cocktails.filter(c => analyzeCocktail(c).status === 'unlocked').length;
   document.getElementById('unlock-count').textContent = unlocked;
   document.getElementById('total-count').textContent = state.cocktails.length;
-  const pct = (unlocked / state.cocktails.length) * 100;
-  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('progress-bar').style.width = (unlocked / state.cocktails.length * 100) + '%';
 }
 
 // ===== Render: Modal =====
@@ -403,122 +353,104 @@ function showModal(cocktailId) {
   const cocktail = state.cocktails.find(c => c.id === cocktailId);
   if (!cocktail) return;
 
-  const analysis = analyzeCocktail(cocktail);
+  const a = analyzeCocktail(cocktail);
   const glassToolId = cocktail.required_tools.find(t => t.endsWith('-glass') || t === 'copper-mug');
   const emoji = GLASS_EMOJI[glassToolId] || '🍸';
   const imgUrl = state.images[cocktail.id];
 
   const ingredientsList = cocktail.ingredients.map(ing => {
     const have = state.inventory.bottles.has(ing.bottle_id);
-    return `<div class="${have ? 'have-tag' : 'missing-tag'} text-sm py-1 px-3">
-      ${have ? '✓' : '✕'} ${getBottleName(ing.bottle_id)} <span class="opacity-60">${ing.amount}</span>
-    </div>`;
+    return `<div class="${have ? 'have-tag' : 'missing-tag'}">${have ? '✓' : '✕'} ${getBottleName(ing.bottle_id)} <span style="opacity:0.6">${ing.amount}</span></div>`;
   }).join('');
 
-  const garnishList = (cocktail.garnish || []).map(g => {
-    return `<span class="taste-badge">${getBottleName(g.bottle_id)} ${g.amount}</span>`;
-  }).join('');
+  const garnishList = (cocktail.garnish || []).map(g =>
+    `<span class="taste-badge">${getBottleName(g.bottle_id)} ${g.amount}</span>`
+  ).join('');
 
   const toolsList = cocktail.required_tools.map(t => {
     const have = state.inventory.tools.has(t);
     return `<span class="${have ? 'have-tag' : 'missing-tag'}">${have ? '✓' : '✕'} ${getToolName(t)}</span>`;
   }).join('');
 
-  const steps = cocktail.instructions.map((step, i) => {
-    return `<div class="recipe-step">
-      <div class="step-number">${i + 1}</div>
-      <p class="text-sm text-gray-300 pt-0.5">${step}</p>
-    </div>`;
-  }).join('');
+  const steps = cocktail.instructions.map((step, i) =>
+    `<div class="recipe-step"><div class="step-number">${i + 1}</div><p class="step-text">${step}</p></div>`
+  ).join('');
 
   document.getElementById('modal-content').innerHTML = `
     <div class="modal-image gradient-${cocktail.category}">
-      ${imgUrl ? `<img src="${imgUrl}" alt="${cocktail.name.ja}">` : `<span class="text-6xl">${emoji}</span>`}
+      ${imgUrl ? `<img src="${imgUrl}" alt="${cocktail.name.ja}">` : `<span style="font-size:3.5rem;opacity:0.7">${emoji}</span>`}
     </div>
-    <div class="p-6">
-      <div class="flex items-center justify-between mb-1">
-        <h2 class="text-xl font-bold">${cocktail.name.ja}</h2>
-        <button id="modal-close" class="text-gray-400 hover:text-white p-1">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    <div class="modal-body">
+      <div class="modal-header">
+        <h2 class="modal-title">${cocktail.name.ja}</h2>
+        <button id="modal-close" class="modal-close">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
-      <p class="text-sm text-gray-500 mb-3">${cocktail.name.en}</p>
-      <div class="flex flex-wrap gap-1.5 mb-4">
+      <p class="modal-en">${cocktail.name.en}</p>
+      <div class="modal-tags">
         <span class="method-badge method-${cocktail.method}">${METHOD_LABELS[cocktail.method]}</span>
         <span class="taste-badge">${CATEGORY_LABELS[cocktail.category]}</span>
         <span class="taste-badge">${TASTE_LABELS[cocktail.taste]}</span>
         <span class="taste-badge">${STRENGTH_LABELS[cocktail.alcohol_strength]}</span>
       </div>
-      <p class="text-sm text-gray-400 mb-4">${cocktail.description}</p>
+      <p class="modal-desc">${cocktail.description}</p>
 
-      <h3 class="text-sm font-bold mb-2 text-bar-accent">材料</h3>
-      <div class="flex flex-wrap gap-1.5 mb-4">${ingredientsList}</div>
+      <h3 class="modal-section-title">材料</h3>
+      <div class="modal-tags">${ingredientsList}</div>
 
-      ${garnishList ? `<h3 class="text-sm font-bold mb-2 text-bar-accent">ガーニッシュ</h3><div class="flex flex-wrap gap-1.5 mb-4">${garnishList}</div>` : ''}
+      ${garnishList ? `<h3 class="modal-section-title">ガーニッシュ</h3><div class="modal-tags">${garnishList}</div>` : ''}
 
-      <h3 class="text-sm font-bold mb-2 text-bar-accent">必要な器具</h3>
-      <div class="flex flex-wrap gap-1.5 mb-4">${toolsList}</div>
-      ${cocktail.alternative_tools_note ? `<p class="text-xs text-gray-500 mb-4">💡 ${cocktail.alternative_tools_note}</p>` : ''}
+      <h3 class="modal-section-title">必要な器具</h3>
+      <div class="modal-tags">${toolsList}</div>
+      ${cocktail.alternative_tools_note ? `<p class="modal-note">${cocktail.alternative_tools_note}</p>` : ''}
 
-      <h3 class="text-sm font-bold mb-2 text-bar-accent">作り方</h3>
-      <div class="mb-2">${steps}</div>
+      <h3 class="modal-section-title">作り方</h3>
+      <div>${steps}</div>
     </div>
   `;
 
-  const modal = document.getElementById('modal');
-  modal.classList.remove('hidden');
-  modal.classList.add('flex');
-
+  document.getElementById('modal').classList.remove('hidden');
   document.getElementById('modal-close').addEventListener('click', closeModal);
 }
 
 function closeModal() {
-  const modal = document.getElementById('modal');
-  modal.classList.add('hidden');
-  modal.classList.remove('flex');
+  document.getElementById('modal').classList.add('hidden');
 }
 
 // ===== Image Loading (TheCocktailDB) =====
 async function loadImages() {
-  // Try to load from cache first
   try {
     const cached = JSON.parse(localStorage.getItem('cocktailImages') || '{}');
     if (Object.keys(cached).length > 0) {
       state.images = cached;
-      renderCocktails(); // Re-render with cached images
+      renderCocktails();
     }
   } catch (e) { /* ignore */ }
 
-  // Fetch fresh images in background
   const promises = state.cocktails.map(async (cocktail) => {
-    if (state.images[cocktail.id]) return; // Already cached
-
+    if (state.images[cocktail.id]) return;
     const searchName = COCKTAILDB_NAMES[cocktail.id];
     if (!searchName) return;
-
     try {
       const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${encodeURIComponent(searchName)}`);
       const data = await res.json();
       if (data.drinks && data.drinks[0] && data.drinks[0].strDrinkThumb) {
         state.images[cocktail.id] = data.drinks[0].strDrinkThumb + '/preview';
       }
-    } catch (e) { /* API unavailable, use emoji fallback */ }
+    } catch (e) { /* fallback to emoji */ }
   });
 
   await Promise.allSettled(promises);
-
-  // Cache and re-render
   localStorage.setItem('cocktailImages', JSON.stringify(state.images));
   renderCocktails();
 }
 
 // ===== Full Render =====
 function render() {
-  // Track previously unlocked before re-render
   state.previouslyUnlocked = new Set(
     state.cocktails.filter(c => analyzeCocktail(c).status === 'unlocked').map(c => c.id)
   );
-
   renderInventory();
   renderCocktails();
   renderRecommendations();
@@ -527,41 +459,25 @@ function render() {
 
 // ===== Event Handlers =====
 function setupEventHandlers() {
-  // Inventory item toggle
   document.getElementById('inventory-panel').addEventListener('click', (e) => {
     const item = e.target.closest('.inv-item');
     if (!item) return;
-
-    const type = item.dataset.type;
-    const id = item.dataset.id;
-
-    if (type === 'bottle') {
-      if (state.inventory.bottles.has(id)) state.inventory.bottles.delete(id);
-      else state.inventory.bottles.add(id);
-    } else {
-      if (state.inventory.tools.has(id)) state.inventory.tools.delete(id);
-      else state.inventory.tools.add(id);
-    }
-
+    const { type, id } = item.dataset;
+    const set = type === 'bottle' ? state.inventory.bottles : state.inventory.tools;
+    if (set.has(id)) set.delete(id);
+    else set.add(id);
     saveInventory();
     render();
   });
 
-  // Cocktail card click → modal
   document.getElementById('cocktail-grid').addEventListener('click', (e) => {
     const card = e.target.closest('.cocktail-card');
     if (card) showModal(card.dataset.cocktailId);
   });
 
-  // Modal overlay click → close
   document.getElementById('modal-overlay').addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-  // Escape key → close modal
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  // Filter: status buttons
   document.querySelectorAll('[data-filter-status]').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('[data-filter-status]').forEach(b => b.classList.remove('active'));
@@ -571,33 +487,24 @@ function setupEventHandlers() {
     });
   });
 
-  // Filter: category select
   document.getElementById('filter-category').addEventListener('change', (e) => {
     state.filters.category = e.target.value;
     renderCocktails();
   });
 
-  // Filter: method select
   document.getElementById('filter-method').addEventListener('change', (e) => {
     state.filters.method = e.target.value;
     renderCocktails();
   });
 
-  // Sidebar toggle (mobile)
   document.getElementById('sidebar-toggle').addEventListener('click', () => {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebar-overlay');
-    sidebar.classList.toggle('-translate-x-full');
-    sidebar.classList.toggle('translate-x-0');
-    overlay.classList.toggle('hidden');
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebar-overlay').classList.toggle('visible');
   });
 
   document.getElementById('sidebar-overlay').addEventListener('click', () => {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebar-overlay');
-    sidebar.classList.add('-translate-x-full');
-    sidebar.classList.remove('translate-x-0');
-    overlay.classList.add('hidden');
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('visible');
   });
 }
 
@@ -607,7 +514,6 @@ async function init() {
   loadInventory();
   setupEventHandlers();
   render();
-  // Load images in background (non-blocking)
   loadImages();
 }
 
