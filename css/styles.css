@@ -353,7 +353,11 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: var(--sp-md);
-  margin-bottom: var(--sp-xl);
+  padding: var(--sp-sm) 0;
+}
+.tool-section { margin-bottom: var(--sp-lg); }
+.tool-section > summary {
+  font-size: var(--fs-lg);
 }
 .tool-card {
   background: var(--bg-card);

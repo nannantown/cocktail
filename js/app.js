@@ -272,6 +272,17 @@ function renderInventory() {
     return;
   }
 
+  // Tools first: visual card grid with toggle switches, collapsible
+  const nonGlasswareTools = state.tools.filter(t => t.category !== 'glassware');
+  if (nonGlasswareTools.length > 0) {
+    const checkedCount = nonGlasswareTools.filter(t => state.inventory.tools.has(t.id)).length;
+    html += `<details class="inv-section tool-section" open>
+      <summary>${chevronSvg}<span>ツール</span><span class="inv-section-count">${checkedCount}/${nonGlasswareTools.length}</span></summary>
+      <div class="tool-card-grid">`;
+    for (const item of nonGlasswareTools) html += renderToolCard(item);
+    html += '</div></details>';
+  }
+
   html += '<div class="inv-heading">ボトル・材料</div>';
   for (const section of BOTTLE_SECTIONS) {
     const items = state.bottles.filter(b => b.type === section.type);
@@ -290,15 +301,6 @@ function renderInventory() {
       </div>`;
     }
     html += '</div></details>';
-  }
-
-  // Tools: visual card grid with toggle switches
-  const nonGlasswareTools = state.tools.filter(t => t.category !== 'glassware');
-  if (nonGlasswareTools.length > 0) {
-    html += '<div class="inv-heading">ツール</div>';
-    html += '<div class="tool-card-grid">';
-    for (const item of nonGlasswareTools) html += renderToolCard(item);
-    html += '</div>';
   }
 
   panel.innerHTML = html;
