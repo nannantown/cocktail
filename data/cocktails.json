@@ -490,5 +490,620 @@
       "炭酸水を少量加えてバースプーンで軽くステアする",
       "オレンジスライスを飾る"
     ]
+  },
+  {
+    "id": "tom-collins",
+    "name": { "ja": "トムコリンズ", "en": "Tom Collins" },
+    "category": "long",
+    "method": "shake",
+    "taste": "sweet-sour",
+    "alcohol_strength": "medium",
+    "description": "19世紀から続くクラシックカクテル。レモンの爽やかさと炭酸の心地よい喉越し。",
+    "ingredients": [
+      { "bottle_id": "dry-gin", "amount": "45ml" },
+      { "bottle_id": "lemon-juice", "amount": "20ml" },
+      { "bottle_id": "sugar-syrup", "amount": "15ml" },
+      { "bottle_id": "soda-water", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "スライス1枚" },
+      { "bottle_id": "maraschino-cherry", "amount": "1個" }
+    ],
+    "required_tools": ["shaker", "jigger", "bar-spoon", "collins-glass"],
+    "instructions": [
+      "シェーカーにジン、レモンジュース、シュガーシロップと氷を入れる",
+      "しっかりシェークする",
+      "氷を入れたコリンズグラスに注ぐ",
+      "炭酸水で満たし、バースプーンで軽くステアする",
+      "レモンスライスとチェリーを飾る"
+    ]
+  },
+  {
+    "id": "french-75",
+    "name": { "ja": "フレンチ75", "en": "French 75" },
+    "category": "long",
+    "method": "shake",
+    "taste": "dry",
+    "alcohol_strength": "medium",
+    "description": "第一次世界大戦中にパリで生まれた。シャンパンの泡立ちが華やかな一杯。",
+    "ingredients": [
+      { "bottle_id": "dry-gin", "amount": "30ml" },
+      { "bottle_id": "lemon-juice", "amount": "15ml" },
+      { "bottle_id": "sugar-syrup", "amount": "10ml" },
+      { "bottle_id": "champagne", "amount": "60ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "ピール1片" }
+    ],
+    "required_tools": ["shaker", "jigger", "champagne-flute"],
+    "instructions": [
+      "シェーカーにジン、レモンジュース、シュガーシロップと氷を入れる",
+      "しっかりシェークする",
+      "シャンパンフルートに注ぐ",
+      "冷えたシャンパンで満たす",
+      "レモンピールを絞りかける"
+    ]
+  },
+  {
+    "id": "tequila-sunrise",
+    "name": { "ja": "テキーラサンライズ", "en": "Tequila Sunrise" },
+    "category": "long",
+    "method": "build",
+    "taste": "sweet",
+    "alcohol_strength": "medium",
+    "description": "朝焼けのようなグラデーションが美しい。見た目も楽しめるカクテル。",
+    "ingredients": [
+      { "bottle_id": "tequila", "amount": "45ml" },
+      { "bottle_id": "orange-juice", "amount": "90ml" },
+      { "bottle_id": "grenadine", "amount": "15ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "orange", "amount": "スライス1枚" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "ハイボールグラスに氷を入れる",
+      "テキーラとオレンジジュースを注ぎ、ステアする",
+      "グレナデンシロップをグラスの縁から静かに沈める",
+      "自然なグラデーションを楽しむ（混ぜない）",
+      "オレンジスライスを飾る"
+    ]
+  },
+  {
+    "id": "paloma",
+    "name": { "ja": "パローマ", "en": "Paloma" },
+    "category": "long",
+    "method": "build",
+    "taste": "refreshing",
+    "alcohol_strength": "medium",
+    "description": "メキシコで最も人気のテキーラカクテル。グレープフルーツの苦味と爽やかさが絶妙。",
+    "ingredients": [
+      { "bottle_id": "tequila", "amount": "45ml" },
+      { "bottle_id": "grapefruit-juice", "amount": "45ml" },
+      { "bottle_id": "lime-juice", "amount": "15ml" },
+      { "bottle_id": "soda-water", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "salt", "amount": "スノースタイル" },
+      { "bottle_id": "lime", "amount": "ウェッジ1個" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "お好みでグラスのリムに塩をつける",
+      "ハイボールグラスに氷を入れる",
+      "テキーラ、グレープフルーツジュース、ライムジュースを注ぐ",
+      "炭酸水で満たし、軽くステアする"
+    ]
+  },
+  {
+    "id": "screwdriver",
+    "name": { "ja": "スクリュードライバー", "en": "Screwdriver" },
+    "category": "long",
+    "method": "build",
+    "taste": "sweet",
+    "alcohol_strength": "medium",
+    "description": "油田労働者がねじ回しで混ぜたのが名前の由来。シンプルで飲みやすい定番カクテル。",
+    "ingredients": [
+      { "bottle_id": "vodka", "amount": "45ml" },
+      { "bottle_id": "orange-juice", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "orange", "amount": "スライス1枚" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "ハイボールグラスに氷を入れる",
+      "ウォッカを注ぐ",
+      "オレンジジュースで満たす",
+      "バースプーンで軽くステアする"
+    ]
+  },
+  {
+    "id": "black-russian",
+    "name": { "ja": "ブラックルシアン", "en": "Black Russian" },
+    "category": "short",
+    "method": "build",
+    "taste": "sweet",
+    "alcohol_strength": "strong",
+    "description": "1949年にブリュッセルで生まれた。コーヒーリキュールの甘い香りが特徴。",
+    "ingredients": [
+      { "bottle_id": "vodka", "amount": "40ml" },
+      { "bottle_id": "kahlua", "amount": "20ml" }
+    ],
+    "garnish": [],
+    "required_tools": ["jigger", "bar-spoon", "old-fashioned-glass"],
+    "instructions": [
+      "ロックグラスに氷を入れる",
+      "ウォッカとコーヒーリキュールを注ぐ",
+      "バースプーンで軽くステアする"
+    ]
+  },
+  {
+    "id": "white-russian",
+    "name": { "ja": "ホワイトルシアン", "en": "White Russian" },
+    "category": "short",
+    "method": "build",
+    "taste": "sweet",
+    "alcohol_strength": "medium",
+    "description": "ブラックルシアンに生クリームを加えた濃厚な一杯。映画『ビッグ・リボウスキ』で有名。",
+    "ingredients": [
+      { "bottle_id": "vodka", "amount": "40ml" },
+      { "bottle_id": "kahlua", "amount": "20ml" },
+      { "bottle_id": "heavy-cream", "amount": "30ml" }
+    ],
+    "garnish": [],
+    "required_tools": ["jigger", "bar-spoon", "old-fashioned-glass"],
+    "instructions": [
+      "ロックグラスに氷を入れる",
+      "ウォッカとコーヒーリキュールを注いでステアする",
+      "生クリームをバースプーンの背でフロートさせる"
+    ]
+  },
+  {
+    "id": "bloody-mary",
+    "name": { "ja": "ブラッディマリー", "en": "Bloody Mary" },
+    "category": "long",
+    "method": "build",
+    "taste": "savory",
+    "alcohol_strength": "medium",
+    "description": "飲むサラダとも呼ばれるスパイシーなカクテル。二日酔いの迎え酒としても知られる。",
+    "ingredients": [
+      { "bottle_id": "vodka", "amount": "45ml" },
+      { "bottle_id": "tomato-juice", "amount": "90ml" },
+      { "bottle_id": "lemon-juice", "amount": "15ml" },
+      { "bottle_id": "tabasco", "amount": "2〜3dashes" },
+      { "bottle_id": "worcestershire-sauce", "amount": "2〜3dashes" }
+    ],
+    "garnish": [
+      { "bottle_id": "celery", "amount": "スティック1本" },
+      { "bottle_id": "lemon", "amount": "ウェッジ1個" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "ハイボールグラスに氷を入れる",
+      "ウォッカ、トマトジュース、レモンジュースを注ぐ",
+      "タバスコとウスターソースを加える",
+      "バースプーンでゆっくりステアする",
+      "セロリスティックとレモンを添える"
+    ]
+  },
+  {
+    "id": "cuba-libre",
+    "name": { "ja": "キューバリブレ", "en": "Cuba Libre" },
+    "category": "long",
+    "method": "build",
+    "taste": "sweet",
+    "alcohol_strength": "medium",
+    "description": "「自由キューバ」の意。ラムコークにライムを加えた、シンプルだが奥深いカクテル。",
+    "ingredients": [
+      { "bottle_id": "white-rum", "amount": "45ml" },
+      { "bottle_id": "cola", "amount": "適量" },
+      { "bottle_id": "lime-juice", "amount": "10ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "lime", "amount": "ウェッジ1個" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "ハイボールグラスに氷を入れる",
+      "ラムとライムジュースを注ぐ",
+      "コーラで満たす",
+      "バースプーンで軽くステアする",
+      "ライムウェッジを添える"
+    ]
+  },
+  {
+    "id": "dark-n-stormy",
+    "name": { "ja": "ダークアンドストーミー", "en": "Dark 'n' Stormy" },
+    "category": "long",
+    "method": "build",
+    "taste": "refreshing",
+    "alcohol_strength": "medium",
+    "description": "バミューダ発祥。ダークラムとジンジャービアの力強い組み合わせ。",
+    "ingredients": [
+      { "bottle_id": "dark-rum", "amount": "45ml" },
+      { "bottle_id": "ginger-beer", "amount": "適量" },
+      { "bottle_id": "lime-juice", "amount": "15ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "lime", "amount": "ウェッジ1個" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "ハイボールグラスに氷を入れる",
+      "ライムジュースを注ぐ",
+      "ジンジャービアで満たす",
+      "ダークラムをバースプーンの背でフロートさせる"
+    ]
+  },
+  {
+    "id": "blue-lagoon",
+    "name": { "ja": "ブルーラグーン", "en": "Blue Lagoon" },
+    "category": "long",
+    "method": "build",
+    "taste": "sweet-sour",
+    "alcohol_strength": "medium",
+    "description": "鮮やかな青色が南国の海を思わせる。見た目のインパクトが抜群のカクテル。",
+    "ingredients": [
+      { "bottle_id": "vodka", "amount": "30ml" },
+      { "bottle_id": "blue-curacao", "amount": "20ml" },
+      { "bottle_id": "lemon-juice", "amount": "20ml" },
+      { "bottle_id": "soda-water", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "スライス1枚" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "ハイボールグラスに氷を入れる",
+      "ウォッカ、ブルーキュラソー、レモンジュースを注ぐ",
+      "炭酸水で満たす",
+      "バースプーンで軽くステアする"
+    ]
+  },
+  {
+    "id": "mint-julep",
+    "name": { "ja": "ミントジュレップ", "en": "Mint Julep" },
+    "category": "standard",
+    "method": "build",
+    "taste": "refreshing",
+    "alcohol_strength": "strong",
+    "description": "ケンタッキーダービーの公式カクテル。ミントの香りとバーボンの力強さが調和。",
+    "ingredients": [
+      { "bottle_id": "bourbon", "amount": "60ml" },
+      { "bottle_id": "sugar-syrup", "amount": "15ml" },
+      { "bottle_id": "mint", "amount": "8〜10枚" }
+    ],
+    "garnish": [
+      { "bottle_id": "mint", "amount": "枝1本" }
+    ],
+    "required_tools": ["muddler", "bar-spoon", "jigger", "julep-cup"],
+    "alternative_tools_note": "ジュレップカップがなければロックグラスで代用可",
+    "instructions": [
+      "ジュレップカップ（またはロックグラス）にミントの葉とシロップを入れる",
+      "マドラーで軽くマドルしてミントの香りを出す",
+      "クラッシュドアイスをたっぷり入れる",
+      "バーボンを注ぎ、バースプーンでステアする",
+      "ミントの枝を飾る"
+    ]
+  },
+  {
+    "id": "rob-roy",
+    "name": { "ja": "ロブロイ", "en": "Rob Roy" },
+    "category": "short",
+    "method": "stir",
+    "taste": "sweet",
+    "alcohol_strength": "strong",
+    "description": "スコッチウイスキー版のマンハッタン。スコットランドの英雄から名付けられた。",
+    "ingredients": [
+      { "bottle_id": "scotch", "amount": "45ml" },
+      { "bottle_id": "sweet-vermouth", "amount": "20ml" },
+      { "bottle_id": "angostura-bitters", "amount": "1dash" }
+    ],
+    "garnish": [
+      { "bottle_id": "maraschino-cherry", "amount": "1個" }
+    ],
+    "required_tools": ["mixing-glass", "bar-spoon", "strainer", "jigger", "cocktail-glass"],
+    "instructions": [
+      "ミキシンググラスに氷を入れる",
+      "スコッチ、スイートベルモット、ビターズを注ぐ",
+      "ステアしてカクテルグラスに注ぐ",
+      "マラスキーノチェリーを飾る"
+    ]
+  },
+  {
+    "id": "whiskey-highball",
+    "name": { "ja": "ハイボール", "en": "Whiskey Highball" },
+    "category": "long",
+    "method": "build",
+    "taste": "refreshing",
+    "alcohol_strength": "medium",
+    "description": "日本で大ブームとなったシンプルなカクテル。食事との相性が抜群。",
+    "ingredients": [
+      { "bottle_id": "bourbon", "amount": "45ml" },
+      { "bottle_id": "soda-water", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "ピール1片" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "ハイボールグラスに氷をたっぷり入れる",
+      "ウイスキーを注ぐ",
+      "冷えた炭酸水で満たす（ウイスキーの3〜4倍量）",
+      "バースプーンで縦に1回だけステアする（炭酸を逃がさない）",
+      "お好みでレモンピールを絞りかける"
+    ]
+  },
+  {
+    "id": "godfather",
+    "name": { "ja": "ゴッドファーザー", "en": "Godfather" },
+    "category": "short",
+    "method": "build",
+    "taste": "sweet",
+    "alcohol_strength": "strong",
+    "description": "映画『ゴッドファーザー』にちなんだカクテル。アーモンドの甘い香りが特徴。",
+    "ingredients": [
+      { "bottle_id": "scotch", "amount": "45ml" },
+      { "bottle_id": "amaretto", "amount": "15ml" }
+    ],
+    "garnish": [],
+    "required_tools": ["jigger", "bar-spoon", "old-fashioned-glass"],
+    "instructions": [
+      "ロックグラスに大きめの氷を入れる",
+      "スコッチとアマレットを注ぐ",
+      "バースプーンで軽くステアする"
+    ]
+  },
+  {
+    "id": "amaretto-sour",
+    "name": { "ja": "アマレットサワー", "en": "Amaretto Sour" },
+    "category": "short",
+    "method": "shake",
+    "taste": "sweet-sour",
+    "alcohol_strength": "weak",
+    "description": "アーモンドの甘い香りとレモンの酸味が絶妙。アルコール度が低く飲みやすい。",
+    "ingredients": [
+      { "bottle_id": "amaretto", "amount": "45ml" },
+      { "bottle_id": "lemon-juice", "amount": "25ml" },
+      { "bottle_id": "sugar-syrup", "amount": "10ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "orange", "amount": "スライス1枚" },
+      { "bottle_id": "maraschino-cherry", "amount": "1個" }
+    ],
+    "required_tools": ["shaker", "jigger", "old-fashioned-glass"],
+    "instructions": [
+      "シェーカーに全ての材料と氷を入れる",
+      "しっかりシェークする",
+      "氷を入れたロックグラスに注ぐ",
+      "オレンジスライスとチェリーを飾る"
+    ]
+  },
+  {
+    "id": "long-island-iced-tea",
+    "name": { "ja": "ロングアイランドアイスティー", "en": "Long Island Iced Tea" },
+    "category": "long",
+    "method": "build",
+    "taste": "sweet-sour",
+    "alcohol_strength": "strong",
+    "description": "紅茶に見えるがアルコール度数が非常に高い。4種のスピリッツを使った強力な一杯。",
+    "ingredients": [
+      { "bottle_id": "vodka", "amount": "15ml" },
+      { "bottle_id": "dry-gin", "amount": "15ml" },
+      { "bottle_id": "white-rum", "amount": "15ml" },
+      { "bottle_id": "tequila", "amount": "15ml" },
+      { "bottle_id": "cointreau", "amount": "15ml" },
+      { "bottle_id": "lemon-juice", "amount": "25ml" },
+      { "bottle_id": "sugar-syrup", "amount": "10ml" },
+      { "bottle_id": "cola", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "ウェッジ1個" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "collins-glass"],
+    "instructions": [
+      "コリンズグラスに氷を入れる",
+      "スピリッツ4種、コアントロー、レモンジュース、シロップを注ぐ",
+      "バースプーンでステアする",
+      "コーラを少量加えて紅茶のような色にする"
+    ]
+  },
+  {
+    "id": "brandy-alexander",
+    "name": { "ja": "ブランデーアレキサンダー", "en": "Brandy Alexander" },
+    "category": "short",
+    "method": "shake",
+    "taste": "sweet",
+    "alcohol_strength": "medium",
+    "description": "デザートカクテルの代表格。チョコレートとクリームの濃厚な味わい。",
+    "ingredients": [
+      { "bottle_id": "brandy", "amount": "30ml" },
+      { "bottle_id": "creme-de-cacao", "amount": "30ml" },
+      { "bottle_id": "heavy-cream", "amount": "30ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "nutmeg", "amount": "少量（すりおろし）" }
+    ],
+    "required_tools": ["shaker", "jigger", "cocktail-glass"],
+    "instructions": [
+      "シェーカーに全ての材料と氷を入れる",
+      "しっかりシェークする",
+      "カクテルグラスに注ぐ",
+      "ナツメグをすりおろして振りかける"
+    ]
+  },
+  {
+    "id": "grasshopper",
+    "name": { "ja": "グラスホッパー", "en": "Grasshopper" },
+    "category": "short",
+    "method": "shake",
+    "taste": "sweet",
+    "alcohol_strength": "weak",
+    "description": "鮮やかな緑色のデザートカクテル。ミントチョコレートのような味わい。",
+    "ingredients": [
+      { "bottle_id": "creme-de-menthe", "amount": "30ml" },
+      { "bottle_id": "creme-de-cacao", "amount": "30ml" },
+      { "bottle_id": "heavy-cream", "amount": "30ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "mint", "amount": "葉1枚" }
+    ],
+    "required_tools": ["shaker", "jigger", "cocktail-glass"],
+    "instructions": [
+      "シェーカーに全ての材料と氷を入れる",
+      "しっかりシェークする",
+      "カクテルグラスに注ぐ",
+      "ミントの葉を飾る"
+    ]
+  },
+  {
+    "id": "sex-on-the-beach",
+    "name": { "ja": "セックスオンザビーチ", "en": "Sex on the Beach" },
+    "category": "long",
+    "method": "shake",
+    "taste": "sweet",
+    "alcohol_strength": "medium",
+    "description": "1980年代にフロリダで誕生。フルーティーで甘く、ビーチにぴったりの一杯。",
+    "ingredients": [
+      { "bottle_id": "vodka", "amount": "30ml" },
+      { "bottle_id": "peach-schnapps", "amount": "20ml" },
+      { "bottle_id": "orange-juice", "amount": "40ml" },
+      { "bottle_id": "cranberry-juice", "amount": "40ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "orange", "amount": "スライス1枚" }
+    ],
+    "required_tools": ["shaker", "jigger", "highball-glass"],
+    "instructions": [
+      "シェーカーに全ての材料と氷を入れる",
+      "しっかりシェークする",
+      "氷を入れたハイボールグラスに注ぐ",
+      "オレンジスライスを飾る"
+    ]
+  },
+  {
+    "id": "hot-toddy",
+    "name": { "ja": "ホットトディ", "en": "Hot Toddy" },
+    "category": "hot",
+    "method": "build",
+    "taste": "sweet",
+    "alcohol_strength": "medium",
+    "description": "風邪の季節に愛される温かいカクテル。はちみつとレモンで体が温まる。",
+    "ingredients": [
+      { "bottle_id": "bourbon", "amount": "45ml" },
+      { "bottle_id": "honey", "amount": "大さじ1" },
+      { "bottle_id": "lemon-juice", "amount": "15ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "スライス1枚" }
+    ],
+    "required_tools": ["bar-spoon", "jigger", "irish-coffee-glass"],
+    "alternative_tools_note": "耐熱マグカップで代用可",
+    "instructions": [
+      "耐熱グラスにはちみつを入れる",
+      "お湯を少量加えてはちみつを溶かす",
+      "バーボンとレモンジュースを加える",
+      "お湯で満たし、バースプーンでステアする",
+      "レモンスライスを浮かべる"
+    ]
+  },
+  {
+    "id": "americano",
+    "name": { "ja": "アメリカーノ", "en": "Americano" },
+    "category": "long",
+    "method": "build",
+    "taste": "bitter",
+    "alcohol_strength": "weak",
+    "description": "ネグローニの原型。カンパリとベルモットの苦味を炭酸で軽やかに楽しめる食前酒。",
+    "ingredients": [
+      { "bottle_id": "campari", "amount": "30ml" },
+      { "bottle_id": "sweet-vermouth", "amount": "30ml" },
+      { "bottle_id": "soda-water", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "orange", "amount": "スライス1枚" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "ハイボールグラスに氷を入れる",
+      "カンパリとスイートベルモットを注ぐ",
+      "炭酸水で満たす",
+      "バースプーンで軽くステアする",
+      "オレンジスライスを飾る"
+    ]
+  },
+  {
+    "id": "boulevardier",
+    "name": { "ja": "ブールヴァルディエ", "en": "Boulevardier" },
+    "category": "short",
+    "method": "stir",
+    "taste": "bitter",
+    "alcohol_strength": "strong",
+    "description": "バーボン版ネグローニ。ウイスキーの甘みがカンパリの苦味と見事に調和する。",
+    "ingredients": [
+      { "bottle_id": "bourbon", "amount": "30ml" },
+      { "bottle_id": "campari", "amount": "30ml" },
+      { "bottle_id": "sweet-vermouth", "amount": "30ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "orange", "amount": "ピール1片" }
+    ],
+    "required_tools": ["mixing-glass", "bar-spoon", "strainer", "jigger", "old-fashioned-glass"],
+    "instructions": [
+      "ミキシンググラスに氷を入れる",
+      "全ての材料を注ぐ",
+      "ステアしてロックグラスに大きめの氷と共に注ぐ",
+      "オレンジピールを絞りかける"
+    ]
+  },
+  {
+    "id": "mimosa",
+    "name": { "ja": "ミモザ", "en": "Mimosa" },
+    "category": "long",
+    "method": "build",
+    "taste": "sweet",
+    "alcohol_strength": "weak",
+    "description": "ブランチの定番カクテル。シャンパンとオレンジジュースの黄金の組み合わせ。",
+    "ingredients": [
+      { "bottle_id": "champagne", "amount": "75ml" },
+      { "bottle_id": "orange-juice", "amount": "75ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "orange", "amount": "スライス1枚" }
+    ],
+    "required_tools": ["champagne-flute"],
+    "instructions": [
+      "冷やしたシャンパンフルートにオレンジジュースを注ぐ",
+      "冷えたシャンパンをゆっくり注いで満たす",
+      "軽く混ぜる（混ぜすぎない）"
+    ]
+  },
+  {
+    "id": "virgin-mojito",
+    "name": { "ja": "ヴァージンモヒート", "en": "Virgin Mojito" },
+    "category": "non-alcohol",
+    "method": "build",
+    "taste": "refreshing",
+    "alcohol_strength": "none",
+    "description": "モヒートのノンアルコール版。ミントとライムの爽快さはそのままに誰でも楽しめる。",
+    "ingredients": [
+      { "bottle_id": "lime-juice", "amount": "20ml" },
+      { "bottle_id": "sugar-syrup", "amount": "15ml" },
+      { "bottle_id": "mint", "amount": "6〜8枚" },
+      { "bottle_id": "soda-water", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "mint", "amount": "枝1本" },
+      { "bottle_id": "lime", "amount": "ウェッジ1個" }
+    ],
+    "required_tools": ["muddler", "bar-spoon", "collins-glass"],
+    "instructions": [
+      "グラスにミントの葉とシュガーシロップを入れ、軽くマドルする",
+      "ライムジュースを加える",
+      "クラッシュドアイスを入れる",
+      "炭酸水で満たし、バースプーンで軽くステアする",
+      "ミントの枝とライムを飾る"
+    ]
   }
 ]

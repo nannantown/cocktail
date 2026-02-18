@@ -515,5 +515,181 @@
     "price_range": "¥300〜¥500",
     "home_bar_note": "ピニャコラーダ、マイタイのガーニッシュに",
     "recommended_brands": []
+  },
+  {
+    "id": "scotch",
+    "name": { "ja": "スコッチウイスキー", "en": "Scotch Whisky" },
+    "type": "spirit",
+    "storage": "room_temp",
+    "shelf_life": "無期限（開封後1〜2年が目安）",
+    "priority": "optional",
+    "price_range": "¥2,000〜¥5,000",
+    "home_bar_note": "ロブロイ、ゴッドファーザーに使用。ブレンデッドがカクテル向き",
+    "recommended_brands": ["ジョニーウォーカー ブラック", "デュワーズ", "フェイマスグラウス"]
+  },
+  {
+    "id": "amaretto",
+    "name": { "ja": "アマレット", "en": "Amaretto" },
+    "type": "liqueur",
+    "storage": "room_temp",
+    "shelf_life": "開封後約1年",
+    "priority": "optional",
+    "price_range": "¥1,500〜¥2,500",
+    "home_bar_note": "アーモンド風味のリキュール。アマレットサワー、ゴッドファーザーに",
+    "recommended_brands": ["ディサローノ"]
+  },
+  {
+    "id": "blue-curacao",
+    "name": { "ja": "ブルーキュラソー", "en": "Blue Curaçao" },
+    "type": "liqueur",
+    "storage": "room_temp",
+    "shelf_life": "開封後約1年",
+    "priority": "optional",
+    "price_range": "¥1,000〜¥2,000",
+    "home_bar_note": "ブルーラグーン用。鮮やかな青色を加えるリキュール",
+    "recommended_brands": ["ボルス ブルーキュラソー"]
+  },
+  {
+    "id": "creme-de-cacao",
+    "name": { "ja": "クレームドカカオ（ホワイト）", "en": "White Crème de Cacao" },
+    "type": "liqueur",
+    "storage": "room_temp",
+    "shelf_life": "開封後約1年",
+    "priority": "optional",
+    "price_range": "¥1,000〜¥2,000",
+    "home_bar_note": "チョコレート風味のリキュール。ブランデーアレキサンダー、グラスホッパーに",
+    "recommended_brands": ["ボルス クレームドカカオ ホワイト"]
+  },
+  {
+    "id": "creme-de-menthe",
+    "name": { "ja": "クレームドミント（グリーン）", "en": "Green Crème de Menthe" },
+    "type": "liqueur",
+    "storage": "room_temp",
+    "shelf_life": "開封後約1年",
+    "priority": "optional",
+    "price_range": "¥1,000〜¥2,000",
+    "home_bar_note": "ミント風味のリキュール。グラスホッパーに使用",
+    "recommended_brands": ["ボルス クレームドミント グリーン"]
+  },
+  {
+    "id": "peach-schnapps",
+    "name": { "ja": "ピーチシュナップス", "en": "Peach Schnapps" },
+    "type": "liqueur",
+    "storage": "room_temp",
+    "shelf_life": "開封後約1年",
+    "priority": "optional",
+    "price_range": "¥1,000〜¥2,000",
+    "home_bar_note": "セックスオンザビーチなどフルーティーなカクテルに",
+    "recommended_brands": ["デカイパー ピーチツリー"]
+  },
+  {
+    "id": "champagne",
+    "name": { "ja": "シャンパン／スパークリングワイン", "en": "Champagne / Sparkling Wine" },
+    "type": "mixer",
+    "storage": "refrigerate",
+    "shelf_life": "開封後は当日中に使い切る",
+    "priority": "optional",
+    "price_range": "¥1,500〜¥5,000",
+    "home_bar_note": "フレンチ75、ミモザに使用。カヴァやスパークリングワインでも代用可",
+    "recommended_brands": ["モエ・エ・シャンドン", "ヴーヴ・クリコ", "フレシネ（カヴァ）"]
+  },
+  {
+    "id": "cola",
+    "name": { "ja": "コーラ", "en": "Cola" },
+    "type": "mixer",
+    "storage": "room_temp",
+    "shelf_life": "開封後は当日中に使い切る",
+    "priority": "recommended",
+    "price_range": "¥100〜¥200（1本）",
+    "home_bar_note": "キューバリブレ、ロングアイランドアイスティーなどに",
+    "recommended_brands": ["コカ・コーラ", "ペプシ"]
+  },
+  {
+    "id": "orange-juice",
+    "name": { "ja": "オレンジジュース", "en": "Orange Juice" },
+    "type": "juice",
+    "storage": "refrigerate",
+    "shelf_life": "生搾り：当日中／パック：開封後3〜5日",
+    "priority": "recommended",
+    "price_range": "¥200〜¥400",
+    "home_bar_note": "スクリュードライバー、テキーラサンライズ、ミモザなど幅広く使える",
+    "recommended_brands": ["トロピカーナ 100%", "生搾り推奨"]
+  },
+  {
+    "id": "grapefruit-juice",
+    "name": { "ja": "グレープフルーツジュース", "en": "Grapefruit Juice" },
+    "type": "juice",
+    "storage": "refrigerate",
+    "shelf_life": "生搾り：当日中／パック：開封後3〜5日",
+    "priority": "optional",
+    "price_range": "¥200〜¥400",
+    "home_bar_note": "パローマに使用。100%果汁がおすすめ",
+    "recommended_brands": ["トロピカーナ 100%", "生搾り推奨"]
+  },
+  {
+    "id": "tomato-juice",
+    "name": { "ja": "トマトジュース", "en": "Tomato Juice" },
+    "type": "juice",
+    "storage": "refrigerate",
+    "shelf_life": "開封後3〜5日",
+    "priority": "optional",
+    "price_range": "¥200〜¥400",
+    "home_bar_note": "ブラッディマリー用。無塩タイプがカクテルに向いている",
+    "recommended_brands": ["カゴメ トマトジュース（食塩無添加）"]
+  },
+  {
+    "id": "honey",
+    "name": { "ja": "はちみつ", "en": "Honey" },
+    "type": "syrup",
+    "storage": "room_temp",
+    "shelf_life": "無期限",
+    "priority": "optional",
+    "price_range": "¥500〜¥1,000",
+    "home_bar_note": "ホットトディなどに。お湯で溶いて使うと混ざりやすい",
+    "recommended_brands": []
+  },
+  {
+    "id": "tabasco",
+    "name": { "ja": "タバスコ", "en": "Tabasco Sauce" },
+    "type": "other",
+    "storage": "room_temp",
+    "shelf_life": "開封後約5年",
+    "priority": "optional",
+    "price_range": "¥300〜¥500",
+    "home_bar_note": "ブラッディマリーのスパイスに。お好みで量を調整",
+    "recommended_brands": ["タバスコ オリジナル"]
+  },
+  {
+    "id": "worcestershire-sauce",
+    "name": { "ja": "ウスターソース", "en": "Worcestershire Sauce" },
+    "type": "other",
+    "storage": "room_temp",
+    "shelf_life": "開封後約1年",
+    "priority": "optional",
+    "price_range": "¥300〜¥500",
+    "home_bar_note": "ブラッディマリーの旨味づけに",
+    "recommended_brands": ["リーペリン"]
+  },
+  {
+    "id": "celery",
+    "name": { "ja": "セロリ", "en": "Celery" },
+    "type": "fresh",
+    "storage": "refrigerate",
+    "shelf_life": "1〜2週間",
+    "priority": "optional",
+    "price_range": "¥200〜¥300",
+    "home_bar_note": "ブラッディマリーの定番ガーニッシュ兼マドラー",
+    "recommended_brands": []
+  },
+  {
+    "id": "nutmeg",
+    "name": { "ja": "ナツメグ", "en": "Nutmeg" },
+    "type": "pantry",
+    "storage": "room_temp",
+    "shelf_life": "約1年",
+    "priority": "optional",
+    "price_range": "¥200〜¥500",
+    "home_bar_note": "ブランデーアレキサンダーの仕上げにすりおろして使う",
+    "recommended_brands": []
   }
 ]
