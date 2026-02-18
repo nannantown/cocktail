@@ -17,7 +17,7 @@ const GLASS_EMOJI = {
   'cocktail-glass': '🍸', 'old-fashioned-glass': '🥃', 'highball-glass': '🥂',
   'collins-glass': '🥂', 'wine-glass': '🍷', 'shot-glass': '🥃',
   'copper-mug': '🍺', 'hurricane-glass': '🍹', 'margarita-glass': '🍸',
-  'irish-coffee-glass': '☕', 'champagne-flute': '🥂',
+  'irish-coffee-glass': '☕', 'champagne-flute': '🥂', 'julep-cup': '🥃',
 };
 const CATEGORY_LABELS = {
   short: 'ショート', long: 'ロング', tropical: 'トロピカル',
@@ -28,7 +28,7 @@ const METHOD_LABELS = {
 };
 const TASTE_LABELS = {
   sweet: '甘口', dry: '辛口', sour: '酸味', bitter: '苦味',
-  'sweet-sour': '甘酸', refreshing: '爽快',
+  'sweet-sour': '甘酸', refreshing: '爽快', savory: '旨味',
 };
 const STRENGTH_LABELS = {
   strong: '強め', medium: '普通', weak: '軽め', none: 'ノンアル',
@@ -58,6 +58,17 @@ const COCKTAILDB_NAMES = {
   'espresso-martini': 'Espresso Martini', 'mai-tai': 'Mai Tai',
   'irish-coffee': 'Irish Coffee', 'shirley-temple': 'Shirley Temple',
   'b52': 'B-52', 'spritz': 'Aperol Spritz',
+  'tom-collins': 'Tom Collins', 'french-75': 'French 75',
+  'tequila-sunrise': 'Tequila Sunrise', 'paloma': 'Paloma',
+  'screwdriver': 'Screwdriver', 'black-russian': 'Black Russian',
+  'white-russian': 'White Russian', 'bloody-mary': 'Bloody Mary',
+  'cuba-libre': 'Cuba Libre', 'blue-lagoon': 'Blue Lagoon',
+  'mint-julep': 'Mint Julep', 'rob-roy': 'Rob Roy',
+  'godfather': 'Godfather', 'amaretto-sour': 'Amaretto Sour',
+  'long-island-iced-tea': 'Long Island Tea', 'brandy-alexander': 'Brandy Alexander',
+  'grasshopper': 'Grasshopper', 'sex-on-the-beach': 'Sex on the Beach',
+  'hot-toddy': 'Hot Toddy', 'americano': 'Americano',
+  'boulevardier': 'Boulevardier', 'mimosa': 'Mimosa',
 };
 
 // ===== Data Loading =====
