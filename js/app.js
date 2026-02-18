@@ -48,13 +48,6 @@ const BOTTLE_SECTIONS = [
   { type: 'pantry', label: 'パントリー', open: false },
   { type: 'other', label: 'その他', open: false },
 ];
-const TOOL_SECTIONS = [
-  { category: 'mixing', label: 'ミキシングツール', open: true },
-  { category: 'measuring', label: '計量', open: false },
-  { category: 'garnish', label: 'ガーニッシュ', open: false },
-  { category: 'other', label: 'その他', open: false },
-];
-
 // ===== CocktailDB image mapping =====
 const COCKTAILDB_NAMES = {
   'martini': 'Dry Martini', 'manhattan': 'Manhattan', 'old-fashioned': 'Old Fashioned',
@@ -202,6 +195,19 @@ function countUsage(itemId, itemType) {
 const checkSvg = '<svg width="12" height="12" fill="none" stroke="#0a0a0a" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>';
 const chevronSvg = '<svg class="chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M6.293 7.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"/></svg>';
 
+// ===== Tool Illustrations =====
+const TOOL_ILLUST = {
+  'shaker': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8h16l2 6H22l2-6z"/><rect x="20" y="14" width="24" height="4" rx="1"/><path d="M21 18l3 38h16l3-38"/><ellipse cx="32" cy="37" rx="6" ry="8" stroke-dasharray="3 3" opacity=".3"/></svg>',
+  'mixing-glass': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10h24l-3 42H23L20 10z"/><path d="M20 10h24" stroke-width="2"/><ellipse cx="32" cy="32" rx="7" ry="10" stroke-dasharray="3 3" opacity=".3"/><line x1="38" y1="6" x2="38" y2="16" stroke-width="1" opacity=".5"/></svg>',
+  'bar-spoon': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="32" cy="52" rx="5" ry="3"/><path d="M32 49V12"/><path d="M29 12a3 3 0 016 0" /><path d="M28 28c2-2 6 2 8 0" opacity=".5"/><path d="M28 34c2-2 6 2 8 0" opacity=".5"/><path d="M28 40c2-2 6 2 8 0" opacity=".5"/></svg>',
+  'strainer': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="32" cy="28" rx="14" ry="6"/><path d="M18 28v4c0 3.3 6.3 6 14 6s14-2.7 14-6v-4"/><path d="M22 32v3m4-4v4m4-4v4m4-4v4m4-3v3"/><path d="M32 8v14"/><circle cx="32" cy="8" r="3"/></svg>',
+  'jigger': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 30h20"/><path d="M26 30l-4-22h20l-4 22"/><path d="M26 30l-2 26h16l-2-26"/></svg>',
+  'muddler': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="28" y="6" width="8" height="44" rx="4"/><rect x="26" y="50" width="12" height="8" rx="2"/><line x1="28" y1="14" x2="36" y2="14" opacity=".4"/><line x1="28" y1="20" x2="36" y2="20" opacity=".4"/></svg>',
+  'blender': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 6h20v4H22z"/><path d="M24 10l-2 30h20l-2-30"/><rect x="20" y="40" width="24" height="8" rx="2"/><path d="M38 10l4-4" stroke-width="1"/><circle cx="32" cy="44" r="2"/><path d="M28 24l8-4m-8 8l8-4" opacity=".3"/></svg>',
+  'peeler': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M26 8c0 0 2 4 6 4s6-4 6-4"/><path d="M26 8v6h12V8"/><rect x="30" y="14" width="4" height="36" rx="2"/><path d="M28 10h8" opacity=".5"/></svg>',
+  'ice-tray': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="18" width="44" height="28" rx="3"/><line x1="10" y1="32" x2="54" y2="32"/><line x1="21" y1="18" x2="21" y2="46"/><line x1="32" y1="18" x2="32" y2="46"/><line x1="43" y1="18" x2="43" y2="46"/></svg>',
+};
+
 // ===== Render: My Bar Stats =====
 function renderMyBarStats() {
   const unlocked = state.cocktails.filter(c => analyzeCocktail(c).status === 'unlocked').length;
@@ -223,6 +229,23 @@ function renderInventory() {
       || (item.name.en && item.name.en.toLowerCase().includes(query));
   };
 
+  // Helper: render a tool card with illustration + toggle switch
+  const renderToolCard = (item) => {
+    const checked = state.inventory.tools.has(item.id);
+    const usage = countUsage(item.id, 'tool');
+    const illust = TOOL_ILLUST[item.id] || '';
+    return `<div class="tool-card ${checked ? 'active' : ''}" data-type="tool" data-id="${item.id}">
+      <div class="tool-card-illust">${illust}</div>
+      <div class="tool-card-info">
+        <div class="tool-card-name">${item.name.ja}</div>
+        <div class="tool-card-sub">${usage}杯で使用</div>
+      </div>
+      <div class="tool-toggle">
+        <div class="tool-toggle-track"><div class="tool-toggle-thumb"></div></div>
+      </div>
+    </div>`;
+  };
+
   // When searching, show flat list instead of sections
   if (query) {
     const matchedBottles = state.bottles.filter(matchItem);
@@ -239,14 +262,10 @@ function renderInventory() {
           <span class="inv-badge">${usage}杯</span>
         </div>`;
       }
-      for (const item of matchedTools) {
-        const checked = state.inventory.tools.has(item.id);
-        const usage = countUsage(item.id, 'tool');
-        html += `<div class="inv-item ${checked ? 'checked' : ''}" data-type="tool" data-id="${item.id}">
-          <div class="inv-checkbox">${checkSvg}</div>
-          <span>${item.name.ja}</span>
-          <span class="inv-badge">${usage}杯</span>
-        </div>`;
+      if (matchedTools.length > 0) {
+        html += '<div class="tool-card-grid">';
+        for (const item of matchedTools) html += renderToolCard(item);
+        html += '</div>';
       }
     }
     panel.innerHTML = html;
@@ -273,24 +292,13 @@ function renderInventory() {
     html += '</div></details>';
   }
 
-  html += '<div class="inv-heading">ツール・グラス</div>';
-  for (const section of TOOL_SECTIONS) {
-    const items = state.tools.filter(t => t.category === section.category);
-    if (items.length === 0) continue;
-    const checkedCount = items.filter(t => state.inventory.tools.has(t.id)).length;
-    html += `<details class="inv-section" ${section.open ? 'open' : ''}>
-      <summary>${chevronSvg}<span>${section.label}</span><span class="inv-section-count">${checkedCount}/${items.length}</span></summary>
-      <div>`;
-    for (const item of items) {
-      const checked = state.inventory.tools.has(item.id);
-      const usage = countUsage(item.id, 'tool');
-      html += `<div class="inv-item ${checked ? 'checked' : ''}" data-type="tool" data-id="${item.id}">
-        <div class="inv-checkbox">${checkSvg}</div>
-        <span>${item.name.ja}</span>
-        <span class="inv-badge">${usage}杯</span>
-      </div>`;
-    }
-    html += '</div></details>';
+  // Tools: visual card grid with toggle switches
+  const nonGlasswareTools = state.tools.filter(t => t.category !== 'glassware');
+  if (nonGlasswareTools.length > 0) {
+    html += '<div class="inv-heading">ツール</div>';
+    html += '<div class="tool-card-grid">';
+    for (const item of nonGlasswareTools) html += renderToolCard(item);
+    html += '</div>';
   }
 
   panel.innerHTML = html;
@@ -551,9 +559,9 @@ function setupEventHandlers() {
     btn.addEventListener('click', () => switchTab(btn.dataset.tab));
   });
 
-  // Inventory item toggle
+  // Inventory item toggle (bottles + tools)
   document.getElementById('inventory-panel').addEventListener('click', (e) => {
-    const item = e.target.closest('.inv-item');
+    const item = e.target.closest('.inv-item') || e.target.closest('.tool-card');
     if (!item) return;
     const { type, id } = item.dataset;
     const set = type === 'bottle' ? state.inventory.bottles : state.inventory.tools;
