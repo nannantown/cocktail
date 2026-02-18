@@ -8,17 +8,16 @@ const state = {
   filters: { status: 'all', category: 'all', method: 'all' },
   images: {},
   previouslyUnlocked: new Set(),
+  activeTab: 'mybar',
 };
 
-// ===== Glass emoji mapping =====
+// ===== Labels =====
 const GLASS_EMOJI = {
   'cocktail-glass': '🍸', 'old-fashioned-glass': '🥃', 'highball-glass': '🥂',
   'collins-glass': '🥂', 'wine-glass': '🍷', 'shot-glass': '🥃',
   'copper-mug': '🍺', 'hurricane-glass': '🍹', 'margarita-glass': '🍸',
   'irish-coffee-glass': '☕', 'champagne-flute': '🥂',
 };
-
-// ===== Labels =====
 const CATEGORY_LABELS = {
   short: 'ショート', long: 'ロング', tropical: 'トロピカル',
   standard: 'スタンダード', shot: 'ショット', hot: 'ホット', 'non-alcohol': 'ノンアル',
@@ -56,7 +55,7 @@ const TOOL_SECTIONS = [
   { category: 'other', label: 'その他', open: false },
 ];
 
-// ===== CocktailDB search mapping =====
+// ===== CocktailDB image mapping =====
 const COCKTAILDB_NAMES = {
   'martini': 'Dry Martini', 'manhattan': 'Manhattan', 'old-fashioned': 'Old Fashioned',
   'gimlet': 'Gimlet', 'daiquiri': 'Daiquiri', 'margarita': 'Margarita',
@@ -100,6 +99,22 @@ function loadInventory() {
   } catch (e) { /* ignore */ }
 }
 
+// ===== Tab Navigation =====
+function switchTab(tabName) {
+  state.activeTab = tabName;
+  document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-bar-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabName).classList.add('active');
+  document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+
+  // Lazy render on tab switch
+  if (tabName === 'cocktails') renderCocktails();
+  if (tabName === 'recommend') renderRecommendations();
+
+  // Scroll to top
+  window.scrollTo(0, 0);
+}
+
 // ===== Cocktail Analysis =====
 function analyzeCocktail(cocktail) {
   const missingBottles = [];
@@ -108,14 +123,12 @@ function analyzeCocktail(cocktail) {
     if (state.inventory.bottles.has(ing.bottle_id)) haveBottles.push(ing);
     else missingBottles.push(ing);
   }
-
   const missingTools = [];
   const haveTools = [];
   for (const toolId of cocktail.required_tools) {
     if (state.inventory.tools.has(toolId)) haveTools.push(toolId);
     else missingTools.push(toolId);
   }
-
   const totalItems = cocktail.ingredients.length + cocktail.required_tools.length;
   const haveItems = haveBottles.length + haveTools.length;
   const progress = totalItems > 0 ? haveItems / totalItems : 0;
@@ -134,7 +147,6 @@ function getRecommendations() {
     ...state.bottles.filter(b => !state.inventory.bottles.has(b.id)).map(b => ({ ...b, itemType: 'bottle' })),
     ...state.tools.filter(t => !state.inventory.tools.has(t.id)).map(t => ({ ...t, itemType: 'tool' })),
   ];
-
   const results = [];
   for (const item of allItems) {
     const tempBottles = new Set(state.inventory.bottles);
@@ -151,9 +163,8 @@ function getRecommendations() {
     }
     if (newlyUnlocked.length > 0) results.push({ item, newlyUnlocked });
   }
-
   results.sort((a, b) => b.newlyUnlocked.length - a.newlyUnlocked.length);
-  return results.slice(0, 6);
+  return results.slice(0, 8);
 }
 
 // ===== Helpers =====
@@ -177,8 +188,16 @@ function countUsage(itemId, itemType) {
   return count;
 }
 
-const checkSvg = '<svg width="10" height="10" fill="none" stroke="#0a0a0a" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>';
-const chevronSvg = '<svg class="chevron" width="10" height="10" fill="currentColor" viewBox="0 0 20 20"><path d="M6.293 7.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"/></svg>';
+const checkSvg = '<svg width="12" height="12" fill="none" stroke="#0a0a0a" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>';
+const chevronSvg = '<svg class="chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M6.293 7.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"/></svg>';
+
+// ===== Render: My Bar Stats =====
+function renderMyBarStats() {
+  const unlocked = state.cocktails.filter(c => analyzeCocktail(c).status === 'unlocked').length;
+  document.getElementById('stat-bottles').textContent = state.inventory.bottles.size;
+  document.getElementById('stat-tools').textContent = state.inventory.tools.size;
+  document.getElementById('stat-unlocked').textContent = unlocked;
+}
 
 // ===== Render: Inventory =====
 function renderInventory() {
@@ -258,7 +277,6 @@ function renderCocktails() {
     const emoji = GLASS_EMOJI[glassToolId] || '🍸';
     const imgUrl = state.images[cocktail.id];
     const justUnlocked = a.status === 'unlocked' && !state.previouslyUnlocked.has(cocktail.id);
-
     const fillClass = a.status === 'unlocked' ? 'fill-success' : a.status === 'almost' ? 'fill-warning' : 'fill-neutral';
 
     const statusBadge = a.status === 'unlocked'
@@ -273,10 +291,10 @@ function renderCocktails() {
         ...a.missingBottles.map(i => getBottleName(i.bottle_id)),
         ...a.missingTools.map(t => getToolName(t)),
       ];
-      const shown = allMissing.slice(0, 3);
+      const shown = allMissing.slice(0, 2);
       missingHtml = '<div class="missing-row">'
         + shown.map(name => `<span class="missing-tag">${name}</span>`).join('')
-        + (allMissing.length > 3 ? `<span class="missing-tag">+${allMissing.length - 3}</span>` : '')
+        + (allMissing.length > 2 ? `<span class="missing-tag">+${allMissing.length - 2}</span>` : '')
         + '</div>';
     }
 
@@ -297,7 +315,6 @@ function renderCocktails() {
         <div class="badge-row">
           <span class="method-badge method-${cocktail.method}">${METHOD_LABELS[cocktail.method]}</span>
           <span class="taste-badge">${TASTE_LABELS[cocktail.taste] || cocktail.taste}</span>
-          <span class="taste-badge">${STRENGTH_LABELS[cocktail.alcohol_strength]}</span>
         </div>
         ${missingHtml}
       </div>
@@ -308,15 +325,16 @@ function renderCocktails() {
 
 // ===== Render: Recommendations =====
 function renderRecommendations() {
-  const section = document.getElementById('recommendations');
   const list = document.getElementById('recommendations-list');
+  const empty = document.getElementById('rec-empty');
   const recs = getRecommendations();
 
   if (recs.length === 0) {
-    section.classList.add('hidden');
+    list.innerHTML = '';
+    empty.classList.remove('hidden');
     return;
   }
-  section.classList.remove('hidden');
+  empty.classList.add('hidden');
 
   let html = '';
   for (const rec of recs) {
@@ -418,13 +436,13 @@ function closeModal() {
   document.getElementById('modal').classList.add('hidden');
 }
 
-// ===== Image Loading (TheCocktailDB) =====
+// ===== Image Loading =====
 async function loadImages() {
   try {
     const cached = JSON.parse(localStorage.getItem('cocktailImages') || '{}');
     if (Object.keys(cached).length > 0) {
       state.images = cached;
-      renderCocktails();
+      if (state.activeTab === 'cocktails') renderCocktails();
     }
   } catch (e) { /* ignore */ }
 
@@ -443,7 +461,7 @@ async function loadImages() {
 
   await Promise.allSettled(promises);
   localStorage.setItem('cocktailImages', JSON.stringify(state.images));
-  renderCocktails();
+  if (state.activeTab === 'cocktails') renderCocktails();
 }
 
 // ===== Full Render =====
@@ -451,14 +469,21 @@ function render() {
   state.previouslyUnlocked = new Set(
     state.cocktails.filter(c => analyzeCocktail(c).status === 'unlocked').map(c => c.id)
   );
+  renderMyBarStats();
   renderInventory();
-  renderCocktails();
-  renderRecommendations();
   renderProgress();
+  if (state.activeTab === 'cocktails') renderCocktails();
+  if (state.activeTab === 'recommend') renderRecommendations();
 }
 
 // ===== Event Handlers =====
 function setupEventHandlers() {
+  // Tab navigation
+  document.querySelectorAll('.tab-bar-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+
+  // Inventory item toggle
   document.getElementById('inventory-panel').addEventListener('click', (e) => {
     const item = e.target.closest('.inv-item');
     if (!item) return;
@@ -470,14 +495,17 @@ function setupEventHandlers() {
     render();
   });
 
+  // Cocktail card click → modal
   document.getElementById('cocktail-grid').addEventListener('click', (e) => {
     const card = e.target.closest('.cocktail-card');
     if (card) showModal(card.dataset.cocktailId);
   });
 
+  // Modal close
   document.getElementById('modal-overlay').addEventListener('click', closeModal);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
+  // Filters
   document.querySelectorAll('[data-filter-status]').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('[data-filter-status]').forEach(b => b.classList.remove('active'));
@@ -495,16 +523,6 @@ function setupEventHandlers() {
   document.getElementById('filter-method').addEventListener('change', (e) => {
     state.filters.method = e.target.value;
     renderCocktails();
-  });
-
-  document.getElementById('sidebar-toggle').addEventListener('click', () => {
-    document.getElementById('sidebar').classList.toggle('open');
-    document.getElementById('sidebar-overlay').classList.toggle('visible');
-  });
-
-  document.getElementById('sidebar-overlay').addEventListener('click', () => {
-    document.getElementById('sidebar').classList.remove('open');
-    document.getElementById('sidebar-overlay').classList.remove('visible');
   });
 }
 

@@ -2,105 +2,121 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Home Bar Builder</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-left">
-        <button id="sidebar-toggle" class="sidebar-toggle" aria-label="メニュー">
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-        <h1 class="header-title">Home Bar Builder</h1>
-      </div>
-      <div class="header-right">
-        <span class="header-label">解放済み</span>
-        <span id="unlock-count" class="header-count">0</span>
-        <span class="header-sep">/ <span id="total-count">20</span></span>
-        <div class="progress-track">
-          <div id="progress-bar" class="progress-fill"></div>
+  <!-- ===== Tab: My Bar ===== -->
+  <div id="tab-mybar" class="tab-page active">
+    <header class="tab-header">
+      <h1 class="tab-header-title">My Bar</h1>
+      <p class="tab-header-sub">持っているものにチェック</p>
+    </header>
+    <div class="tab-body">
+      <div class="mybar-stats">
+        <div class="mybar-stat">
+          <span class="mybar-stat-num" id="stat-bottles">0</span>
+          <span class="mybar-stat-label">ボトル</span>
+        </div>
+        <div class="mybar-stat">
+          <span class="mybar-stat-num" id="stat-tools">0</span>
+          <span class="mybar-stat-label">ツール</span>
+        </div>
+        <div class="mybar-stat">
+          <span class="mybar-stat-num" id="stat-unlocked">0</span>
+          <span class="mybar-stat-label">作れる杯</span>
         </div>
       </div>
+      <div id="inventory-panel"></div>
     </div>
-  </header>
+  </div>
 
-  <div class="layout">
-
-    <!-- Sidebar -->
-    <aside id="sidebar" class="sidebar">
-      <div class="sidebar-inner">
-        <h2 class="sidebar-title">My Bar</h2>
-        <p class="sidebar-desc">持っているものにチェック</p>
-        <div id="inventory-panel"></div>
+  <!-- ===== Tab: Cocktails ===== -->
+  <div id="tab-cocktails" class="tab-page">
+    <header class="tab-header">
+      <h1 class="tab-header-title">カクテル</h1>
+      <div class="tab-header-progress">
+        <span id="unlock-count" class="progress-num">0</span>
+        <span class="progress-sep">/ <span id="total-count">0</span></span>
+        <div class="progress-track"><div id="progress-bar" class="progress-fill"></div></div>
       </div>
-    </aside>
-
-    <!-- Sidebar overlay (mobile) -->
-    <div id="sidebar-overlay" class="sidebar-overlay"></div>
-
-    <!-- Main -->
-    <main class="main">
-
-      <!-- Recommendations -->
-      <section id="recommendations" class="rec-section hidden">
-        <h2 class="section-title">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/></svg>
-          次に買うと解放されるもの
-        </h2>
-        <div id="recommendations-list" class="rec-grid"></div>
-      </section>
-
-      <!-- Filters -->
+    </header>
+    <div class="tab-body">
       <div class="filter-bar">
         <div class="filter-group">
           <button data-filter-status="all" class="filter-btn active">すべて</button>
-          <button data-filter-status="unlocked" class="filter-btn"><span class="dot dot-success"></span>解放済み</button>
+          <button data-filter-status="unlocked" class="filter-btn"><span class="dot dot-success"></span>作れる</button>
           <button data-filter-status="almost" class="filter-btn"><span class="dot dot-warning"></span>あと少し</button>
-          <button data-filter-status="locked" class="filter-btn"><span class="dot dot-neutral"></span>ロック中</button>
+          <button data-filter-status="locked" class="filter-btn"><span class="dot dot-neutral"></span>ロック</button>
         </div>
-        <select id="filter-category" class="filter-select">
-          <option value="all">全カテゴリ</option>
-          <option value="short">ショート</option>
-          <option value="long">ロング</option>
-          <option value="tropical">トロピカル</option>
-          <option value="standard">スタンダード</option>
-          <option value="shot">ショット</option>
-          <option value="hot">ホット</option>
-          <option value="non-alcohol">ノンアルコール</option>
-        </select>
-        <select id="filter-method" class="filter-select">
-          <option value="all">全技法</option>
-          <option value="shake">シェーク</option>
-          <option value="stir">ステア</option>
-          <option value="build">ビルド</option>
-          <option value="blend">ブレンド</option>
-          <option value="layer">レイヤー</option>
-        </select>
+        <div class="filter-selects">
+          <select id="filter-category" class="filter-select">
+            <option value="all">全カテゴリ</option>
+            <option value="short">ショート</option>
+            <option value="long">ロング</option>
+            <option value="tropical">トロピカル</option>
+            <option value="standard">スタンダード</option>
+            <option value="shot">ショット</option>
+            <option value="hot">ホット</option>
+            <option value="non-alcohol">ノンアル</option>
+          </select>
+          <select id="filter-method" class="filter-select">
+            <option value="all">全技法</option>
+            <option value="shake">シェーク</option>
+            <option value="stir">ステア</option>
+            <option value="build">ビルド</option>
+            <option value="blend">ブレンド</option>
+            <option value="layer">レイヤー</option>
+          </select>
+        </div>
       </div>
-
-      <!-- Cocktail Grid -->
       <div id="cocktail-grid" class="cocktail-grid"></div>
-
-      <!-- Empty State -->
       <div id="empty-state" class="empty-state hidden">
         <p class="empty-icon">🍸</p>
         <p class="empty-text">フィルターに一致するカクテルがありません</p>
       </div>
-    </main>
+    </div>
   </div>
 
-  <!-- Detail Modal -->
+  <!-- ===== Tab: Recommend ===== -->
+  <div id="tab-recommend" class="tab-page">
+    <header class="tab-header">
+      <h1 class="tab-header-title">おすすめ</h1>
+      <p class="tab-header-sub">次に買うと作れるカクテルが増えます</p>
+    </header>
+    <div class="tab-body">
+      <div id="recommendations-list" class="rec-list"></div>
+      <div id="rec-empty" class="empty-state hidden">
+        <p class="empty-icon">🎉</p>
+        <p class="empty-text">すべてのカクテルが作れます！</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Detail Modal ===== -->
   <div id="modal" class="modal-backdrop hidden">
     <div id="modal-overlay" class="modal-scrim"></div>
     <div id="modal-content" class="modal-content"></div>
   </div>
+
+  <!-- ===== Bottom Tab Bar ===== -->
+  <nav class="tab-bar">
+    <button class="tab-bar-btn active" data-tab="mybar">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+      <span>My Bar</span>
+    </button>
+    <button class="tab-bar-btn" data-tab="cocktails">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M8 2l1.5 9H14l1.5-9"/><path d="M12 11v9"/><path d="M8 20h8"/><path d="M6 2h12"/></svg>
+      <span>カクテル</span>
+    </button>
+    <button class="tab-bar-btn" data-tab="recommend">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+      <span>おすすめ</span>
+    </button>
+  </nav>
 
   <script src="js/app.js"></script>
 </body>
