@@ -487,6 +487,14 @@ body {
   background: var(--bg-surface);
   color: var(--text-secondary);
 }
+.glass-badge {
+  padding: 1px 6px;
+  border-radius: var(--r-xs);
+  font-size: 9px;
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
 
 .missing-tag {
   display: inline-flex; align-items: center; gap: 2px;

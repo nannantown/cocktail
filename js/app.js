@@ -52,7 +52,6 @@ const TOOL_SECTIONS = [
   { category: 'mixing', label: 'ミキシングツール', open: true },
   { category: 'measuring', label: '計量', open: false },
   { category: 'garnish', label: 'ガーニッシュ', open: false },
-  { category: 'glassware', label: 'グラスウェア', open: false },
   { category: 'other', label: 'その他', open: false },
 ];
 
@@ -126,11 +125,12 @@ function analyzeCocktail(cocktail) {
   }
   const missingTools = [];
   const haveTools = [];
-  for (const toolId of cocktail.required_tools) {
+  const nonGlassTools = cocktail.required_tools.filter(t => !isGlassware(t));
+  for (const toolId of nonGlassTools) {
     if (state.inventory.tools.has(toolId)) haveTools.push(toolId);
     else missingTools.push(toolId);
   }
-  const totalItems = cocktail.ingredients.length + cocktail.required_tools.length;
+  const totalItems = cocktail.ingredients.length + nonGlassTools.length;
   const haveItems = haveBottles.length + haveTools.length;
   const progress = totalItems > 0 ? haveItems / totalItems : 0;
 
@@ -146,7 +146,7 @@ function analyzeCocktail(cocktail) {
 function getRecommendations() {
   const allItems = [
     ...state.bottles.filter(b => !state.inventory.bottles.has(b.id)).map(b => ({ ...b, itemType: 'bottle' })),
-    ...state.tools.filter(t => !state.inventory.tools.has(t.id)).map(t => ({ ...t, itemType: 'tool' })),
+    ...state.tools.filter(t => t.category !== 'glassware' && !state.inventory.tools.has(t.id)).map(t => ({ ...t, itemType: 'tool' })),
   ];
   const results = [];
   for (const item of allItems) {
@@ -159,7 +159,7 @@ function getRecommendations() {
     for (const cocktail of state.cocktails) {
       if (analyzeCocktail(cocktail).status === 'unlocked') continue;
       const allIngs = cocktail.ingredients.every(i => tempBottles.has(i.bottle_id));
-      const allToolsOk = cocktail.required_tools.every(t => tempTools.has(t));
+      const allToolsOk = cocktail.required_tools.filter(t => !isGlassware(t)).every(t => tempTools.has(t));
       if (allIngs && allToolsOk) newlyUnlocked.push(cocktail);
     }
     if (newlyUnlocked.length > 0) results.push({ item, newlyUnlocked });
@@ -169,6 +169,16 @@ function getRecommendations() {
 }
 
 // ===== Helpers =====
+function isGlassware(toolId) {
+  const t = state.tools.find(t => t.id === toolId);
+  return t && t.category === 'glassware';
+}
+function getGlassInfo(cocktail) {
+  const glassId = cocktail.required_tools.find(t => isGlassware(t));
+  if (!glassId) return null;
+  const tool = state.tools.find(t => t.id === glassId);
+  return { id: glassId, emoji: GLASS_EMOJI[glassId] || '🍸', name: tool ? tool.name.ja : glassId };
+}
 function getBottleName(id) {
   const b = state.bottles.find(b => b.id === id);
   return b ? b.name.ja : id;
@@ -216,7 +226,7 @@ function renderInventory() {
   // When searching, show flat list instead of sections
   if (query) {
     const matchedBottles = state.bottles.filter(matchItem);
-    const matchedTools = state.tools.filter(matchItem);
+    const matchedTools = state.tools.filter(t => t.category !== 'glassware' && matchItem(t));
     if (matchedBottles.length === 0 && matchedTools.length === 0) {
       html = '<div class="empty-state"><p class="empty-text">見つかりません</p></div>';
     } else {
@@ -326,8 +336,8 @@ function renderCocktails() {
   let html = '';
   for (const cocktail of filtered) {
     const a = analyzeCocktail(cocktail);
-    const glassToolId = cocktail.required_tools.find(t => t.endsWith('-glass') || t === 'copper-mug');
-    const emoji = GLASS_EMOJI[glassToolId] || '🍸';
+    const glass = getGlassInfo(cocktail);
+    const emoji = glass ? glass.emoji : '🍸';
     const imgUrl = state.images[cocktail.id];
     const justUnlocked = a.status === 'unlocked' && !state.previouslyUnlocked.has(cocktail.id);
     const fillClass = a.status === 'unlocked' ? 'fill-success' : a.status === 'almost' ? 'fill-warning' : 'fill-neutral';
@@ -351,6 +361,8 @@ function renderCocktails() {
         + '</div>';
     }
 
+    const glassHtml = glass ? `<span class="glass-badge">${glass.emoji} ${glass.name}</span>` : '';
+
     html += `
     <div class="cocktail-card ${a.status} ${justUnlocked ? 'just-unlocked' : ''}" data-cocktail-id="${cocktail.id}">
       <div class="card-image gradient-${cocktail.category}">
@@ -368,6 +380,7 @@ function renderCocktails() {
         <div class="badge-row">
           <span class="method-badge method-${cocktail.method}">${METHOD_LABELS[cocktail.method]}</span>
           <span class="taste-badge">${TASTE_LABELS[cocktail.taste] || cocktail.taste}</span>
+          ${glassHtml}
         </div>
         ${missingHtml}
       </div>
@@ -425,8 +438,8 @@ function showModal(cocktailId) {
   if (!cocktail) return;
 
   const a = analyzeCocktail(cocktail);
-  const glassToolId = cocktail.required_tools.find(t => t.endsWith('-glass') || t === 'copper-mug');
-  const emoji = GLASS_EMOJI[glassToolId] || '🍸';
+  const glass = getGlassInfo(cocktail);
+  const emoji = glass ? glass.emoji : '🍸';
   const imgUrl = state.images[cocktail.id];
 
   const ingredientsList = cocktail.ingredients.map(ing => {
@@ -438,7 +451,8 @@ function showModal(cocktailId) {
     `<span class="taste-badge">${getBottleName(g.bottle_id)} ${g.amount}</span>`
   ).join('');
 
-  const toolsList = cocktail.required_tools.map(t => {
+  const nonGlassTools = cocktail.required_tools.filter(t => !isGlassware(t));
+  const toolsList = nonGlassTools.map(t => {
     const have = state.inventory.tools.has(t);
     return `<span class="${have ? 'have-tag' : 'missing-tag'}">${have ? '✓' : '✕'} ${getToolName(t)}</span>`;
   }).join('');
@@ -472,9 +486,10 @@ function showModal(cocktailId) {
 
       ${garnishList ? `<h3 class="modal-section-title">ガーニッシュ</h3><div class="modal-tags">${garnishList}</div>` : ''}
 
-      <h3 class="modal-section-title">必要な器具</h3>
-      <div class="modal-tags">${toolsList}</div>
+      ${glass ? `<h3 class="modal-section-title">グラス</h3><div class="modal-tags"><span class="glass-badge">${glass.emoji} ${glass.name}</span></div>` : ''}
       ${cocktail.alternative_tools_note ? `<p class="modal-note">${cocktail.alternative_tools_note}</p>` : ''}
+
+      ${nonGlassTools.length > 0 ? `<h3 class="modal-section-title">必要な器具</h3><div class="modal-tags">${toolsList}</div>` : ''}
 
       <h3 class="modal-section-title">作り方</h3>
       <div>${steps}</div>
