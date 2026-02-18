@@ -218,6 +218,50 @@ body {
 .tab-bar-btn.active { color: var(--text-primary); }
 .tab-bar-btn.active svg { stroke: var(--accent); }
 
+/* ===== 5b. Search Box ===== */
+.search-box {
+  position: relative;
+  margin-bottom: var(--sp-lg);
+}
+.search-icon {
+  position: absolute; left: var(--sp-md); top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.search-input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-lg);
+  padding: var(--sp-md) var(--sp-md) var(--sp-md) 40px;
+  font-size: var(--fs-md);
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  transition: border-color var(--tr-fast), box-shadow var(--tr-fast);
+  -webkit-appearance: none;
+}
+.search-input::placeholder { color: var(--text-muted); }
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+.search-clear {
+  position: absolute; right: var(--sp-sm); top: 50%;
+  transform: translateY(-50%);
+  background: var(--bg-surface);
+  border: none; border-radius: var(--r-full);
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--tr-fast), color var(--tr-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+.search-clear:hover { background: var(--bg-surface-hover); color: var(--text-primary); }
+.search-clear.hidden { display: none; }
+
 /* ===== 6. My Bar Stats ===== */
 .mybar-stats {
   display: grid; grid-template-columns: repeat(3, 1fr);

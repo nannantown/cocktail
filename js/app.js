@@ -6,6 +6,7 @@ const state = {
   categories: [],
   inventory: { bottles: new Set(), tools: new Set() },
   filters: { status: 'all', category: 'all', method: 'all' },
+  search: { inventory: '', cocktails: '' },
   images: {},
   previouslyUnlocked: new Set(),
   activeTab: 'mybar',
@@ -202,7 +203,45 @@ function renderMyBarStats() {
 // ===== Render: Inventory =====
 function renderInventory() {
   const panel = document.getElementById('inventory-panel');
+  const query = state.search.inventory.toLowerCase();
   let html = '';
+
+  // Helper: check if item matches search
+  const matchItem = (item) => {
+    if (!query) return true;
+    return item.name.ja.toLowerCase().includes(query)
+      || (item.name.en && item.name.en.toLowerCase().includes(query));
+  };
+
+  // When searching, show flat list instead of sections
+  if (query) {
+    const matchedBottles = state.bottles.filter(matchItem);
+    const matchedTools = state.tools.filter(matchItem);
+    if (matchedBottles.length === 0 && matchedTools.length === 0) {
+      html = '<div class="empty-state"><p class="empty-text">見つかりません</p></div>';
+    } else {
+      for (const item of matchedBottles) {
+        const checked = state.inventory.bottles.has(item.id);
+        const usage = countUsage(item.id, 'bottle');
+        html += `<div class="inv-item ${checked ? 'checked' : ''}" data-type="bottle" data-id="${item.id}">
+          <div class="inv-checkbox">${checkSvg}</div>
+          <span>${item.name.ja}</span>
+          <span class="inv-badge">${usage}杯</span>
+        </div>`;
+      }
+      for (const item of matchedTools) {
+        const checked = state.inventory.tools.has(item.id);
+        const usage = countUsage(item.id, 'tool');
+        html += `<div class="inv-item ${checked ? 'checked' : ''}" data-type="tool" data-id="${item.id}">
+          <div class="inv-checkbox">${checkSvg}</div>
+          <span>${item.name.ja}</span>
+          <span class="inv-badge">${usage}杯</span>
+        </div>`;
+      }
+    }
+    panel.innerHTML = html;
+    return;
+  }
 
   html += '<div class="inv-heading">ボトル・材料</div>';
   for (const section of BOTTLE_SECTIONS) {
@@ -252,11 +291,18 @@ function renderCocktails() {
   const grid = document.getElementById('cocktail-grid');
   const emptyState = document.getElementById('empty-state');
 
+  const query = state.search.cocktails.toLowerCase();
+
   const filtered = state.cocktails.filter(c => {
     const a = analyzeCocktail(c);
     if (state.filters.status !== 'all' && a.status !== state.filters.status) return false;
     if (state.filters.category !== 'all' && c.category !== state.filters.category) return false;
     if (state.filters.method !== 'all' && c.method !== state.filters.method) return false;
+    if (query) {
+      const nameMatch = c.name.ja.toLowerCase().includes(query)
+        || c.name.en.toLowerCase().includes(query);
+      if (!nameMatch) return false;
+    }
     return true;
   });
 
@@ -267,8 +313,15 @@ function renderCocktails() {
   }
   emptyState.classList.add('hidden');
 
-  const statusOrder = { unlocked: 0, almost: 1, locked: 2 };
-  filtered.sort((a, b) => statusOrder[analyzeCocktail(a).status] - statusOrder[analyzeCocktail(b).status]);
+  // Sort: unlocked first, then by progress descending (closest to making)
+  filtered.sort((a, b) => {
+    const aa = analyzeCocktail(a);
+    const ab = analyzeCocktail(b);
+    const statusOrder = { unlocked: 0, almost: 1, locked: 2 };
+    const statusDiff = statusOrder[aa.status] - statusOrder[ab.status];
+    if (statusDiff !== 0) return statusDiff;
+    return ab.progress - aa.progress;
+  });
 
   let html = '';
   for (const cocktail of filtered) {
@@ -522,6 +575,36 @@ function setupEventHandlers() {
 
   document.getElementById('filter-method').addEventListener('change', (e) => {
     state.filters.method = e.target.value;
+    renderCocktails();
+  });
+
+  // Search: inventory
+  const invSearch = document.getElementById('search-inventory');
+  const invClear = document.getElementById('search-inventory-clear');
+  invSearch.addEventListener('input', () => {
+    state.search.inventory = invSearch.value;
+    invClear.classList.toggle('hidden', !invSearch.value);
+    renderInventory();
+  });
+  invClear.addEventListener('click', () => {
+    invSearch.value = '';
+    state.search.inventory = '';
+    invClear.classList.add('hidden');
+    renderInventory();
+  });
+
+  // Search: cocktails
+  const cktSearch = document.getElementById('search-cocktails');
+  const cktClear = document.getElementById('search-cocktails-clear');
+  cktSearch.addEventListener('input', () => {
+    state.search.cocktails = cktSearch.value;
+    cktClear.classList.toggle('hidden', !cktSearch.value);
+    renderCocktails();
+  });
+  cktClear.addEventListener('click', () => {
+    cktSearch.value = '';
+    state.search.cocktails = '';
+    cktClear.classList.add('hidden');
     renderCocktails();
   });
 }
