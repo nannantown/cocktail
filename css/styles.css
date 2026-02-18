@@ -1,0 +1,277 @@
+/* ===== Custom Scrollbar ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #2a2a4a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3a3a5a; }
+
+/* ===== Sidebar ===== */
+@media (max-width: 1023px) {
+  .sidebar-open { transform: translateX(0) !important; }
+}
+
+/* ===== Inventory Section ===== */
+.inventory-section summary {
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.inventory-section summary::-webkit-details-marker { display: none; }
+.inventory-section summary .chevron {
+  transition: transform 0.2s;
+}
+.inventory-section[open] summary .chevron {
+  transform: rotate(90deg);
+}
+
+/* ===== Inventory Item ===== */
+.inv-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-size: 0.85rem;
+}
+.inv-item:hover { background: rgba(255,255,255,0.04); }
+.inv-item.checked { background: rgba(226,184,74,0.08); }
+
+.inv-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #3a3a5a;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.inv-item.checked .inv-checkbox {
+  background: #e2b84a;
+  border-color: #e2b84a;
+}
+.inv-checkbox svg {
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.inv-item.checked .inv-checkbox svg { opacity: 1; }
+
+.inv-badge {
+  margin-left: auto;
+  font-size: 0.7rem;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+/* ===== Filter Buttons ===== */
+.filter-btn {
+  color: #9ca3af;
+}
+.filter-btn:hover {
+  background: rgba(255,255,255,0.05);
+  color: #e5e7eb;
+}
+.filter-btn.active {
+  background: #e2b84a;
+  color: #0c0c18;
+}
+
+/* ===== Cocktail Card ===== */
+.cocktail-card {
+  background: #1a1a35;
+  border: 1px solid #2a2a4a;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.3s, border-color 0.3s;
+  cursor: pointer;
+}
+.cocktail-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+/* Unlocked glow */
+.cocktail-card.unlocked {
+  border-color: #34d399;
+  box-shadow: 0 0 20px rgba(52,211,153,0.15);
+}
+.cocktail-card.unlocked:hover {
+  box-shadow: 0 0 30px rgba(52,211,153,0.25);
+}
+
+/* Almost glow */
+.cocktail-card.almost {
+  border-color: #fbbf24;
+  box-shadow: 0 0 15px rgba(251,191,36,0.1);
+}
+
+/* Card Image Area */
+.card-image {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+.cocktail-card:hover .card-image img {
+  transform: scale(1.05);
+}
+.card-image .emoji-fallback {
+  font-size: 4rem;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+.card-image .status-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+}
+.status-badge.unlocked-badge {
+  background: rgba(16,185,129,0.85);
+  color: white;
+}
+.status-badge.almost-badge {
+  background: rgba(245,158,11,0.85);
+  color: white;
+}
+.status-badge.locked-badge {
+  background: rgba(75,85,99,0.85);
+  color: #d1d5db;
+}
+
+/* Card Progress Bar */
+.card-progress {
+  height: 3px;
+  background: rgba(255,255,255,0.06);
+}
+.card-progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+/* ===== Gradients by category ===== */
+.gradient-short    { background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #1a1a35 100%); }
+.gradient-long     { background: linear-gradient(135deg, #0a1e2e 0%, #1b3a4e 50%, #1a1a35 100%); }
+.gradient-tropical { background: linear-gradient(135deg, #2e1a0a 0%, #4e3a1b 50%, #1a1a35 100%); }
+.gradient-standard { background: linear-gradient(135deg, #1e1a0a 0%, #3a2e1b 50%, #1a1a35 100%); }
+.gradient-shot     { background: linear-gradient(135deg, #2e0a0a 0%, #4e1b1b 50%, #1a1a35 100%); }
+.gradient-hot      { background: linear-gradient(135deg, #2e1a0a 0%, #4e2a0a 50%, #1a1a35 100%); }
+.gradient-non-alcohol { background: linear-gradient(135deg, #0a2e1a 0%, #1b4e3a 50%, #1a1a35 100%); }
+
+/* ===== Recommendation Card ===== */
+.rec-card {
+  background: linear-gradient(135deg, #1a1a35 0%, #1e1e3a 100%);
+  border: 1px solid #2a2a4a;
+  border-radius: 12px;
+  padding: 16px;
+  transition: border-color 0.2s;
+}
+.rec-card:hover {
+  border-color: #e2b84a;
+}
+
+/* ===== Modal ===== */
+#modal.flex { display: flex; }
+
+.modal-image {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== Unlock Animation ===== */
+@keyframes unlockPulse {
+  0% { box-shadow: 0 0 0 0 rgba(52,211,153,0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(52,211,153,0); }
+  100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); }
+}
+.just-unlocked {
+  animation: unlockPulse 0.8s ease-out;
+}
+
+/* ===== Missing Item Tag ===== */
+.missing-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: 6px;
+  font-size: 0.72rem;
+  color: #fca5a5;
+}
+.have-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: rgba(52,211,153,0.1);
+  border: 1px solid rgba(52,211,153,0.15);
+  border-radius: 6px;
+  font-size: 0.72rem;
+  color: #6ee7b7;
+}
+
+/* ===== Method Badge ===== */
+.method-badge {
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.method-shake { background: rgba(168,85,247,0.15); color: #c084fc; }
+.method-stir  { background: rgba(59,130,246,0.15); color: #93c5fd; }
+.method-build { background: rgba(34,197,94,0.15);  color: #86efac; }
+.method-blend { background: rgba(236,72,153,0.15); color: #f9a8d4; }
+.method-layer { background: rgba(245,158,11,0.15); color: #fcd34d; }
+
+/* ===== Taste/Strength Indicators ===== */
+.taste-badge {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  background: rgba(255,255,255,0.05);
+  color: #9ca3af;
+}
+
+/* ===== Recipe Step ===== */
+.recipe-step {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+}
+.step-number {
+  width: 24px;
+  height: 24px;
+  background: rgba(226,184,74,0.15);
+  color: #e2b84a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Bar Builder - カクテルアンロック</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Noto Sans JP"', 'sans-serif'] },
+          colors: {
+            bar: {
+              bg: '#0c0c18',
+              panel: '#13132a',
+              card: '#1a1a35',
+              border: '#2a2a4a',
+              accent: '#e2b84a',
+              gold: '#d4a843',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-bar-bg text-gray-200 font-sans min-h-screen">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-bar-panel/95 backdrop-blur border-b border-bar-border">
+    <div class="max-w-screen-2xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <button id="sidebar-toggle" class="lg:hidden p-2 hover:bg-bar-card rounded-lg">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+        <h1 class="text-xl font-bold">
+          <span class="text-bar-accent">Home Bar</span> Builder
+        </h1>
+      </div>
+      <div id="header-stats" class="flex items-center gap-4 text-sm">
+        <div class="flex items-center gap-2">
+          <span class="text-gray-400">解放済み</span>
+          <span id="unlock-count" class="text-2xl font-bold text-emerald-400">0</span>
+          <span class="text-gray-500">/ <span id="total-count">20</span></span>
+        </div>
+        <div class="hidden sm:block w-32 h-2 bg-bar-card rounded-full overflow-hidden">
+          <div id="progress-bar" class="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-700" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-screen-2xl mx-auto flex">
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar-closed lg:sidebar-open fixed lg:sticky top-[57px] left-0 z-30 w-80 h-[calc(100vh-57px)] bg-bar-panel border-r border-bar-border overflow-y-auto flex-shrink-0 transition-transform duration-300 lg:translate-x-0 -translate-x-full">
+      <div class="p-4">
+        <h2 class="text-lg font-bold mb-1">My Bar</h2>
+        <p class="text-xs text-gray-500 mb-4">持っているものにチェックを入れよう</p>
+        <div id="inventory-panel"></div>
+      </div>
+    </aside>
+
+    <!-- Sidebar overlay for mobile -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 z-20 hidden lg:hidden" ></div>
+
+    <!-- Main Content -->
+    <main class="flex-1 min-w-0 p-4 lg:p-6">
+
+      <!-- Recommendations -->
+      <section id="recommendations" class="mb-6 hidden">
+        <h2 class="text-lg font-bold mb-3 flex items-center gap-2">
+          <svg class="w-5 h-5 text-bar-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/></svg>
+          次に買うと解放されるもの
+        </h2>
+        <div id="recommendations-list" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3"></div>
+      </section>
+
+      <!-- Filter Bar -->
+      <div class="flex flex-wrap items-center gap-3 mb-6">
+        <div class="flex bg-bar-card rounded-lg p-1 gap-1">
+          <button data-filter-status="all" class="filter-btn active px-3 py-1.5 rounded-md text-sm font-medium transition-colors">すべて</button>
+          <button data-filter-status="unlocked" class="filter-btn px-3 py-1.5 rounded-md text-sm font-medium transition-colors">
+            <span class="inline-block w-2 h-2 bg-emerald-400 rounded-full mr-1"></span>解放済み
+          </button>
+          <button data-filter-status="almost" class="filter-btn px-3 py-1.5 rounded-md text-sm font-medium transition-colors">
+            <span class="inline-block w-2 h-2 bg-amber-400 rounded-full mr-1"></span>あと少し
+          </button>
+          <button data-filter-status="locked" class="filter-btn px-3 py-1.5 rounded-md text-sm font-medium transition-colors">
+            <span class="inline-block w-2 h-2 bg-gray-500 rounded-full mr-1"></span>ロック中
+          </button>
+        </div>
+        <select id="filter-category" class="bg-bar-card border border-bar-border rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-bar-accent">
+          <option value="all">全カテゴリ</option>
+          <option value="short">ショート</option>
+          <option value="long">ロング</option>
+          <option value="tropical">トロピカル</option>
+          <option value="standard">スタンダード</option>
+          <option value="shot">ショット</option>
+          <option value="hot">ホット</option>
+          <option value="non-alcohol">ノンアルコール</option>
+        </select>
+        <select id="filter-method" class="bg-bar-card border border-bar-border rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-bar-accent">
+          <option value="all">全技法</option>
+          <option value="shake">シェーク</option>
+          <option value="stir">ステア</option>
+          <option value="build">ビルド</option>
+          <option value="blend">ブレンド</option>
+          <option value="layer">レイヤー</option>
+        </select>
+      </div>
+
+      <!-- Cocktail Grid -->
+      <div id="cocktail-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="hidden text-center py-20">
+        <p class="text-4xl mb-4">🍸</p>
+        <p class="text-gray-400 text-lg">フィルターに一致するカクテルがありません</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Detail Modal -->
+  <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div id="modal-overlay" class="absolute inset-0 bg-black/70"></div>
+    <div id="modal-content" class="relative bg-bar-panel border border-bar-border rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
