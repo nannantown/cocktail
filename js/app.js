@@ -4,7 +4,7 @@ const state = {
   bottles: [],
   tools: [],
   categories: [],
-  inventory: { bottles: new Set(), tools: new Set() },
+  inventory: { bottles: new Set() },
   filters: { status: 'all', category: 'all', method: 'all' },
   search: { inventory: '', cocktails: '' },
   images: {},
@@ -34,19 +34,13 @@ const STRENGTH_LABELS = {
   strong: '強め', medium: '普通', weak: '軽め', none: 'ノンアル',
 };
 
-// ===== Inventory sections =====
+// ===== Inventory sections (alcohol bottles only) =====
+const ALCOHOL_TYPES = new Set(['spirit', 'liqueur', 'vermouth', 'bitters']);
 const BOTTLE_SECTIONS = [
   { type: 'spirit', label: 'スピリッツ', open: true },
   { type: 'liqueur', label: 'リキュール', open: false },
   { type: 'vermouth', label: 'ベルモット', open: false },
   { type: 'bitters', label: 'ビターズ', open: false },
-  { type: 'mixer', label: 'ミキサー', open: false },
-  { type: 'juice', label: 'ジュース', open: false },
-  { type: 'syrup', label: 'シロップ', open: false },
-  { type: 'fresh', label: 'フレッシュ', open: false },
-  { type: 'garnish', label: 'ガーニッシュ', open: false },
-  { type: 'pantry', label: 'パントリー', open: false },
-  { type: 'other', label: 'その他', open: false },
 ];
 // ===== CocktailDB image mapping =====
 const COCKTAILDB_NAMES = {
@@ -89,7 +83,6 @@ async function loadData() {
 function saveInventory() {
   localStorage.setItem('homeBarInventory', JSON.stringify({
     bottles: [...state.inventory.bottles],
-    tools: [...state.inventory.tools],
   }));
 }
 
@@ -98,7 +91,6 @@ function loadInventory() {
     const data = JSON.parse(localStorage.getItem('homeBarInventory'));
     if (data) {
       state.inventory.bottles = new Set(data.bottles || []);
-      state.inventory.tools = new Set(data.tools || []);
     }
   } catch (e) { /* ignore */ }
 }
@@ -120,51 +112,45 @@ function switchTab(tabName) {
 }
 
 // ===== Cocktail Analysis =====
+function isAlcoholBottle(bottleId) {
+  const b = state.bottles.find(b => b.id === bottleId);
+  return b && ALCOHOL_TYPES.has(b.type);
+}
+
 function analyzeCocktail(cocktail) {
   const missingBottles = [];
   const haveBottles = [];
   for (const ing of cocktail.ingredients) {
+    if (!isAlcoholBottle(ing.bottle_id)) continue;
     if (state.inventory.bottles.has(ing.bottle_id)) haveBottles.push(ing);
     else missingBottles.push(ing);
   }
-  const missingTools = [];
-  const haveTools = [];
-  const nonGlassTools = cocktail.required_tools.filter(t => !isGlassware(t));
-  for (const toolId of nonGlassTools) {
-    if (state.inventory.tools.has(toolId)) haveTools.push(toolId);
-    else missingTools.push(toolId);
-  }
-  const totalItems = cocktail.ingredients.length + nonGlassTools.length;
-  const haveItems = haveBottles.length + haveTools.length;
-  const progress = totalItems > 0 ? haveItems / totalItems : 0;
+  const totalItems = haveBottles.length + missingBottles.length;
+  const progress = totalItems > 0 ? haveBottles.length / totalItems : 1;
 
   let status;
-  if (missingBottles.length === 0 && missingTools.length === 0) status = 'unlocked';
-  else if (missingBottles.length + missingTools.length <= 2) status = 'almost';
+  if (missingBottles.length === 0) status = 'unlocked';
+  else if (missingBottles.length <= 2) status = 'almost';
   else status = 'locked';
 
-  return { status, missingBottles, haveBottles, missingTools, haveTools, progress };
+  return { status, missingBottles, haveBottles, progress };
 }
 
 // ===== Recommendations =====
 function getRecommendations() {
-  const allItems = [
-    ...state.bottles.filter(b => !state.inventory.bottles.has(b.id)).map(b => ({ ...b, itemType: 'bottle' })),
-    ...state.tools.filter(t => t.category !== 'glassware' && !state.inventory.tools.has(t.id)).map(t => ({ ...t, itemType: 'tool' })),
-  ];
+  const alcoholBottles = state.bottles.filter(b => ALCOHOL_TYPES.has(b.type) && !state.inventory.bottles.has(b.id));
   const results = [];
-  for (const item of allItems) {
+  for (const item of alcoholBottles) {
     const tempBottles = new Set(state.inventory.bottles);
-    const tempTools = new Set(state.inventory.tools);
-    if (item.itemType === 'bottle') tempBottles.add(item.id);
-    else tempTools.add(item.id);
+    tempBottles.add(item.id);
 
     const newlyUnlocked = [];
     for (const cocktail of state.cocktails) {
       if (analyzeCocktail(cocktail).status === 'unlocked') continue;
-      const allIngs = cocktail.ingredients.every(i => tempBottles.has(i.bottle_id));
-      const allToolsOk = cocktail.required_tools.filter(t => !isGlassware(t)).every(t => tempTools.has(t));
-      if (allIngs && allToolsOk) newlyUnlocked.push(cocktail);
+      const allAlcohol = cocktail.ingredients
+        .filter(i => isAlcoholBottle(i.bottle_id))
+        .every(i => tempBottles.has(i.bottle_id));
+      if (allAlcohol) newlyUnlocked.push(cocktail);
     }
     if (newlyUnlocked.length > 0) results.push({ item, newlyUnlocked });
   }
@@ -191,14 +177,10 @@ function getToolName(id) {
   const t = state.tools.find(t => t.id === id);
   return t ? t.name.ja : id;
 }
-function countUsage(itemId, itemType) {
+function countUsage(itemId) {
   let count = 0;
   for (const c of state.cocktails) {
-    if (itemType === 'bottle') {
-      if (c.ingredients.some(i => i.bottle_id === itemId) || (c.garnish && c.garnish.some(g => g.bottle_id === itemId))) count++;
-    } else {
-      if (c.required_tools.includes(itemId)) count++;
-    }
+    if (c.ingredients.some(i => i.bottle_id === itemId)) count++;
   }
   return count;
 }
@@ -206,24 +188,15 @@ function countUsage(itemId, itemType) {
 const checkSvg = '<svg width="12" height="12" fill="none" stroke="#0a0a0a" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>';
 const chevronSvg = '<svg class="chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M6.293 7.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"/></svg>';
 
-// ===== Tool Illustrations =====
-const TOOL_ILLUST = {
-  'shaker': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8h16l2 6H22l2-6z"/><rect x="20" y="14" width="24" height="4" rx="1"/><path d="M21 18l3 38h16l3-38"/><ellipse cx="32" cy="37" rx="6" ry="8" stroke-dasharray="3 3" opacity=".3"/></svg>',
-  'mixing-glass': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10h24l-3 42H23L20 10z"/><path d="M20 10h24" stroke-width="2"/><ellipse cx="32" cy="32" rx="7" ry="10" stroke-dasharray="3 3" opacity=".3"/><line x1="38" y1="6" x2="38" y2="16" stroke-width="1" opacity=".5"/></svg>',
-  'bar-spoon': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="32" cy="52" rx="5" ry="3"/><path d="M32 49V12"/><path d="M29 12a3 3 0 016 0" /><path d="M28 28c2-2 6 2 8 0" opacity=".5"/><path d="M28 34c2-2 6 2 8 0" opacity=".5"/><path d="M28 40c2-2 6 2 8 0" opacity=".5"/></svg>',
-  'strainer': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="32" cy="28" rx="14" ry="6"/><path d="M18 28v4c0 3.3 6.3 6 14 6s14-2.7 14-6v-4"/><path d="M22 32v3m4-4v4m4-4v4m4-4v4m4-3v3"/><path d="M32 8v14"/><circle cx="32" cy="8" r="3"/></svg>',
-  'jigger': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 30h20"/><path d="M26 30l-4-22h20l-4 22"/><path d="M26 30l-2 26h16l-2-26"/></svg>',
-  'muddler': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="28" y="6" width="8" height="44" rx="4"/><rect x="26" y="50" width="12" height="8" rx="2"/><line x1="28" y1="14" x2="36" y2="14" opacity=".4"/><line x1="28" y1="20" x2="36" y2="20" opacity=".4"/></svg>',
-  'blender': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 6h20v4H22z"/><path d="M24 10l-2 30h20l-2-30"/><rect x="20" y="40" width="24" height="8" rx="2"/><path d="M38 10l4-4" stroke-width="1"/><circle cx="32" cy="44" r="2"/><path d="M28 24l8-4m-8 8l8-4" opacity=".3"/></svg>',
-  'peeler': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M26 8c0 0 2 4 6 4s6-4 6-4"/><path d="M26 8v6h12V8"/><rect x="30" y="14" width="4" height="36" rx="2"/><path d="M28 10h8" opacity=".5"/></svg>',
-  'ice-tray': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="18" width="44" height="28" rx="3"/><line x1="10" y1="32" x2="54" y2="32"/><line x1="21" y1="18" x2="21" y2="46"/><line x1="32" y1="18" x2="32" y2="46"/><line x1="43" y1="18" x2="43" y2="46"/></svg>',
-};
 
 // ===== Render: My Bar Stats =====
 function renderMyBarStats() {
+  const alcoholCount = [...state.inventory.bottles].filter(id => {
+    const b = state.bottles.find(b => b.id === id);
+    return b && ALCOHOL_TYPES.has(b.type);
+  }).length;
   const unlocked = state.cocktails.filter(c => analyzeCocktail(c).status === 'unlocked').length;
-  document.getElementById('stat-bottles').textContent = state.inventory.bottles.size;
-  document.getElementById('stat-tools').textContent = state.inventory.tools.size;
+  document.getElementById('stat-bottles').textContent = alcoholCount;
   document.getElementById('stat-unlocked').textContent = unlocked;
 }
 
@@ -240,60 +213,31 @@ function renderInventory() {
       || (item.name.en && item.name.en.toLowerCase().includes(query));
   };
 
-  // Helper: render a tool card with illustration
-  const renderToolCard = (item) => {
-    const checked = state.inventory.tools.has(item.id);
-    const usage = countUsage(item.id, 'tool');
-    const illust = TOOL_ILLUST[item.id] || '';
-    return `<div class="tool-card ${checked ? 'active' : ''}" data-type="tool" data-id="${item.id}">
-      <div class="tool-card-illust">${illust}</div>
-      <div class="tool-card-info">
-        <div class="tool-card-name">${item.name.ja}</div>
-        <div class="tool-card-sub">${usage}杯で使用</div>
-      </div>
-    </div>`;
-  };
+  // Only show alcohol bottles
+  const alcoholBottles = state.bottles.filter(b => ALCOHOL_TYPES.has(b.type));
 
-  // When searching, show flat list instead of sections
+  // When searching, show flat list
   if (query) {
-    const matchedBottles = state.bottles.filter(matchItem);
-    const matchedTools = state.tools.filter(t => t.category !== 'glassware' && matchItem(t));
-    if (matchedBottles.length === 0 && matchedTools.length === 0) {
+    const matched = alcoholBottles.filter(matchItem);
+    if (matched.length === 0) {
       html = '<div class="empty-state"><p class="empty-text">見つかりません</p></div>';
     } else {
-      for (const item of matchedBottles) {
+      for (const item of matched) {
         const checked = state.inventory.bottles.has(item.id);
-        const usage = countUsage(item.id, 'bottle');
+        const usage = countUsage(item.id);
         html += `<div class="inv-item ${checked ? 'checked' : ''}" data-type="bottle" data-id="${item.id}">
           <div class="inv-checkbox">${checkSvg}</div>
           <span>${item.name.ja}</span>
           <span class="inv-badge">${usage}杯</span>
         </div>`;
       }
-      if (matchedTools.length > 0) {
-        html += '<div class="tool-card-grid">';
-        for (const item of matchedTools) html += renderToolCard(item);
-        html += '</div>';
-      }
     }
     panel.innerHTML = html;
     return;
   }
 
-  // Tools first: visual card grid with toggle switches, collapsible
-  const nonGlasswareTools = state.tools.filter(t => t.category !== 'glassware');
-  if (nonGlasswareTools.length > 0) {
-    const checkedCount = nonGlasswareTools.filter(t => state.inventory.tools.has(t.id)).length;
-    html += `<details class="inv-section tool-section" open>
-      <summary>${chevronSvg}<span>ツール</span><span class="inv-section-count">${checkedCount}/${nonGlasswareTools.length}</span></summary>
-      <div class="tool-card-grid">`;
-    for (const item of nonGlasswareTools) html += renderToolCard(item);
-    html += '</div></details>';
-  }
-
-  html += '<div class="inv-heading">ボトル・材料</div>';
   for (const section of BOTTLE_SECTIONS) {
-    const items = state.bottles.filter(b => b.type === section.type);
+    const items = alcoholBottles.filter(b => b.type === section.type);
     if (items.length === 0) continue;
     const checkedCount = items.filter(b => state.inventory.bottles.has(b.id)).length;
     html += `<details class="inv-section" ${section.open ? 'open' : ''}>
@@ -301,7 +245,7 @@ function renderInventory() {
       <div>`;
     for (const item of items) {
       const checked = state.inventory.bottles.has(item.id);
-      const usage = countUsage(item.id, 'bottle');
+      const usage = countUsage(item.id);
       html += `<div class="inv-item ${checked ? 'checked' : ''}" data-type="bottle" data-id="${item.id}">
         <div class="inv-checkbox">${checkSvg}</div>
         <span>${item.name.ja}</span>
@@ -363,15 +307,12 @@ function renderCocktails() {
     const statusBadge = a.status === 'unlocked'
       ? '<span class="status-badge unlocked-badge">UNLOCKED</span>'
       : a.status === 'almost'
-      ? `<span class="status-badge almost-badge">あと${a.missingBottles.length + a.missingTools.length}</span>`
-      : `<span class="status-badge locked-badge">${a.missingBottles.length + a.missingTools.length}不足</span>`;
+      ? `<span class="status-badge almost-badge">あと${a.missingBottles.length}</span>`
+      : `<span class="status-badge locked-badge">${a.missingBottles.length}不足</span>`;
 
     let missingHtml = '';
     if (a.status !== 'unlocked') {
-      const allMissing = [
-        ...a.missingBottles.map(i => getBottleName(i.bottle_id)),
-        ...a.missingTools.map(t => getToolName(t)),
-      ];
+      const allMissing = a.missingBottles.map(i => getBottleName(i.bottle_id));
       const shown = allMissing.slice(0, 2);
       missingHtml = '<div class="missing-row">'
         + shown.map(name => `<span class="missing-tag">${name}</span>`).join('')
@@ -423,11 +364,10 @@ function renderRecommendations() {
   let html = '';
   for (const rec of recs) {
     const item = rec.item;
-    const isBottle = item.itemType === 'bottle';
     html += `
     <div class="rec-card">
       <div class="rec-header">
-        <span class="rec-icon">${isBottle ? '🍾' : '🔧'}</span>
+        <span class="rec-icon">🍾</span>
         <div>
           <div class="rec-name">${item.name.ja}</div>
           <div class="rec-price">${item.price_range || ''}</div>
@@ -461,8 +401,12 @@ function showModal(cocktailId) {
   const imgUrl = state.images[cocktail.id];
 
   const ingredientsList = cocktail.ingredients.map(ing => {
-    const have = state.inventory.bottles.has(ing.bottle_id);
-    return `<div class="${have ? 'have-tag' : 'missing-tag'}">${have ? '✓' : '✕'} ${getBottleName(ing.bottle_id)} <span style="opacity:0.6">${ing.amount}</span></div>`;
+    const isAlcohol = isAlcoholBottle(ing.bottle_id);
+    if (isAlcohol) {
+      const have = state.inventory.bottles.has(ing.bottle_id);
+      return `<div class="${have ? 'have-tag' : 'missing-tag'}">${have ? '✓' : '✕'} ${getBottleName(ing.bottle_id)} <span style="opacity:0.6">${ing.amount}</span></div>`;
+    }
+    return `<div class="have-tag">・ ${getBottleName(ing.bottle_id)} <span style="opacity:0.6">${ing.amount}</span></div>`;
   }).join('');
 
   const garnishList = (cocktail.garnish || []).map(g =>
@@ -470,10 +414,9 @@ function showModal(cocktailId) {
   ).join('');
 
   const nonGlassTools = cocktail.required_tools.filter(t => !isGlassware(t));
-  const toolsList = nonGlassTools.map(t => {
-    const have = state.inventory.tools.has(t);
-    return `<span class="${have ? 'have-tag' : 'missing-tag'}">${have ? '✓' : '✕'} ${getToolName(t)}</span>`;
-  }).join('');
+  const toolsList = nonGlassTools.map(t =>
+    `<span class="taste-badge">${getToolName(t)}</span>`
+  ).join('');
 
   const steps = cocktail.instructions.map((step, i) =>
     `<div class="recipe-step"><div class="step-number">${i + 1}</div><p class="step-text">${step}</p></div>`
@@ -569,14 +512,13 @@ function setupEventHandlers() {
     btn.addEventListener('click', () => switchTab(btn.dataset.tab));
   });
 
-  // Inventory item toggle (bottles + tools)
+  // Inventory item toggle (alcohol bottles only)
   document.getElementById('inventory-panel').addEventListener('click', (e) => {
-    const item = e.target.closest('.inv-item') || e.target.closest('.tool-card');
+    const item = e.target.closest('.inv-item');
     if (!item) return;
-    const { type, id } = item.dataset;
-    const set = type === 'bottle' ? state.inventory.bottles : state.inventory.tools;
-    if (set.has(id)) set.delete(id);
-    else set.add(id);
+    const { id } = item.dataset;
+    if (state.inventory.bottles.has(id)) state.inventory.bottles.delete(id);
+    else state.inventory.bottles.add(id);
     saveInventory();
     render();
   });
