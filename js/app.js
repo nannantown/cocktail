@@ -240,7 +240,7 @@ function renderInventory() {
       || (item.name.en && item.name.en.toLowerCase().includes(query));
   };
 
-  // Helper: render a tool card with illustration + toggle switch
+  // Helper: render a tool card with illustration
   const renderToolCard = (item) => {
     const checked = state.inventory.tools.has(item.id);
     const usage = countUsage(item.id, 'tool');
@@ -250,9 +250,6 @@ function renderInventory() {
       <div class="tool-card-info">
         <div class="tool-card-name">${item.name.ja}</div>
         <div class="tool-card-sub">${usage}杯で使用</div>
-      </div>
-      <div class="tool-toggle">
-        <div class="tool-toggle-track"><div class="tool-toggle-thumb"></div></div>
       </div>
     </div>`;
   };

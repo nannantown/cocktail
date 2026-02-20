@@ -397,28 +397,6 @@ body {
   margin-top: 2px;
 }
 
-/* Toggle switch */
-.tool-toggle { margin-top: var(--sp-xs); }
-.tool-toggle-track {
-  width: 36px; height: 20px;
-  background: var(--p-white-12);
-  border-radius: var(--r-full);
-  position: relative;
-  transition: background var(--tr-fast);
-}
-.tool-card.active .tool-toggle-track { background: var(--success); }
-.tool-toggle-thumb {
-  width: 16px; height: 16px;
-  background: var(--p-gray-300);
-  border-radius: var(--r-full);
-  position: absolute; top: 2px; left: 2px;
-  transition: transform var(--tr-fast), background var(--tr-fast);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-}
-.tool-card.active .tool-toggle-thumb {
-  transform: translateX(16px);
-  background: #fff;
-}
 
 /* ===== 8. Filters ===== */
 .filter-bar {
