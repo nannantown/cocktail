@@ -264,7 +264,7 @@ body {
 
 /* ===== 6. My Bar Stats ===== */
 .mybar-stats {
-  display: grid; grid-template-columns: repeat(3, 1fr);
+  display: grid; grid-template-columns: repeat(2, 1fr);
   gap: var(--sp-sm);
   margin-bottom: var(--sp-xl);
 }
@@ -633,3 +633,155 @@ body {
   100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
 }
 .just-unlocked { animation: unlockPulse 0.8s ease-out; }
+
+/* ===== 16. Guide Tab ===== */
+.guide-section-label {
+  font-size: var(--fs-xs); font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: var(--sp-sm); margin-top: var(--sp-xl);
+}
+.guide-section-label:first-child { margin-top: 0; }
+
+.guide-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color var(--tr-base);
+  -webkit-tap-highlight-color: transparent;
+  margin-bottom: var(--sp-md);
+}
+.guide-card:hover { border-color: var(--border-default); }
+
+.guide-card-header {
+  display: flex; align-items: center; gap: var(--sp-md);
+  padding: var(--sp-lg);
+}
+.guide-card-icon {
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--r-md);
+  flex-shrink: 0;
+  font-size: var(--fs-xl);
+}
+.guide-card-icon.technique {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+.guide-card-icon.tool {
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+}
+.guide-card-icon svg { width: 28px; height: 28px; }
+.guide-card-text { flex: 1; min-width: 0; }
+.guide-card-name {
+  font-size: var(--fs-md); font-weight: 600;
+  color: var(--text-primary);
+}
+.guide-card-name-en {
+  font-size: var(--fs-xs); color: var(--text-muted);
+}
+.guide-card-sub {
+  font-size: var(--fs-xs); color: var(--text-muted);
+  margin-top: 2px; line-height: 1.4;
+}
+.guide-card-chevron {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform var(--tr-base);
+}
+.guide-card.open .guide-card-chevron { transform: rotate(90deg); }
+
+.guide-card-body {
+  display: none;
+  padding: 0 var(--sp-lg) var(--sp-lg);
+}
+.guide-card.open .guide-card-body { display: block; }
+
+.guide-card-body h4 {
+  font-size: var(--fs-sm); font-weight: 600;
+  color: var(--accent);
+  margin: var(--sp-lg) 0 var(--sp-sm);
+}
+.guide-card-body h4:first-child { margin-top: 0; }
+
+.guide-card-body p {
+  font-size: var(--fs-sm); color: var(--text-secondary);
+  line-height: 1.7; margin-bottom: var(--sp-md);
+}
+
+.guide-steps {
+  list-style: none; padding: 0;
+  counter-reset: guide-step;
+}
+.guide-steps li {
+  display: flex; gap: var(--sp-md);
+  padding: var(--sp-sm) 0;
+  font-size: var(--fs-sm); color: var(--text-secondary);
+  line-height: 1.6;
+  counter-increment: guide-step;
+}
+.guide-steps li::before {
+  content: counter(guide-step);
+  width: 20px; height: 20px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-radius: var(--r-full);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--fs-xs); font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.guide-tips {
+  list-style: none; padding: 0;
+}
+.guide-tips li {
+  position: relative;
+  padding: var(--sp-xs) 0 var(--sp-xs) var(--sp-lg);
+  font-size: var(--fs-sm); color: var(--text-secondary);
+  line-height: 1.6;
+}
+.guide-tips li::before {
+  content: '';
+  position: absolute; left: 4px; top: 10px;
+  width: 5px; height: 5px;
+  background: var(--p-green-400);
+  border-radius: var(--r-full);
+}
+
+.guide-mistakes li::before {
+  background: var(--p-amber-400);
+}
+
+.guide-info-box {
+  background: var(--bg-surface);
+  border-radius: var(--r-md);
+  padding: var(--sp-md);
+  font-size: var(--fs-sm); color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--sp-sm);
+}
+.guide-info-label {
+  font-size: var(--fs-xs); font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: var(--sp-xs);
+}
+
+.guide-method-tags {
+  display: flex; flex-wrap: wrap; gap: 4px;
+  margin-bottom: var(--sp-sm);
+}
+
+.guide-cocktail-tags {
+  display: flex; flex-wrap: wrap; gap: var(--sp-xs);
+}
+.guide-cocktail-tags span {
+  font-size: var(--fs-xs);
+  background: var(--bg-surface);
+  padding: 2px var(--sp-sm);
+  border-radius: var(--r-sm);
+  color: var(--text-secondary);
+}

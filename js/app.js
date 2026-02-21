@@ -4,6 +4,7 @@ const state = {
   bottles: [],
   tools: [],
   categories: [],
+  toolGuides: { tools: [], techniques: [] },
   inventory: { bottles: new Set() },
   filters: { status: 'all', category: 'all', method: 'all' },
   search: { inventory: '', cocktails: '' },
@@ -67,16 +68,18 @@ const COCKTAILDB_NAMES = {
 
 // ===== Data Loading =====
 async function loadData() {
-  const [cocktails, bottles, tools, categories] = await Promise.all([
+  const [cocktails, bottles, tools, categories, toolGuides] = await Promise.all([
     fetch('data/cocktails.json').then(r => r.json()),
     fetch('data/bottles.json').then(r => r.json()),
     fetch('data/tools.json').then(r => r.json()),
     fetch('data/categories.json').then(r => r.json()),
+    fetch('data/tool-guides.json').then(r => r.json()),
   ]);
   state.cocktails = cocktails;
   state.bottles = bottles;
   state.tools = tools;
   state.categories = categories;
+  state.toolGuides = toolGuides;
 }
 
 // ===== Inventory Persistence =====
@@ -106,6 +109,7 @@ function switchTab(tabName) {
   // Lazy render on tab switch
   if (tabName === 'cocktails') renderCocktails();
   if (tabName === 'recommend') renderRecommendations();
+  if (tabName === 'guide') renderGuide();
 
   // Scroll to top
   window.scrollTo(0, 0);
@@ -491,6 +495,119 @@ async function loadImages() {
   await Promise.allSettled(promises);
   localStorage.setItem('cocktailImages', JSON.stringify(state.images));
   if (state.activeTab === 'cocktails') renderCocktails();
+}
+
+// ===== Tool Illustrations (for guide) =====
+const TOOL_ILLUST = {
+  'shaker': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8h16l2 6H22l2-6z"/><rect x="20" y="14" width="24" height="4" rx="1"/><path d="M21 18l3 38h16l3-38"/><ellipse cx="32" cy="37" rx="6" ry="8" stroke-dasharray="3 3" opacity=".3"/></svg>',
+  'mixing-glass': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10h24l-3 42H23L20 10z"/><path d="M20 10h24" stroke-width="2"/><ellipse cx="32" cy="32" rx="7" ry="10" stroke-dasharray="3 3" opacity=".3"/></svg>',
+  'bar-spoon': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="32" cy="52" rx="5" ry="3"/><path d="M32 49V12"/><path d="M29 12a3 3 0 016 0"/><path d="M28 28c2-2 6 2 8 0" opacity=".5"/><path d="M28 34c2-2 6 2 8 0" opacity=".5"/></svg>',
+  'strainer': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="32" cy="28" rx="14" ry="6"/><path d="M18 28v4c0 3.3 6.3 6 14 6s14-2.7 14-6v-4"/><path d="M22 32v3m4-4v4m4-4v4m4-4v4m4-3v3"/><path d="M32 8v14"/><circle cx="32" cy="8" r="3"/></svg>',
+  'jigger': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 30h20"/><path d="M26 30l-4-22h20l-4 22"/><path d="M26 30l-2 26h16l-2-26"/></svg>',
+  'muddler': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="28" y="6" width="8" height="44" rx="4"/><rect x="26" y="50" width="12" height="8" rx="2"/><line x1="28" y1="14" x2="36" y2="14" opacity=".4"/></svg>',
+  'blender': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 6h20v4H22z"/><path d="M24 10l-2 30h20l-2-30"/><rect x="20" y="40" width="24" height="8" rx="2"/><circle cx="32" cy="44" r="2"/></svg>',
+  'peeler': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M26 8c0 0 2 4 6 4s6-4 6-4"/><path d="M26 8v6h12V8"/><rect x="30" y="14" width="4" height="36" rx="2"/></svg>',
+  'ice-tray': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="18" width="44" height="28" rx="3"/><line x1="10" y1="32" x2="54" y2="32"/><line x1="21" y1="18" x2="21" y2="46"/><line x1="32" y1="18" x2="32" y2="46"/><line x1="43" y1="18" x2="43" y2="46"/></svg>',
+};
+
+const TECHNIQUE_EMOJI = {
+  shake: '🫨', stir: '🥢', build: '🧊', blend: '🌀', layer: '🌈',
+};
+
+// ===== Render: Guide =====
+function renderGuide() {
+  const panel = document.getElementById('guide-panel');
+  if (panel.innerHTML) return; // Already rendered (static content)
+
+  const { techniques, tools } = state.toolGuides;
+  const chevron = '<svg class="guide-card-chevron" width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path d="M6.293 7.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"/></svg>';
+
+  let html = '<div class="guide-section-label">テクニック</div>';
+
+  for (const tech of techniques) {
+    const emoji = TECHNIQUE_EMOJI[tech.id] || '🍸';
+    const toolNames = tech.required_tools.map(id => getToolName(id)).join('、');
+    html += `
+    <div class="guide-card" data-guide-id="${tech.id}">
+      <div class="guide-card-header">
+        <div class="guide-card-icon technique"><span>${emoji}</span></div>
+        <div class="guide-card-text">
+          <div class="guide-card-name">${tech.name.ja}</div>
+          <div class="guide-card-name-en">${tech.name.en}</div>
+        </div>
+        ${chevron}
+      </div>
+      <div class="guide-card-body">
+        <p>${tech.description}</p>
+
+        <h4>いつ使う？</h4>
+        <p>${tech.when_to_use}</p>
+
+        <h4>手順</h4>
+        <ol class="guide-steps">${tech.steps.map(s => `<li><span>${s}</span></li>`).join('')}</ol>
+
+        <h4>コツ</h4>
+        <ul class="guide-tips">${tech.tips.map(t => `<li>${t}</li>`).join('')}</ul>
+
+        <h4>必要な器具</h4>
+        <p>${toolNames}</p>
+
+        <h4>代表的なカクテル</h4>
+        <div class="guide-cocktail-tags">${tech.example_cocktails.map(c => `<span>${c}</span>`).join('')}</div>
+      </div>
+    </div>`;
+  }
+
+  html += '<div class="guide-section-label">ツール</div>';
+
+  for (const guide of tools) {
+    const toolData = state.tools.find(t => t.id === guide.id);
+    if (!toolData) continue;
+    const illust = TOOL_ILLUST[guide.id] || '';
+    const priority = toolData.priority === 'essential' ? '必須' : toolData.priority === 'recommended' ? 'おすすめ' : 'あると便利';
+
+    html += `
+    <div class="guide-card" data-guide-id="${guide.id}">
+      <div class="guide-card-header">
+        <div class="guide-card-icon tool">${illust}</div>
+        <div class="guide-card-text">
+          <div class="guide-card-name">${toolData.name.ja}</div>
+          <div class="guide-card-sub">${priority} ・ ${toolData.price_range || ''}</div>
+        </div>
+        ${chevron}
+      </div>
+      <div class="guide-card-body">
+        <p>${toolData.description}</p>
+
+        <h4>使い方</h4>
+        <ol class="guide-steps">${guide.how_to_use.map(s => `<li><span>${s}</span></li>`).join('')}</ol>
+
+        <h4>コツ</h4>
+        <ul class="guide-tips">${guide.tips.map(t => `<li>${t}</li>`).join('')}</ul>
+
+        <h4>よくある失敗</h4>
+        <ul class="guide-tips guide-mistakes">${guide.common_mistakes.map(m => `<li>${m}</li>`).join('')}</ul>
+
+        <div class="guide-info-box">
+          <div class="guide-info-label">お手入れ</div>
+          ${guide.care}
+        </div>
+        <div class="guide-info-box">
+          <div class="guide-info-label">代用品</div>
+          ${guide.alternatives}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  panel.innerHTML = html;
+
+  // Toggle open/close
+  panel.addEventListener('click', (e) => {
+    const header = e.target.closest('.guide-card-header');
+    if (!header) return;
+    header.closest('.guide-card').classList.toggle('open');
+  });
 }
 
 // ===== Full Render =====
