@@ -87,20 +87,20 @@ const COCKTAILDB_NAMES = {
   'vesper': 'Vesper', 'harvard-cooler': 'Harvard Cooler',
 };
 
-// Fallback: if primary name not found, try visually similar cocktail
+// Alternate search terms if primary name not found
 const COCKTAILDB_FALLBACKS = {
-  'whiskey-highball': 'John Collins',
-  'whiskey-ginger': 'John Collins',
-  'virgin-mojito': 'Mojito',
-  'cape-codder': 'Sea Breeze',
-  'harvard-cooler': 'Tom Collins',
-  'hot-toddy': 'Rum Toddy',
-  'dark-n-stormy': 'Moscow Mule',
-  'fuzzy-navel': 'Harvey Wallbanger',
-  'midori-sour': 'Japanese Slipper',
-  'boulevardier': 'Negroni',
-  'bees-knees': 'Gimlet',
-  'kir-royale': 'Mimosa',
+  'whiskey-highball': 'Highball',
+  'whiskey-ginger': 'Whiskey Highball',
+  'virgin-mojito': 'Non Alcoholic Mojito',
+  'cape-codder': 'Cape Cod',
+  'harvard-cooler': 'Apple Cooler',
+  'hot-toddy': 'Toddy',
+  'dark-n-stormy': "Dark 'n' Stormy",
+  'fuzzy-navel': 'Peach Schnapps',
+  'midori-sour': 'Midori',
+  'boulevardier': 'Old Pal',
+  'bees-knees': 'Bees Knees',
+  'kir-royale': 'Kir Royal',
   'long-island-iced-tea': 'Long Island Tea',
   'horses-neck': 'Horses Neck',
   'planters-punch': 'Planters Punch',
@@ -522,7 +522,7 @@ async function searchCocktailDB(name) {
 }
 
 async function loadImages() {
-  const CACHE_VER = 2; // Bump to invalidate old cache
+  const CACHE_VER = 3; // Bump to invalidate old cache
   try {
     const cacheVer = parseInt(localStorage.getItem('cocktailImagesCacheVer') || '0');
     const cached = JSON.parse(localStorage.getItem('cocktailImages') || '{}');
@@ -589,19 +589,6 @@ async function loadImages() {
     // Partial match: find any drink containing our search term
     const match = Object.keys(letterDrinks).find(k => k.includes(name) || name.includes(k));
     if (match) { state.images[cocktail.id] = letterDrinks[match]; }
-  }
-
-  // Final: for any still missing, use a random cocktail from same category as visual placeholder
-  const finalMissing = state.cocktails.filter(c => !state.images[c.id]);
-  if (finalMissing.length > 0) {
-    const allImages = Object.values(state.images);
-    if (allImages.length > 0) {
-      for (const cocktail of finalMissing) {
-        // Use image from a cocktail in the same category if possible
-        const sameCat = state.cocktails.find(c => c.category === cocktail.category && state.images[c.id]);
-        state.images[cocktail.id] = sameCat ? state.images[sameCat.id] : allImages[0];
-      }
-    }
   }
 
   localStorage.setItem('cocktailImages', JSON.stringify(state.images));
