@@ -104,6 +104,16 @@ const WIKIPEDIA_NAMES = {
   'last-word': 'Last Word (cocktail)',
 };
 
+// Wikimedia Commons search queries (last resort for cocktails without images)
+const COMMONS_SEARCH = {
+  'fuzzy-navel': 'fuzzy navel cocktail',
+  'whiskey-highball': 'whiskey highball cocktail',
+  'whiskey-ginger': 'whiskey ginger ale cocktail',
+  'virgin-mojito': 'virgin mojito',
+  'harvard-cooler': 'apple brandy cocktail cooler',
+  'midori-sour': 'midori sour cocktail',
+};
+
 // ===== Data Loading =====
 async function loadData() {
   const [cocktails, bottles, tools, categories, toolGuides] = await Promise.all([
@@ -534,8 +544,27 @@ async function searchWikipedia(title) {
   return null;
 }
 
+async function searchWikimediaCommons(query) {
+  try {
+    const res = await fetch(
+      `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrnamespace=6&gsrlimit=5&prop=imageinfo&iiprop=url&iiurlwidth=400&format=json&origin=*`
+    );
+    const data = await res.json();
+    if (data.query && data.query.pages) {
+      // Pick the first result that has a usable thumbnail (skip SVGs and icons)
+      for (const page of Object.values(data.query.pages)) {
+        if (page.imageinfo && page.imageinfo[0] && page.imageinfo[0].thumburl) {
+          const url = page.imageinfo[0].thumburl;
+          if (!url.endsWith('.svg') && !url.includes('Icon')) return url;
+        }
+      }
+    }
+  } catch (e) { /* network error */ }
+  return null;
+}
+
 async function loadImages() {
-  const CACHE_VER = 4; // Bump to invalidate old cache
+  const CACHE_VER = 5;
   try {
     const cacheVer = parseInt(localStorage.getItem('cocktailImagesCacheVer') || '0');
     const cached = JSON.parse(localStorage.getItem('cocktailImages') || '{}');
@@ -549,7 +578,7 @@ async function loadImages() {
   const missing = state.cocktails.filter(c => !state.images[c.id]);
   if (missing.length === 0) return;
 
-  // First pass: CocktailDB
+  // Pass 1: CocktailDB
   const promises = missing.map(async (cocktail) => {
     const searchName = COCKTAILDB_NAMES[cocktail.id];
     if (searchName) {
@@ -561,7 +590,7 @@ async function loadImages() {
   await Promise.allSettled(promises);
   if (state.activeTab === 'cocktails') renderCocktails();
 
-  // Second pass: Wikipedia for cocktails not found on CocktailDB
+  // Pass 2: Wikipedia page images
   const stillMissing = state.cocktails.filter(c => !state.images[c.id]);
   if (stillMissing.length > 0) {
     const wikiPromises = stillMissing.map(async (cocktail) => {
@@ -572,6 +601,20 @@ async function loadImages() {
       }
     });
     await Promise.allSettled(wikiPromises);
+    if (state.activeTab === 'cocktails') renderCocktails();
+  }
+
+  // Pass 3: Wikimedia Commons image search
+  const finalMissing = state.cocktails.filter(c => !state.images[c.id]);
+  if (finalMissing.length > 0) {
+    const commonsPromises = finalMissing.map(async (cocktail) => {
+      const query = COMMONS_SEARCH[cocktail.id];
+      if (query) {
+        const url = await searchWikimediaCommons(query);
+        if (url) { state.images[cocktail.id] = url; }
+      }
+    });
+    await Promise.allSettled(commonsPromises);
     if (state.activeTab === 'cocktails') renderCocktails();
   }
 
