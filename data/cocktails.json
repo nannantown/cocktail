@@ -1588,5 +1588,30 @@
       "カクテルグラスに注ぐ",
       "レモンピールを絞りかける"
     ]
+  },
+  {
+    "id": "harvard-cooler",
+    "name": { "ja": "ハーバードクーラー", "en": "Harvard Cooler" },
+    "category": "long",
+    "method": "shake",
+    "taste": "sweet-sour",
+    "alcohol_strength": "medium",
+    "description": "アップルブランデーの芳醇なりんごの香りと炭酸の爽快感が楽しめるクーラースタイルのカクテル。",
+    "ingredients": [
+      { "bottle_id": "apple-brandy", "amount": "45ml" },
+      { "bottle_id": "lemon-juice", "amount": "20ml" },
+      { "bottle_id": "sugar-syrup", "amount": "15ml" },
+      { "bottle_id": "soda-water", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "スライス1枚" }
+    ],
+    "required_tools": ["shaker", "jigger", "bar-spoon", "collins-glass"],
+    "instructions": [
+      "シェーカーにアップルブランデー、レモンジュース、シュガーシロップと氷を入れる",
+      "しっかりシェークする",
+      "氷を入れたコリンズグラスに注ぐ",
+      "炭酸水で満たし、バースプーンで軽くステアする"
+    ]
   }
 ]

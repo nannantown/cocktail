@@ -834,5 +834,16 @@
     "price_range": "¥1,500〜¥2,500",
     "home_bar_note": "フランス産アペリティフワイン。ヴェスパーマティーニに使用",
     "recommended_brands": ["リレ ブラン"]
+  },
+  {
+    "id": "apple-brandy",
+    "name": { "ja": "アップルブランデー（カルヴァドス）", "en": "Apple Brandy / Calvados" },
+    "type": "spirit",
+    "storage": "room_temp",
+    "shelf_life": "無期限",
+    "priority": "optional",
+    "price_range": "¥2,500〜¥5,000",
+    "home_bar_note": "りんごから造る蒸留酒。ハーバードクーラーやジャックローズに使用",
+    "recommended_brands": ["カルヴァドス ブラー", "ラード アップルジャック"]
   }
 ]

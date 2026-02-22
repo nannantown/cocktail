@@ -84,7 +84,7 @@ const COCKTAILDB_NAMES = {
   'kir-royale': 'Kir Royale', 'midori-sour': 'Midori Sour',
   'bramble': 'Bramble', 'sazerac': 'Sazerac',
   'singapore-sling': 'Singapore Sling', 'last-word': 'Last Word',
-  'vesper': 'Vesper',
+  'vesper': 'Vesper', 'harvard-cooler': 'Harvard Cooler',
 };
 
 // ===== Data Loading =====
