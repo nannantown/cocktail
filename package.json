@@ -1,0 +1,19 @@
+{
+  "name": "cocktail",
+  "version": "1.0.0",
+  "description": "家庭でカクテルを作るための実用的なデータベースです。GitHubをデータベースとして活用し、必要なボトル・器具・レシピを管理します。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:27887/git/nannantown/cocktail"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ground/ui": "github:nannantown/ground-ui"
+  }
+}
