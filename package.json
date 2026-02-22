@@ -14,6 +14,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ground/ui": "github:nannantown/ground-ui"
+    "@nannantown/ground-ui": "^0.1.0"
   }
 }
