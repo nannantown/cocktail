@@ -114,6 +114,12 @@ const COMMONS_SEARCH = {
   'midori-sour': 'midori sour cocktail',
 };
 
+// Direct Wikimedia Commons thumbnail URLs (verified, used as final fallback)
+const FALLBACK_IMAGES = {
+  'midori-sour': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Midori_Sour_%283804267959%29.jpg/400px-Midori_Sour_%283804267959%29.jpg',
+  'whiskey-highball': 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Torys_Highball_at_Ebisu%2C_Nishiogikubo_south_%2829740423022%29.jpg/400px-Torys_Highball_at_Ebisu%2C_Nishiogikubo_south_%2829740423022%29.jpg',
+};
+
 // ===== Data Loading =====
 async function loadData() {
   const [cocktails, bottles, tools, categories, toolGuides] = await Promise.all([
@@ -617,6 +623,14 @@ async function loadImages() {
     await Promise.allSettled(commonsPromises);
     if (state.activeTab === 'cocktails') renderCocktails();
   }
+
+  // Pass 4: Hardcoded fallback URLs (verified Wikimedia Commons images)
+  for (const cocktail of state.cocktails) {
+    if (!state.images[cocktail.id] && FALLBACK_IMAGES[cocktail.id]) {
+      state.images[cocktail.id] = FALLBACK_IMAGES[cocktail.id];
+    }
+  }
+  if (state.activeTab === 'cocktails') renderCocktails();
 
   localStorage.setItem('cocktailImages', JSON.stringify(state.images));
   localStorage.setItem('cocktailImagesCacheVer', String(CACHE_VER));
