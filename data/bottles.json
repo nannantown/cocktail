@@ -691,5 +691,148 @@
     "price_range": "¥200〜¥500",
     "home_bar_note": "ブランデーアレキサンダーの仕上げにすりおろして使う",
     "recommended_brands": []
+  },
+  {
+    "id": "cachaca",
+    "name": { "ja": "カシャーサ", "en": "Cachaça" },
+    "type": "spirit",
+    "storage": "room_temp",
+    "shelf_life": "無期限",
+    "priority": "optional",
+    "price_range": "¥1,500〜¥3,000",
+    "home_bar_note": "ブラジルのサトウキビ蒸留酒。カイピリーニャ専用と言っても良い",
+    "recommended_brands": ["ピトゥー", "レブロン", "サガティバ"]
+  },
+  {
+    "id": "galliano",
+    "name": { "ja": "ガリアーノ", "en": "Galliano" },
+    "type": "liqueur",
+    "storage": "room_temp",
+    "shelf_life": "開封後約1年",
+    "priority": "optional",
+    "price_range": "¥2,000〜¥3,500",
+    "home_bar_note": "バニラとハーブのリキュール。ハーヴェイウォールバンガーに必須",
+    "recommended_brands": ["ガリアーノ ラウテンティコ"]
+  },
+  {
+    "id": "drambuie",
+    "name": { "ja": "ドランブイ", "en": "Drambuie" },
+    "type": "liqueur",
+    "storage": "room_temp",
+    "shelf_life": "開封後約1年",
+    "priority": "optional",
+    "price_range": "¥2,500〜¥4,000",
+    "home_bar_note": "スコッチベースのハニーリキュール。ラスティネイルに必須",
+    "recommended_brands": ["ドランブイ"]
+  },
+  {
+    "id": "creme-de-cassis",
+    "name": { "ja": "クレームドカシス", "en": "Crème de Cassis" },
+    "type": "liqueur",
+    "storage": "refrigerate",
+    "shelf_life": "開封後約3ヶ月（要冷蔵）",
+    "priority": "optional",
+    "price_range": "¥1,000〜¥2,000",
+    "home_bar_note": "カシスの甘いリキュール。キールロワイヤルに使用",
+    "recommended_brands": ["ルジェ クレームドカシス"]
+  },
+  {
+    "id": "midori",
+    "name": { "ja": "ミドリ（メロンリキュール）", "en": "Midori Melon Liqueur" },
+    "type": "liqueur",
+    "storage": "room_temp",
+    "shelf_life": "開封後約1年",
+    "priority": "optional",
+    "price_range": "¥1,500〜¥2,500",
+    "home_bar_note": "日本生まれのメロンリキュール。鮮やかな緑色が特徴",
+    "recommended_brands": ["ミドリ"]
+  },
+  {
+    "id": "creme-de-mure",
+    "name": { "ja": "クレームドミュール", "en": "Crème de Mûre" },
+    "type": "liqueur",
+    "storage": "room_temp",
+    "shelf_life": "開封後約6ヶ月",
+    "priority": "optional",
+    "price_range": "¥1,500〜¥2,500",
+    "home_bar_note": "ブラックベリーのリキュール。ブランブルに必須",
+    "recommended_brands": ["ルジェ クレームドミュール", "ジファール"]
+  },
+  {
+    "id": "absinthe",
+    "name": { "ja": "アブサン", "en": "Absinthe" },
+    "type": "spirit",
+    "storage": "room_temp",
+    "shelf_life": "無期限",
+    "priority": "optional",
+    "price_range": "¥3,000〜¥6,000",
+    "home_bar_note": "ニガヨモギの蒸留酒。サゼラックのリンスに数滴使う。少量で長持ち",
+    "recommended_brands": ["ペルノ アブサン", "リカール"]
+  },
+  {
+    "id": "peychauds-bitters",
+    "name": { "ja": "ペイショーズビターズ", "en": "Peychaud's Bitters" },
+    "type": "bitters",
+    "storage": "room_temp",
+    "shelf_life": "実質無期限",
+    "priority": "optional",
+    "price_range": "¥1,500〜¥2,500",
+    "home_bar_note": "ニューオーリンズ発祥のビターズ。サゼラックに必須",
+    "recommended_brands": ["ペイショーズ"]
+  },
+  {
+    "id": "cherry-heering",
+    "name": { "ja": "チェリーヒーリング", "en": "Cherry Heering" },
+    "type": "liqueur",
+    "storage": "room_temp",
+    "shelf_life": "開封後約1年",
+    "priority": "optional",
+    "price_range": "¥2,000〜¥3,500",
+    "home_bar_note": "デンマーク産チェリーリキュール。シンガポールスリングに必須",
+    "recommended_brands": ["ヒーリング チェリー"]
+  },
+  {
+    "id": "benedictine",
+    "name": { "ja": "ベネディクティン", "en": "Bénédictine" },
+    "type": "liqueur",
+    "storage": "room_temp",
+    "shelf_life": "開封後約1年",
+    "priority": "optional",
+    "price_range": "¥2,500〜¥4,000",
+    "home_bar_note": "ハーブ系リキュール。シンガポールスリングなどに使用",
+    "recommended_brands": ["ベネディクティン D.O.M."]
+  },
+  {
+    "id": "chartreuse",
+    "name": { "ja": "シャルトリューズ（グリーン）", "en": "Green Chartreuse" },
+    "type": "liqueur",
+    "storage": "room_temp",
+    "shelf_life": "開封後約1年",
+    "priority": "optional",
+    "price_range": "¥4,000〜¥7,000",
+    "home_bar_note": "修道院で作られるハーブリキュール。ラストワードに必須。高価だが少量使い",
+    "recommended_brands": ["シャルトリューズ ヴェール"]
+  },
+  {
+    "id": "maraschino-liqueur",
+    "name": { "ja": "マラスキーノリキュール", "en": "Maraschino Liqueur" },
+    "type": "liqueur",
+    "storage": "room_temp",
+    "shelf_life": "開封後約1年",
+    "priority": "optional",
+    "price_range": "¥2,000〜¥3,500",
+    "home_bar_note": "マラスカチェリーの蒸留酒。ラストワード、アヴィエーションに",
+    "recommended_brands": ["ルクサルド マラスキーノ"]
+  },
+  {
+    "id": "lillet-blanc",
+    "name": { "ja": "リレブラン", "en": "Lillet Blanc" },
+    "type": "vermouth",
+    "storage": "refrigerate",
+    "shelf_life": "開封後1〜3ヶ月（要冷蔵）",
+    "priority": "optional",
+    "price_range": "¥1,500〜¥2,500",
+    "home_bar_note": "フランス産アペリティフワイン。ヴェスパーマティーニに使用",
+    "recommended_brands": ["リレ ブラン"]
   }
 ]

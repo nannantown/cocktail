@@ -1105,5 +1105,488 @@
       "炭酸水で満たし、バースプーンで軽くステアする",
       "ミントの枝とライムを飾る"
     ]
+  },
+  {
+    "id": "kamikaze",
+    "name": { "ja": "カミカゼ", "en": "Kamikaze" },
+    "category": "short",
+    "method": "shake",
+    "taste": "sour",
+    "alcohol_strength": "strong",
+    "description": "日本語の「神風」が由来。キレのあるシャープな味わいのショートカクテル。",
+    "ingredients": [
+      { "bottle_id": "vodka", "amount": "30ml" },
+      { "bottle_id": "cointreau", "amount": "30ml" },
+      { "bottle_id": "lime-juice", "amount": "30ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "lime", "amount": "ウェッジ1個" }
+    ],
+    "required_tools": ["shaker", "jigger", "cocktail-glass"],
+    "instructions": [
+      "シェーカーに全ての材料と氷を入れる",
+      "しっかりシェークする",
+      "カクテルグラスに注ぐ"
+    ]
+  },
+  {
+    "id": "gin-fizz",
+    "name": { "ja": "ジンフィズ", "en": "Gin Fizz" },
+    "category": "long",
+    "method": "shake",
+    "taste": "sweet-sour",
+    "alcohol_strength": "medium",
+    "description": "19世紀にニューオーリンズで誕生。フィズとは炭酸のシュワッという音を表す。",
+    "ingredients": [
+      { "bottle_id": "dry-gin", "amount": "45ml" },
+      { "bottle_id": "lemon-juice", "amount": "20ml" },
+      { "bottle_id": "sugar-syrup", "amount": "15ml" },
+      { "bottle_id": "soda-water", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "スライス1枚" }
+    ],
+    "required_tools": ["shaker", "jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "シェーカーにジン、レモンジュース、シュガーシロップと氷を入れる",
+      "しっかりシェークする",
+      "氷を入れたハイボールグラスに注ぐ",
+      "炭酸水で満たし、バースプーンで軽くステアする"
+    ]
+  },
+  {
+    "id": "bees-knees",
+    "name": { "ja": "ビーズニーズ", "en": "Bee's Knees" },
+    "category": "short",
+    "method": "shake",
+    "taste": "sweet-sour",
+    "alcohol_strength": "medium",
+    "description": "禁酒法時代に粗悪なジンの味を隠すために生まれた。はちみつの優しい甘さが特徴。",
+    "ingredients": [
+      { "bottle_id": "dry-gin", "amount": "45ml" },
+      { "bottle_id": "lemon-juice", "amount": "20ml" },
+      { "bottle_id": "honey", "amount": "15ml（お湯で溶く）" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "ピール1片" }
+    ],
+    "required_tools": ["shaker", "jigger", "cocktail-glass"],
+    "instructions": [
+      "はちみつを少量のお湯で溶かしてハニーシロップにする",
+      "シェーカーにジン、レモンジュース、ハニーシロップと氷を入れる",
+      "しっかりシェークする",
+      "カクテルグラスに注ぐ"
+    ]
+  },
+  {
+    "id": "fuzzy-navel",
+    "name": { "ja": "ファジーネーブル", "en": "Fuzzy Navel" },
+    "category": "long",
+    "method": "build",
+    "taste": "sweet",
+    "alcohol_strength": "weak",
+    "description": "ピーチの「ファジー（うぶ毛）」とオレンジの「ネーブル（へそ）」が名前の由来。",
+    "ingredients": [
+      { "bottle_id": "peach-schnapps", "amount": "45ml" },
+      { "bottle_id": "orange-juice", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "orange", "amount": "スライス1枚" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "ハイボールグラスに氷を入れる",
+      "ピーチシュナップスを注ぐ",
+      "オレンジジュースで満たす",
+      "バースプーンで軽くステアする"
+    ]
+  },
+  {
+    "id": "whiskey-ginger",
+    "name": { "ja": "ウイスキージンジャー", "en": "Whiskey Ginger" },
+    "category": "long",
+    "method": "build",
+    "taste": "refreshing",
+    "alcohol_strength": "medium",
+    "description": "ウイスキーとジンジャーエールの手軽な組み合わせ。居酒屋でも定番の一杯。",
+    "ingredients": [
+      { "bottle_id": "bourbon", "amount": "45ml" },
+      { "bottle_id": "ginger-ale", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "lime", "amount": "ウェッジ1個" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "ハイボールグラスに氷を入れる",
+      "ウイスキーを注ぐ",
+      "ジンジャーエールで満たす",
+      "バースプーンで軽くステアする"
+    ]
+  },
+  {
+    "id": "cape-codder",
+    "name": { "ja": "ケープコッダー", "en": "Cape Codder" },
+    "category": "long",
+    "method": "build",
+    "taste": "sweet-sour",
+    "alcohol_strength": "medium",
+    "description": "クランベリーの産地ケープコッドが由来。ウォッカクランベリーとも呼ばれる。",
+    "ingredients": [
+      { "bottle_id": "vodka", "amount": "45ml" },
+      { "bottle_id": "cranberry-juice", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "lime", "amount": "ウェッジ1個" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "ハイボールグラスに氷を入れる",
+      "ウォッカを注ぐ",
+      "クランベリージュースで満たす",
+      "バースプーンで軽くステアする",
+      "ライムウェッジを添える"
+    ]
+  },
+  {
+    "id": "horses-neck",
+    "name": { "ja": "ホーセズネック", "en": "Horse's Neck" },
+    "category": "long",
+    "method": "build",
+    "taste": "refreshing",
+    "alcohol_strength": "medium",
+    "description": "レモンピールを馬の首に見立てた美しいカクテル。ブランデーの芳醇さとジンジャーの爽やかさ。",
+    "ingredients": [
+      { "bottle_id": "brandy", "amount": "45ml" },
+      { "bottle_id": "ginger-ale", "amount": "適量" },
+      { "bottle_id": "angostura-bitters", "amount": "1dash" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "スパイラルピール1本" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass", "peeler"],
+    "instructions": [
+      "レモンの皮をらせん状に長くむく",
+      "ハイボールグラスにレモンピールを沿わせて入れる",
+      "氷を入れ、ブランデーとビターズを注ぐ",
+      "ジンジャーエールで満たし、軽くステアする"
+    ]
+  },
+  {
+    "id": "john-collins",
+    "name": { "ja": "ジョンコリンズ", "en": "John Collins" },
+    "category": "long",
+    "method": "shake",
+    "taste": "sweet-sour",
+    "alcohol_strength": "medium",
+    "description": "トムコリンズのバーボン版。ウイスキーの深みとレモンの爽やかさが調和する。",
+    "ingredients": [
+      { "bottle_id": "bourbon", "amount": "45ml" },
+      { "bottle_id": "lemon-juice", "amount": "20ml" },
+      { "bottle_id": "sugar-syrup", "amount": "15ml" },
+      { "bottle_id": "soda-water", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "スライス1枚" },
+      { "bottle_id": "maraschino-cherry", "amount": "1個" }
+    ],
+    "required_tools": ["shaker", "jigger", "bar-spoon", "collins-glass"],
+    "instructions": [
+      "シェーカーにバーボン、レモンジュース、シュガーシロップと氷を入れる",
+      "しっかりシェークする",
+      "氷を入れたコリンズグラスに注ぐ",
+      "炭酸水で満たし、軽くステアする"
+    ]
+  },
+  {
+    "id": "gin-rickey",
+    "name": { "ja": "ジンリッキー", "en": "Gin Rickey" },
+    "category": "long",
+    "method": "build",
+    "taste": "dry",
+    "alcohol_strength": "medium",
+    "description": "甘みを一切加えないドライなカクテル。ライムと炭酸のキリッとした味わい。",
+    "ingredients": [
+      { "bottle_id": "dry-gin", "amount": "45ml" },
+      { "bottle_id": "lime-juice", "amount": "20ml" },
+      { "bottle_id": "soda-water", "amount": "適量" }
+    ],
+    "garnish": [
+      { "bottle_id": "lime", "amount": "ウェッジ1個" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "ハイボールグラスに氷を入れる",
+      "ジンとライムジュースを注ぐ",
+      "炭酸水で満たす",
+      "バースプーンで軽くステアする"
+    ]
+  },
+  {
+    "id": "planters-punch",
+    "name": { "ja": "プランターズパンチ", "en": "Planter's Punch" },
+    "category": "tropical",
+    "method": "shake",
+    "taste": "sweet-sour",
+    "alcohol_strength": "medium",
+    "description": "カリブ海のプランテーション生まれ。フルーティーで飲みやすいトロピカルカクテル。",
+    "ingredients": [
+      { "bottle_id": "dark-rum", "amount": "45ml" },
+      { "bottle_id": "orange-juice", "amount": "30ml" },
+      { "bottle_id": "pineapple-juice", "amount": "30ml" },
+      { "bottle_id": "lime-juice", "amount": "15ml" },
+      { "bottle_id": "grenadine", "amount": "10ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "orange", "amount": "スライス1枚" },
+      { "bottle_id": "maraschino-cherry", "amount": "1個" }
+    ],
+    "required_tools": ["shaker", "jigger", "highball-glass"],
+    "instructions": [
+      "シェーカーに全ての材料と氷を入れる",
+      "しっかりシェークする",
+      "氷を入れたハイボールグラスに注ぐ",
+      "オレンジスライスとチェリーを飾る"
+    ]
+  },
+  {
+    "id": "caipirinha",
+    "name": { "ja": "カイピリーニャ", "en": "Caipirinha" },
+    "category": "standard",
+    "method": "build",
+    "taste": "sweet-sour",
+    "alcohol_strength": "strong",
+    "description": "ブラジルの国民的カクテル。カシャーサとライムと砂糖だけのシンプルさが魅力。",
+    "ingredients": [
+      { "bottle_id": "cachaca", "amount": "50ml" },
+      { "bottle_id": "lime", "amount": "1個（カット）" },
+      { "bottle_id": "sugar-cube", "amount": "2個" }
+    ],
+    "garnish": [],
+    "required_tools": ["muddler", "jigger", "old-fashioned-glass"],
+    "instructions": [
+      "ライムを8等分にカットする",
+      "ロックグラスにライムと砂糖を入れる",
+      "マドラーでしっかりマドルして果汁を出す",
+      "クラッシュドアイスを入れ、カシャーサを注ぐ",
+      "バースプーンでステアする"
+    ]
+  },
+  {
+    "id": "harvey-wallbanger",
+    "name": { "ja": "ハーヴェイウォールバンガー", "en": "Harvey Wallbanger" },
+    "category": "long",
+    "method": "build",
+    "taste": "sweet",
+    "alcohol_strength": "medium",
+    "description": "1970年代に大流行。スクリュードライバーにガリアーノをフロートさせた一杯。",
+    "ingredients": [
+      { "bottle_id": "vodka", "amount": "30ml" },
+      { "bottle_id": "orange-juice", "amount": "90ml" },
+      { "bottle_id": "galliano", "amount": "15ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "orange", "amount": "スライス1枚" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "highball-glass"],
+    "instructions": [
+      "ハイボールグラスに氷を入れる",
+      "ウォッカとオレンジジュースを注いでステアする",
+      "ガリアーノをバースプーンの背でフロートさせる"
+    ]
+  },
+  {
+    "id": "rusty-nail",
+    "name": { "ja": "ラスティネイル", "en": "Rusty Nail" },
+    "category": "short",
+    "method": "build",
+    "taste": "sweet",
+    "alcohol_strength": "strong",
+    "description": "「錆びた釘」の意。スコッチとドランブイの甘くスモーキーな組み合わせ。",
+    "ingredients": [
+      { "bottle_id": "scotch", "amount": "45ml" },
+      { "bottle_id": "drambuie", "amount": "25ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "ピール1片" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "old-fashioned-glass"],
+    "instructions": [
+      "ロックグラスに大きめの氷を入れる",
+      "スコッチとドランブイを注ぐ",
+      "バースプーンで軽くステアする",
+      "レモンピールを絞りかける"
+    ]
+  },
+  {
+    "id": "kir-royale",
+    "name": { "ja": "キールロワイヤル", "en": "Kir Royale" },
+    "category": "long",
+    "method": "build",
+    "taste": "sweet",
+    "alcohol_strength": "weak",
+    "description": "カシスとシャンパンの華やかなカクテル。パーティーの乾杯にぴったり。",
+    "ingredients": [
+      { "bottle_id": "creme-de-cassis", "amount": "15ml" },
+      { "bottle_id": "champagne", "amount": "120ml" }
+    ],
+    "garnish": [],
+    "required_tools": ["champagne-flute"],
+    "instructions": [
+      "シャンパンフルートにクレームドカシスを入れる",
+      "冷えたシャンパンをゆっくり注ぐ",
+      "自然に混ざるので混ぜなくてよい"
+    ]
+  },
+  {
+    "id": "midori-sour",
+    "name": { "ja": "ミドリサワー", "en": "Midori Sour" },
+    "category": "short",
+    "method": "shake",
+    "taste": "sweet-sour",
+    "alcohol_strength": "weak",
+    "description": "日本発のメロンリキュール「ミドリ」を使った鮮やかな緑色のカクテル。",
+    "ingredients": [
+      { "bottle_id": "midori", "amount": "30ml" },
+      { "bottle_id": "lemon-juice", "amount": "20ml" },
+      { "bottle_id": "sugar-syrup", "amount": "10ml" },
+      { "bottle_id": "soda-water", "amount": "少量" }
+    ],
+    "garnish": [
+      { "bottle_id": "maraschino-cherry", "amount": "1個" }
+    ],
+    "required_tools": ["shaker", "jigger", "bar-spoon", "old-fashioned-glass"],
+    "instructions": [
+      "シェーカーにミドリ、レモンジュース、シロップと氷を入れる",
+      "しっかりシェークする",
+      "氷を入れたロックグラスに注ぐ",
+      "ソーダを少量加え、軽くステアする"
+    ]
+  },
+  {
+    "id": "bramble",
+    "name": { "ja": "ブランブル", "en": "Bramble" },
+    "category": "short",
+    "method": "build",
+    "taste": "sweet-sour",
+    "alcohol_strength": "medium",
+    "description": "1984年にロンドンで誕生。ブラックベリーリキュールの紫が美しいモダンクラシック。",
+    "ingredients": [
+      { "bottle_id": "dry-gin", "amount": "40ml" },
+      { "bottle_id": "lemon-juice", "amount": "20ml" },
+      { "bottle_id": "sugar-syrup", "amount": "10ml" },
+      { "bottle_id": "creme-de-mure", "amount": "15ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "スライス1枚" }
+    ],
+    "required_tools": ["jigger", "bar-spoon", "old-fashioned-glass"],
+    "instructions": [
+      "ロックグラスにクラッシュドアイスを入れる",
+      "ジン、レモンジュース、シロップを注いでステアする",
+      "クレームドミュールをトップからゆっくり注ぎ、マーブル模様を作る"
+    ]
+  },
+  {
+    "id": "sazerac",
+    "name": { "ja": "サゼラック", "en": "Sazerac" },
+    "category": "standard",
+    "method": "stir",
+    "taste": "bitter",
+    "alcohol_strength": "strong",
+    "description": "ニューオーリンズの公式カクテル。アメリカ最古のカクテルのひとつとされる。",
+    "ingredients": [
+      { "bottle_id": "rye-whiskey", "amount": "60ml" },
+      { "bottle_id": "sugar-cube", "amount": "1個" },
+      { "bottle_id": "peychauds-bitters", "amount": "3dashes" },
+      { "bottle_id": "absinthe", "amount": "リンス用少量" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "ピール1片" }
+    ],
+    "required_tools": ["mixing-glass", "bar-spoon", "strainer", "jigger", "old-fashioned-glass"],
+    "instructions": [
+      "ロックグラスにアブサンを少量入れ、グラスの内側をリンスして余分を捨てる",
+      "ミキシンググラスに角砂糖とビターズを入れ、少量の水で角砂糖を溶かす",
+      "ライウイスキーと氷を加え、よくステアする",
+      "アブサンリンスしたグラスにストレーナーで注ぐ",
+      "レモンピールを絞りかけ、グラスには入れない"
+    ]
+  },
+  {
+    "id": "singapore-sling",
+    "name": { "ja": "シンガポールスリング", "en": "Singapore Sling" },
+    "category": "tropical",
+    "method": "shake",
+    "taste": "sweet-sour",
+    "alcohol_strength": "medium",
+    "description": "シンガポールのラッフルズホテルで1915年に誕生した伝説のカクテル。",
+    "ingredients": [
+      { "bottle_id": "dry-gin", "amount": "30ml" },
+      { "bottle_id": "cherry-heering", "amount": "15ml" },
+      { "bottle_id": "benedictine", "amount": "7ml" },
+      { "bottle_id": "cointreau", "amount": "7ml" },
+      { "bottle_id": "pineapple-juice", "amount": "60ml" },
+      { "bottle_id": "lime-juice", "amount": "15ml" },
+      { "bottle_id": "grenadine", "amount": "10ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "pineapple", "amount": "ウェッジ1個" },
+      { "bottle_id": "maraschino-cherry", "amount": "1個" }
+    ],
+    "required_tools": ["shaker", "jigger", "hurricane-glass"],
+    "alternative_tools_note": "ハリケーングラスがなければコリンズグラスで代用可",
+    "instructions": [
+      "シェーカーに全ての材料と氷を入れる",
+      "しっかりシェークする",
+      "氷を入れたハリケーングラスに注ぐ",
+      "パイナップルとチェリーを飾る"
+    ]
+  },
+  {
+    "id": "last-word",
+    "name": { "ja": "ラストワード", "en": "Last Word" },
+    "category": "short",
+    "method": "shake",
+    "taste": "sweet-sour",
+    "alcohol_strength": "strong",
+    "description": "禁酒法時代に生まれ、2000年代に再発見されたカクテル。4つの材料を同量ずつ使う。",
+    "ingredients": [
+      { "bottle_id": "dry-gin", "amount": "22ml" },
+      { "bottle_id": "chartreuse", "amount": "22ml" },
+      { "bottle_id": "maraschino-liqueur", "amount": "22ml" },
+      { "bottle_id": "lime-juice", "amount": "22ml" }
+    ],
+    "garnish": [],
+    "required_tools": ["shaker", "jigger", "cocktail-glass"],
+    "instructions": [
+      "シェーカーに全ての材料と氷を入れる",
+      "しっかりシェークする",
+      "カクテルグラスに注ぐ"
+    ]
+  },
+  {
+    "id": "vesper",
+    "name": { "ja": "ヴェスパー", "en": "Vesper" },
+    "category": "short",
+    "method": "shake",
+    "taste": "dry",
+    "alcohol_strength": "strong",
+    "description": "007ジェームズ・ボンドが『カジノ・ロワイヤル』で注文したカクテル。「シェイクして、ステアはしないで」",
+    "ingredients": [
+      { "bottle_id": "dry-gin", "amount": "45ml" },
+      { "bottle_id": "vodka", "amount": "15ml" },
+      { "bottle_id": "lillet-blanc", "amount": "7ml" }
+    ],
+    "garnish": [
+      { "bottle_id": "lemon", "amount": "ピール1片" }
+    ],
+    "required_tools": ["shaker", "jigger", "cocktail-glass", "peeler"],
+    "instructions": [
+      "シェーカーに全ての材料と氷を入れる",
+      "しっかりシェークする（ステアではなくシェーク）",
+      "カクテルグラスに注ぐ",
+      "レモンピールを絞りかける"
+    ]
   }
 ]

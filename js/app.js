@@ -73,6 +73,18 @@ const COCKTAILDB_NAMES = {
   'grasshopper': 'Grasshopper', 'sex-on-the-beach': 'Sex on the Beach',
   'hot-toddy': 'Hot Toddy', 'americano': 'Americano',
   'boulevardier': 'Boulevardier', 'mimosa': 'Mimosa',
+  'dark-n-stormy': 'Dark and Stormy', 'whiskey-highball': 'Whiskey Highball',
+  'virgin-mojito': 'Virgin Mojito',
+  'kamikaze': 'Kamikaze', 'gin-fizz': 'Gin Fizz', 'bees-knees': 'Bees Knees',
+  'fuzzy-navel': 'Fuzzy Navel', 'whiskey-ginger': 'Whiskey Highball',
+  'cape-codder': 'Cape Codder', 'horses-neck': 'Horses Neck',
+  'john-collins': 'John Collins', 'gin-rickey': 'Gin Rickey',
+  'planters-punch': 'Planters Punch', 'caipirinha': 'Caipirinha',
+  'harvey-wallbanger': 'Harvey Wallbanger', 'rusty-nail': 'Rusty Nail',
+  'kir-royale': 'Kir Royale', 'midori-sour': 'Midori Sour',
+  'bramble': 'Bramble', 'sazerac': 'Sazerac',
+  'singapore-sling': 'Singapore Sling', 'last-word': 'Last Word',
+  'vesper': 'Vesper',
 };
 
 // ===== Data Loading =====
