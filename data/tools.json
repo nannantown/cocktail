@@ -188,5 +188,25 @@
     "description": "大きめの氷を作るための製氷皿",
     "home_bar_note": "大きめの丸氷や四角氷が作れるシリコン型がおすすめ。溶けにくく見た目も良い",
     "used_for_methods": []
+  },
+  {
+    "id": "champagne-flute",
+    "name": { "ja": "シャンパンフルート", "en": "Champagne Flute" },
+    "category": "glassware",
+    "priority": "optional",
+    "price_range": "¥500〜¥2,000（1脚）",
+    "description": "細長い脚付きグラス。泡立ちを美しく保つ",
+    "home_bar_note": "フレンチ75、ミモザ、キールロワイヤルに使用。ワイングラスで代用可",
+    "capacity": "150-180ml"
+  },
+  {
+    "id": "julep-cup",
+    "name": { "ja": "ジュレップカップ", "en": "Julep Cup" },
+    "category": "glassware",
+    "priority": "optional",
+    "price_range": "¥1,500〜¥3,000（1個）",
+    "description": "銀製または銅製の伝統的なカップ。ミントジュレップ用",
+    "home_bar_note": "ミントジュレップの雰囲気を出すために。ロックグラスで代用可",
+    "capacity": "300ml"
   }
 ]
