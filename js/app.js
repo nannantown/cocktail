@@ -87,23 +87,21 @@ const COCKTAILDB_NAMES = {
   'vesper': 'Vesper', 'harvard-cooler': 'Harvard Cooler',
 };
 
-// Alternate search terms if primary name not found
-const COCKTAILDB_FALLBACKS = {
+// Wikipedia article titles for cocktails not on CocktailDB
+const WIKIPEDIA_NAMES = {
+  'fuzzy-navel': 'Fuzzy navel',
   'whiskey-highball': 'Highball',
-  'whiskey-ginger': 'Whiskey Highball',
-  'virgin-mojito': 'Non Alcoholic Mojito',
-  'cape-codder': 'Cape Cod',
-  'harvard-cooler': 'Apple Cooler',
-  'hot-toddy': 'Toddy',
-  'dark-n-stormy': "Dark 'n' Stormy",
-  'fuzzy-navel': 'Peach Schnapps',
-  'midori-sour': 'Midori',
-  'boulevardier': 'Old Pal',
-  'bees-knees': 'Bees Knees',
-  'kir-royale': 'Kir Royal',
-  'long-island-iced-tea': 'Long Island Tea',
-  'horses-neck': 'Horses Neck',
-  'planters-punch': 'Planters Punch',
+  'whiskey-ginger': 'Buck (cocktail)',
+  'virgin-mojito': 'Mojito',
+  'cape-codder': 'Cape Codder (cocktail)',
+  'harvard-cooler': 'Harvard cooler',
+  'hot-toddy': 'Hot toddy',
+  'boulevardier': 'Boulevardier (cocktail)',
+  'dark-n-stormy': "Dark 'n' stormy",
+  'bees-knees': "Bee's knees",
+  'midori-sour': 'Midori (liqueur)',
+  'kir-royale': 'Kir royal',
+  'last-word': 'Last Word (cocktail)',
 };
 
 // ===== Data Loading =====
@@ -521,8 +519,23 @@ async function searchCocktailDB(name) {
   return null;
 }
 
+async function searchWikipedia(title) {
+  try {
+    const res = await fetch(
+      `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=pageimages&format=json&pithumbsize=400&origin=*`
+    );
+    const data = await res.json();
+    const pages = data.query.pages;
+    const page = Object.values(pages)[0];
+    if (page && page.thumbnail && page.thumbnail.source) {
+      return page.thumbnail.source;
+    }
+  } catch (e) { /* network error */ }
+  return null;
+}
+
 async function loadImages() {
-  const CACHE_VER = 3; // Bump to invalidate old cache
+  const CACHE_VER = 4; // Bump to invalidate old cache
   try {
     const cacheVer = parseInt(localStorage.getItem('cocktailImagesCacheVer') || '0');
     const cached = JSON.parse(localStorage.getItem('cocktailImages') || '{}');
@@ -536,64 +549,34 @@ async function loadImages() {
   const missing = state.cocktails.filter(c => !state.images[c.id]);
   if (missing.length === 0) return;
 
+  // First pass: CocktailDB
   const promises = missing.map(async (cocktail) => {
-    // Try primary name
     const searchName = COCKTAILDB_NAMES[cocktail.id];
     if (searchName) {
       const url = await searchCocktailDB(searchName);
       if (url) { state.images[cocktail.id] = url; return; }
     }
-    // Try fallback (visually similar cocktail)
-    const fallbackName = COCKTAILDB_FALLBACKS[cocktail.id];
-    if (fallbackName) {
-      const url = await searchCocktailDB(fallbackName);
-      if (url) { state.images[cocktail.id] = url; return; }
-    }
   });
 
   await Promise.allSettled(promises);
-  localStorage.setItem('cocktailImages', JSON.stringify(state.images));
-  localStorage.setItem('cocktailImagesCacheVer', String(CACHE_VER));
   if (state.activeTab === 'cocktails') renderCocktails();
 
-  // Second pass: fill remaining gaps using first-letter search
+  // Second pass: Wikipedia for cocktails not found on CocktailDB
   const stillMissing = state.cocktails.filter(c => !state.images[c.id]);
-  if (stillMissing.length === 0) return;
-
-  // Collect unique first letters needed
-  const letters = [...new Set(stillMissing.map(c => {
-    const name = COCKTAILDB_NAMES[c.id] || c.name.en;
-    return name.charAt(0).toLowerCase();
-  }))];
-
-  // Fetch all drinks by first letter
-  const letterDrinks = {};
-  await Promise.allSettled(letters.map(async (letter) => {
-    try {
-      const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`);
-      const data = await res.json();
-      if (data.drinks) {
-        data.drinks.forEach(d => {
-          if (d.strDrinkThumb) letterDrinks[d.strDrink.toLowerCase()] = d.strDrinkThumb + '/preview';
-        });
+  if (stillMissing.length > 0) {
+    const wikiPromises = stillMissing.map(async (cocktail) => {
+      const wikiTitle = WIKIPEDIA_NAMES[cocktail.id];
+      if (wikiTitle) {
+        const url = await searchWikipedia(wikiTitle);
+        if (url) { state.images[cocktail.id] = url; }
       }
-    } catch (e) { /* ignore */ }
-  }));
-
-  // Try to match remaining cocktails
-  for (const cocktail of stillMissing) {
-    if (state.images[cocktail.id]) continue;
-    const name = (COCKTAILDB_NAMES[cocktail.id] || cocktail.name.en).toLowerCase();
-    // Exact match
-    if (letterDrinks[name]) { state.images[cocktail.id] = letterDrinks[name]; continue; }
-    // Partial match: find any drink containing our search term
-    const match = Object.keys(letterDrinks).find(k => k.includes(name) || name.includes(k));
-    if (match) { state.images[cocktail.id] = letterDrinks[match]; }
+    });
+    await Promise.allSettled(wikiPromises);
+    if (state.activeTab === 'cocktails') renderCocktails();
   }
 
   localStorage.setItem('cocktailImages', JSON.stringify(state.images));
   localStorage.setItem('cocktailImagesCacheVer', String(CACHE_VER));
-  if (state.activeTab === 'cocktails') renderCocktails();
 }
 
 // ===== Tool Illustrations (for guide) =====
