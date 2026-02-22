@@ -4,7 +4,8 @@
   "description": "家庭でカクテルを作るための実用的なデータベースです。GitHubをデータベースとして活用し、必要なボトル・器具・レシピを管理します。",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update-tokens": "cp node_modules/@nannantown/ground-ui/src/css/tokens.css css/tokens.css"
   },
   "repository": {
     "type": "git",
