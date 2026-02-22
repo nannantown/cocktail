@@ -69,22 +69,41 @@ const COCKTAILDB_NAMES = {
   'cuba-libre': 'Cuba Libre', 'blue-lagoon': 'Blue Lagoon',
   'mint-julep': 'Mint Julep', 'rob-roy': 'Rob Roy',
   'godfather': 'Godfather', 'amaretto-sour': 'Amaretto Sour',
-  'long-island-iced-tea': 'Long Island Tea', 'brandy-alexander': 'Brandy Alexander',
+  'long-island-iced-tea': 'Long Island Iced Tea', 'brandy-alexander': 'Brandy Alexander',
   'grasshopper': 'Grasshopper', 'sex-on-the-beach': 'Sex on the Beach',
   'hot-toddy': 'Hot Toddy', 'americano': 'Americano',
   'boulevardier': 'Boulevardier', 'mimosa': 'Mimosa',
   'dark-n-stormy': 'Dark and Stormy', 'whiskey-highball': 'Whiskey Highball',
   'virgin-mojito': 'Virgin Mojito',
-  'kamikaze': 'Kamikaze', 'gin-fizz': 'Gin Fizz', 'bees-knees': 'Bees Knees',
-  'fuzzy-navel': 'Fuzzy Navel', 'whiskey-ginger': 'Whiskey Highball',
-  'cape-codder': 'Cape Codder', 'horses-neck': 'Horses Neck',
+  'kamikaze': 'Kamikaze', 'gin-fizz': 'Gin Fizz', 'bees-knees': "Bee's Knees",
+  'fuzzy-navel': 'Fuzzy Navel', 'whiskey-ginger': 'Whiskey Ginger',
+  'cape-codder': 'Cape Codder', 'horses-neck': "Horse's Neck",
   'john-collins': 'John Collins', 'gin-rickey': 'Gin Rickey',
-  'planters-punch': 'Planters Punch', 'caipirinha': 'Caipirinha',
+  'planters-punch': "Planter's Punch", 'caipirinha': 'Caipirinha',
   'harvey-wallbanger': 'Harvey Wallbanger', 'rusty-nail': 'Rusty Nail',
   'kir-royale': 'Kir Royale', 'midori-sour': 'Midori Sour',
   'bramble': 'Bramble', 'sazerac': 'Sazerac',
   'singapore-sling': 'Singapore Sling', 'last-word': 'Last Word',
   'vesper': 'Vesper', 'harvard-cooler': 'Harvard Cooler',
+};
+
+// Fallback: if primary name not found, try visually similar cocktail
+const COCKTAILDB_FALLBACKS = {
+  'whiskey-highball': 'John Collins',
+  'whiskey-ginger': 'John Collins',
+  'virgin-mojito': 'Mojito',
+  'cape-codder': 'Sea Breeze',
+  'harvard-cooler': 'Tom Collins',
+  'hot-toddy': 'Rum Toddy',
+  'dark-n-stormy': 'Moscow Mule',
+  'fuzzy-navel': 'Harvey Wallbanger',
+  'midori-sour': 'Japanese Slipper',
+  'boulevardier': 'Negroni',
+  'bees-knees': 'Gimlet',
+  'kir-royale': 'Mimosa',
+  'long-island-iced-tea': 'Long Island Tea',
+  'horses-neck': 'Horses Neck',
+  'planters-punch': 'Planters Punch',
 };
 
 // ===== Data Loading =====
@@ -491,30 +510,102 @@ function closeModal() {
 }
 
 // ===== Image Loading =====
-async function loadImages() {
+async function searchCocktailDB(name) {
   try {
+    const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${encodeURIComponent(name)}`);
+    const data = await res.json();
+    if (data.drinks && data.drinks[0] && data.drinks[0].strDrinkThumb) {
+      return data.drinks[0].strDrinkThumb + '/preview';
+    }
+  } catch (e) { /* network error */ }
+  return null;
+}
+
+async function loadImages() {
+  const CACHE_VER = 2; // Bump to invalidate old cache
+  try {
+    const cacheVer = parseInt(localStorage.getItem('cocktailImagesCacheVer') || '0');
     const cached = JSON.parse(localStorage.getItem('cocktailImages') || '{}');
-    if (Object.keys(cached).length > 0) {
+    if (cacheVer === CACHE_VER && Object.keys(cached).length > 0) {
       state.images = cached;
       if (state.activeTab === 'cocktails') renderCocktails();
     }
   } catch (e) { /* ignore */ }
 
-  const promises = state.cocktails.map(async (cocktail) => {
-    if (state.images[cocktail.id]) return;
+  // Check if all cocktails already have images cached
+  const missing = state.cocktails.filter(c => !state.images[c.id]);
+  if (missing.length === 0) return;
+
+  const promises = missing.map(async (cocktail) => {
+    // Try primary name
     const searchName = COCKTAILDB_NAMES[cocktail.id];
-    if (!searchName) return;
-    try {
-      const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${encodeURIComponent(searchName)}`);
-      const data = await res.json();
-      if (data.drinks && data.drinks[0] && data.drinks[0].strDrinkThumb) {
-        state.images[cocktail.id] = data.drinks[0].strDrinkThumb + '/preview';
-      }
-    } catch (e) { /* fallback to SVG icon */ }
+    if (searchName) {
+      const url = await searchCocktailDB(searchName);
+      if (url) { state.images[cocktail.id] = url; return; }
+    }
+    // Try fallback (visually similar cocktail)
+    const fallbackName = COCKTAILDB_FALLBACKS[cocktail.id];
+    if (fallbackName) {
+      const url = await searchCocktailDB(fallbackName);
+      if (url) { state.images[cocktail.id] = url; return; }
+    }
   });
 
   await Promise.allSettled(promises);
   localStorage.setItem('cocktailImages', JSON.stringify(state.images));
+  localStorage.setItem('cocktailImagesCacheVer', String(CACHE_VER));
+  if (state.activeTab === 'cocktails') renderCocktails();
+
+  // Second pass: fill remaining gaps using first-letter search
+  const stillMissing = state.cocktails.filter(c => !state.images[c.id]);
+  if (stillMissing.length === 0) return;
+
+  // Collect unique first letters needed
+  const letters = [...new Set(stillMissing.map(c => {
+    const name = COCKTAILDB_NAMES[c.id] || c.name.en;
+    return name.charAt(0).toLowerCase();
+  }))];
+
+  // Fetch all drinks by first letter
+  const letterDrinks = {};
+  await Promise.allSettled(letters.map(async (letter) => {
+    try {
+      const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`);
+      const data = await res.json();
+      if (data.drinks) {
+        data.drinks.forEach(d => {
+          if (d.strDrinkThumb) letterDrinks[d.strDrink.toLowerCase()] = d.strDrinkThumb + '/preview';
+        });
+      }
+    } catch (e) { /* ignore */ }
+  }));
+
+  // Try to match remaining cocktails
+  for (const cocktail of stillMissing) {
+    if (state.images[cocktail.id]) continue;
+    const name = (COCKTAILDB_NAMES[cocktail.id] || cocktail.name.en).toLowerCase();
+    // Exact match
+    if (letterDrinks[name]) { state.images[cocktail.id] = letterDrinks[name]; continue; }
+    // Partial match: find any drink containing our search term
+    const match = Object.keys(letterDrinks).find(k => k.includes(name) || name.includes(k));
+    if (match) { state.images[cocktail.id] = letterDrinks[match]; }
+  }
+
+  // Final: for any still missing, use a random cocktail from same category as visual placeholder
+  const finalMissing = state.cocktails.filter(c => !state.images[c.id]);
+  if (finalMissing.length > 0) {
+    const allImages = Object.values(state.images);
+    if (allImages.length > 0) {
+      for (const cocktail of finalMissing) {
+        // Use image from a cocktail in the same category if possible
+        const sameCat = state.cocktails.find(c => c.category === cocktail.category && state.images[c.id]);
+        state.images[cocktail.id] = sameCat ? state.images[sameCat.id] : allImages[0];
+      }
+    }
+  }
+
+  localStorage.setItem('cocktailImages', JSON.stringify(state.images));
+  localStorage.setItem('cocktailImagesCacheVer', String(CACHE_VER));
   if (state.activeTab === 'cocktails') renderCocktails();
 }
 
