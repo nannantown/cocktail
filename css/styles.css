@@ -301,7 +301,8 @@ body {
 .card-image img {
   width: 100%; height: 100%; object-fit: cover;
 }
-.card-image .emoji-fallback { font-size: 2.5rem; opacity: 0.7; }
+.card-image .emoji-fallback { opacity: 0.7; }
+.card-image .emoji-fallback svg { width: 2.5rem; height: 2.5rem; }
 
 .status-badge {
   position: absolute; top: var(--space-xs); right: var(--space-xs);
@@ -366,7 +367,9 @@ body {
   background: var(--bg-surface);
   color: var(--text-muted);
   white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 2px;
 }
+.glass-badge svg { width: 12px; height: 12px; }
 
 .missing-tag {
   display: inline-flex; align-items: center; gap: 2px;
@@ -400,7 +403,8 @@ body {
 }
 .rec-card:hover { border-color: var(--border-default); }
 .rec-header { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm); }
-.rec-icon { font-size: var(--text-xl); }
+.rec-icon { display: flex; align-items: center; }
+.rec-icon svg { width: 1.5rem; height: 1.5rem; }
 .rec-name { font-size: var(--text-md); font-weight: 600; }
 .rec-price { font-size: var(--text-xs); color: var(--text-muted); }
 .rec-badge {
@@ -453,6 +457,8 @@ body {
   background: var(--bg-elevated);
 }
 .modal-image img { width: 100%; height: 100%; object-fit: cover; }
+.modal-glass-icon { opacity: 0.7; }
+.modal-glass-icon svg { width: 3.5rem; height: 3.5rem; }
 .modal-body { padding: var(--space-xl); }
 .modal-header {
   display: flex; align-items: center; justify-content: space-between;

@@ -14,12 +14,21 @@ const state = {
 };
 
 // ===== Labels =====
-const GLASS_EMOJI = {
-  'cocktail-glass': '🍸', 'old-fashioned-glass': '🥃', 'highball-glass': '🥂',
-  'collins-glass': '🥂', 'wine-glass': '🍷', 'shot-glass': '🥃',
-  'copper-mug': '🍺', 'hurricane-glass': '🍹', 'margarita-glass': '🍸',
-  'irish-coffee-glass': '☕', 'champagne-flute': '🥂', 'julep-cup': '🥃',
+const GLASS_SVG = {
+  'cocktail-glass': '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2l4 10 4-10"/><path d="M12 12v8"/><path d="M8 22h8"/></svg>',
+  'old-fashioned-glass': '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14l-1 14H6L5 6z"/><path d="M5 6h14"/></svg>',
+  'highball-glass': '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2h10l-1 20H8L7 2z"/><path d="M7 2h10"/></svg>',
+  'collins-glass': '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2h10l-1 20H8L7 2z"/><path d="M7 2h10"/></svg>',
+  'wine-glass': '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 7a3.5 3.5 0 01-3 3.5A3.5 3.5 0 019 9L8 2z"/><path d="M12 12.5v7"/><path d="M8 22h8"/></svg>',
+  'shot-glass': '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l-1.5 16h-7L7 4z"/><path d="M7 4h10"/></svg>',
+  'copper-mug': '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11v16H6L5 4z"/><path d="M16 8h2a2 2 0 012 2v2a2 2 0 01-2 2h-2"/></svg>',
+  'hurricane-glass': '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6c0 4 3 6 3 10s-3 4-3 8h-6c0-4-3-4-3-8s3-6 3-10z"/><path d="M9 22h6"/></svg>',
+  'margarita-glass': '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2l4 10 4-10"/><path d="M12 12v8"/><path d="M8 22h8"/></svg>',
+  'irish-coffee-glass': '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h11v12H6L5 6z"/><path d="M16 9h2a2 2 0 012 2v1a2 2 0 01-2 2h-2"/><path d="M8 22h8"/><path d="M9 18h6v4H9z"/></svg>',
+  'champagne-flute': '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4l-1 10a1.5 1.5 0 01-1 1.4A1.5 1.5 0 0111 12L10 2z"/><path d="M12 13.5v6"/><path d="M9 22h6"/></svg>',
+  'julep-cup': '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12l-1.5 16h-9L6 4z"/><path d="M6 4h12"/><path d="M8 10h8" opacity=".4"/></svg>',
 };
+const DEFAULT_GLASS_SVG = GLASS_SVG['cocktail-glass'];
 const CATEGORY_LABELS = {
   short: 'ショート', long: 'ロング', tropical: 'トロピカル',
   standard: 'スタンダード', shot: 'ショット', hot: 'ホット', 'non-alcohol': 'ノンアル',
@@ -171,7 +180,7 @@ function getGlassInfo(cocktail) {
   const glassId = cocktail.required_tools.find(t => isGlassware(t));
   if (!glassId) return null;
   const tool = state.tools.find(t => t.id === glassId);
-  return { id: glassId, emoji: GLASS_EMOJI[glassId] || '🍸', name: tool ? tool.name.ja : glassId };
+  return { id: glassId, svg: GLASS_SVG[glassId] || DEFAULT_GLASS_SVG, name: tool ? tool.name.ja : glassId };
 }
 function getBottleName(id) {
   const b = state.bottles.find(b => b.id === id);
@@ -303,7 +312,7 @@ function renderCocktails() {
   for (const cocktail of filtered) {
     const a = analyzeCocktail(cocktail);
     const glass = getGlassInfo(cocktail);
-    const emoji = glass ? glass.emoji : '🍸';
+    const glassSvg = glass ? glass.svg : DEFAULT_GLASS_SVG;
     const imgUrl = state.images[cocktail.id];
     const justUnlocked = a.status === 'unlocked' && !state.previouslyUnlocked.has(cocktail.id);
     const fillClass = a.status === 'unlocked' ? 'fill-success' : a.status === 'almost' ? 'fill-warning' : 'fill-neutral';
@@ -324,14 +333,14 @@ function renderCocktails() {
         + '</div>';
     }
 
-    const glassHtml = glass ? `<span class="glass-badge">${glass.emoji} ${glass.name}</span>` : '';
+    const glassHtml = glass ? `<span class="glass-badge">${glass.svg} ${glass.name}</span>` : '';
 
     html += `
     <div class="cocktail-card ${a.status} ${justUnlocked ? 'just-unlocked' : ''}" data-cocktail-id="${cocktail.id}">
       <div class="card-image gradient-${cocktail.category}">
         ${imgUrl
           ? `<img src="${imgUrl}" alt="${cocktail.name.ja}" loading="lazy">`
-          : `<span class="emoji-fallback">${emoji}</span>`}
+          : `<span class="emoji-fallback">${glassSvg}</span>`}
         ${statusBadge}
       </div>
       <div class="card-progress">
@@ -371,7 +380,7 @@ function renderRecommendations() {
     html += `
     <div class="rec-card">
       <div class="rec-header">
-        <span class="rec-icon">🍾</span>
+        <span class="rec-icon"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4v4l2 4v10a2 2 0 01-2 2h-4a2 2 0 01-2-2V10l2-4V2z"/><path d="M10 2h4"/><path d="M9 14h6"/></svg></span>
         <div>
           <div class="rec-name">${item.name.ja}</div>
           <div class="rec-price">${item.price_range || ''}</div>
@@ -401,7 +410,7 @@ function showModal(cocktailId) {
 
   const a = analyzeCocktail(cocktail);
   const glass = getGlassInfo(cocktail);
-  const emoji = glass ? glass.emoji : '🍸';
+  const glassSvg = glass ? glass.svg : DEFAULT_GLASS_SVG;
   const imgUrl = state.images[cocktail.id];
 
   const ingredientsList = cocktail.ingredients.map(ing => {
@@ -428,7 +437,7 @@ function showModal(cocktailId) {
 
   document.getElementById('modal-content').innerHTML = `
     <div class="modal-image gradient-${cocktail.category}">
-      ${imgUrl ? `<img src="${imgUrl}" alt="${cocktail.name.ja}">` : `<span style="font-size:3.5rem;opacity:0.7">${emoji}</span>`}
+      ${imgUrl ? `<img src="${imgUrl}" alt="${cocktail.name.ja}">` : `<span class="modal-glass-icon">${glassSvg}</span>`}
     </div>
     <div class="modal-body">
       <div class="modal-header">
@@ -451,7 +460,7 @@ function showModal(cocktailId) {
 
       ${garnishList ? `<h3 class="modal-section-title">ガーニッシュ</h3><div class="modal-tags">${garnishList}</div>` : ''}
 
-      ${glass ? `<h3 class="modal-section-title">グラス</h3><div class="modal-tags"><span class="glass-badge">${glass.emoji} ${glass.name}</span></div>` : ''}
+      ${glass ? `<h3 class="modal-section-title">グラス</h3><div class="modal-tags"><span class="glass-badge">${glass.svg} ${glass.name}</span></div>` : ''}
       ${cocktail.alternative_tools_note ? `<p class="modal-note">${cocktail.alternative_tools_note}</p>` : ''}
 
       ${nonGlassTools.length > 0 ? `<h3 class="modal-section-title">必要な器具</h3><div class="modal-tags">${toolsList}</div>` : ''}
@@ -489,7 +498,7 @@ async function loadImages() {
       if (data.drinks && data.drinks[0] && data.drinks[0].strDrinkThumb) {
         state.images[cocktail.id] = data.drinks[0].strDrinkThumb + '/preview';
       }
-    } catch (e) { /* fallback to emoji */ }
+    } catch (e) { /* fallback to SVG icon */ }
   });
 
   await Promise.allSettled(promises);
@@ -510,8 +519,12 @@ const TOOL_ILLUST = {
   'ice-tray': '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="18" width="44" height="28" rx="3"/><line x1="10" y1="32" x2="54" y2="32"/><line x1="21" y1="18" x2="21" y2="46"/><line x1="32" y1="18" x2="32" y2="46"/><line x1="43" y1="18" x2="43" y2="46"/></svg>',
 };
 
-const TECHNIQUE_EMOJI = {
-  shake: '🫨', stir: '🥢', build: '🧊', blend: '🌀', layer: '🌈',
+const TECHNIQUE_SVG = {
+  shake: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4l1 3H9l1-3z"/><rect x="8" y="5" width="8" height="2" rx=".5"/><path d="M9 7l1 15h4l1-15"/><path d="M4 5l2-2m14 2l-2-2"/></svg>',
+  stir: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><circle cx="12" cy="3" r="1.5"/><path d="M10 14c1-1 3 1 4 0" opacity=".5"/><path d="M10 17c1-1 3 1 4 0" opacity=".5"/></svg>',
+  build: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="16" rx="1"/><path d="M6 4h12"/><path d="M9 10h6" opacity=".4"/><path d="M9 14h6" opacity=".4"/></svg>',
+  blend: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8v3H8z"/><path d="M9 5l-1 12h8l-1-12"/><rect x="7" y="17" width="10" height="4" rx="1"/><circle cx="12" cy="19" r="1"/></svg>',
+  layer: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l-1 16H8L7 4z"/><path d="M8.5 9h7" opacity=".6"/><path d="M8.2 13h7.6" opacity=".4"/><path d="M7 4h10"/></svg>',
 };
 
 // ===== Render: Guide =====
@@ -525,12 +538,12 @@ function renderGuide() {
   let html = '<div class="guide-section-label">テクニック</div>';
 
   for (const tech of techniques) {
-    const emoji = TECHNIQUE_EMOJI[tech.id] || '🍸';
+    const techSvg = TECHNIQUE_SVG[tech.id] || DEFAULT_GLASS_SVG;
     const toolNames = tech.required_tools.map(id => getToolName(id)).join('、');
     html += `
     <div class="guide-card" data-guide-id="${tech.id}">
       <div class="guide-card-header">
-        <div class="guide-card-icon technique"><span>${emoji}</span></div>
+        <div class="guide-card-icon technique">${techSvg}</div>
         <div class="guide-card-text">
           <div class="guide-card-name">${tech.name.ja}</div>
           <div class="guide-card-name-en">${tech.name.en}</div>
