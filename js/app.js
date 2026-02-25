@@ -656,13 +656,38 @@ const TECHNIQUE_SVG = {
   blend: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8v3H8z"/><path d="M9 5l-1 12h8l-1-12"/><rect x="7" y="17" width="10" height="4" rx="1"/><circle cx="12" cy="19" r="1"/></svg>',
   layer: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l-1 16H8L7 4z"/><path d="M8.5 9h7" opacity=".6"/><path d="M8.2 13h7.6" opacity=".4"/><path d="M7 4h10"/></svg>',
 };
+const SPIRIT_SVG = {
+  gin: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6v3l2 4v11a2 2 0 01-2 2H9a2 2 0 01-2-2V9l2-4V2z"/><path d="M9 2h6"/><path d="M8 13h8"/></svg>',
+  whiskey: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14l-1 14H6L5 6z"/><path d="M5 6h14"/><path d="M8 10h8" opacity=".5"/></svg>',
+  rum: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8v3H8z"/><path d="M9 5l-2 15h10L15 5"/><path d="M7 11h10"/></svg>',
+  tequila: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l-1 16H8L7 4z"/><path d="M10 2h4v2h-4z"/><path d="M8 10h8" opacity=".5"/></svg>',
+  vodka: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4v4l2 4v10a2 2 0 01-2 2h-4a2 2 0 01-2-2V10l2-4V2z"/><path d="M10 2h4"/></svg>',
+  brandy: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 7a3.5 3.5 0 01-3 3.5A3.5 3.5 0 019 9L8 2z"/><path d="M12 12.5v7"/><path d="M8 22h8"/></svg>',
+};
+const FAMILY_SVG = {
+  liqueur: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6v3l2 5v10a2 2 0 01-2 2H9a2 2 0 01-2-2V10l2-5V2z"/><path d="M9 2h6"/><path d="M8 14h8"/></svg>',
+  vermouth: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 7a3.5 3.5 0 01-3 3.5A3.5 3.5 0 019 9L8 2z"/><path d="M12 12.5v7"/><path d="M8 22h8"/></svg>',
+  bitters: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4v4h-4z"/><path d="M9 6h6l1 14H8L9 6z"/><path d="M10 10h4"/></svg>',
+  mixer: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2h10l-1 20H8L7 2z"/><path d="M7 2h10"/><path d="M9 9h6" opacity=".5"/></svg>',
+  juice: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8v4H8z"/><path d="M7 6h10v14a2 2 0 01-2 2H9a2 2 0 01-2-2V6z"/><path d="M10 10h4"/></svg>',
+  syrup: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4v3h-4z"/><path d="M8 5h8l-1 15H9L8 5z"/><path d="M9 11h6" opacity=".5"/></svg>',
+  fresh: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4 0 7 3 7 7 0 5-4 9-7 9s-7-4-7-9c0-4 3-7 7-7z"/><path d="M12 3c0 3 2 5 5 5"/><path d="M9 11c1 1 3 1 4 0" opacity=".5"/></svg>',
+  garnish: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c3-6 6-10 14-12"/><path d="M10 14c2 1 3 2 4 4"/><path d="M4 20h16"/></svg>',
+  pantry: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6"/><path d="M9 11h6"/><path d="M9 15h6"/></svg>',
+  other: '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><circle cx="12" cy="16" r=".5" fill="currentColor"/></svg>',
+};
 
 // ===== Render: Guide =====
 function renderGuide() {
   const panel = document.getElementById('guide-panel');
   if (panel.innerHTML) return; // Already rendered (static content)
 
-  const { techniques, tools } = state.toolGuides;
+  const {
+    techniques = [],
+    tools = [],
+    base_spirits: baseSpirits = [],
+    ingredient_families: ingredientFamilies = [],
+  } = state.toolGuides;
   const chevron = '<svg class="guide-card-chevron" width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path d="M6.293 7.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"/></svg>';
 
   let html = '<div class="guide-section-label">テクニック</div>';
@@ -697,6 +722,92 @@ function renderGuide() {
 
         <h4>代表的なカクテル</h4>
         <div class="guide-cocktail-tags">${tech.example_cocktails.map(c => `<span>${c}</span>`).join('')}</div>
+      </div>
+    </div>`;
+  }
+
+  if (baseSpirits.length > 0) {
+    html += '<div class="guide-section-label">ベーススピリッツ</div>';
+  }
+
+  for (const spirit of baseSpirits) {
+    const spiritSvg = SPIRIT_SVG[spirit.id] || DEFAULT_GLASS_SVG;
+    html += `
+    <div class="guide-card" data-guide-id="${spirit.id}">
+      <div class="guide-card-header">
+        <div class="guide-card-icon technique">${spiritSvg}</div>
+        <div class="guide-card-text">
+          <div class="guide-card-name">${spirit.name.ja}</div>
+          <div class="guide-card-name-en">${spirit.name.en}</div>
+        </div>
+        ${chevron}
+      </div>
+      <div class="guide-card-body">
+        <p>${spirit.overview}</p>
+
+        <h4>味の傾向</h4>
+        <ul class="guide-tips">${spirit.flavor_profile.map(v => `<li>${v}</li>`).join('')}</ul>
+
+        <h4>選び方</h4>
+        <ul class="guide-tips">${spirit.how_to_choose.map(v => `<li>${v}</li>`).join('')}</ul>
+
+        <h4>使い方のコツ</h4>
+        <ul class="guide-tips">${spirit.how_to_use.map(v => `<li>${v}</li>`).join('')}</ul>
+
+        <div class="guide-info-box">
+          <div class="guide-info-label">保存</div>
+          ${spirit.storage}
+        </div>
+        <div class="guide-info-box">
+          <div class="guide-info-label">最初の1本の考え方</div>
+          ${spirit.beginner_recommendation}
+        </div>
+
+        <h4>代表的なカクテル</h4>
+        <div class="guide-cocktail-tags">${spirit.representative_cocktails.map(c => `<span>${c}</span>`).join('')}</div>
+      </div>
+    </div>`;
+  }
+
+  if (ingredientFamilies.length > 0) {
+    html += '<div class="guide-section-label">素材カテゴリ</div>';
+  }
+
+  for (const family of ingredientFamilies) {
+    const familySvg = FAMILY_SVG[family.id] || DEFAULT_GLASS_SVG;
+    html += `
+    <div class="guide-card" data-guide-id="${family.id}">
+      <div class="guide-card-header">
+        <div class="guide-card-icon technique">${familySvg}</div>
+        <div class="guide-card-text">
+          <div class="guide-card-name">${family.name.ja}</div>
+          <div class="guide-card-name-en">${family.name.en}</div>
+        </div>
+        ${chevron}
+      </div>
+      <div class="guide-card-body">
+        <p>${family.overview}</p>
+
+        <h4>味の傾向</h4>
+        <ul class="guide-tips">${family.flavor_profile.map(v => `<li>${v}</li>`).join('')}</ul>
+
+        <h4>選び方</h4>
+        <ul class="guide-tips">${family.how_to_choose.map(v => `<li>${v}</li>`).join('')}</ul>
+
+        <h4>使い方のコツ</h4>
+        <ul class="guide-tips">${family.how_to_use.map(v => `<li>${v}</li>`).join('')}</ul>
+
+        <div class="guide-info-box">
+          <div class="guide-info-label">保存</div>
+          ${family.storage}
+        </div>
+        <div class="guide-info-box">
+          <div class="guide-info-label">最初の1本の考え方</div>
+          ${family.beginner_recommendation}
+        </div>
+
+        <h4>代表的なカクテル</h4>
+        <div class="guide-cocktail-tags">${family.representative_cocktails.map(c => `<span>${c}</span>`).join('')}</div>
       </div>
     </div>`;
   }
