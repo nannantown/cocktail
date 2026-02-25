@@ -763,30 +763,32 @@ body {
   #tab-mybar .tab-body {
     display: grid;
     grid-template-columns: minmax(320px, 380px) minmax(0, 1fr);
-    grid-template-areas:
-      "search inventory"
-      "stats inventory";
     column-gap: var(--space-xl);
-    row-gap: var(--space-lg);
     align-items: start;
   }
 
-  #tab-mybar .search-box {
-    grid-area: search;
+  #tab-mybar .mybar-sidebar {
+    position: sticky;
+    top: 124px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  #tab-mybar .mybar-sidebar .search-box {
     margin-bottom: 0;
   }
 
-  #tab-mybar .mybar-stats {
-    grid-area: stats;
+  #tab-mybar .mybar-sidebar .mybar-stats {
     margin-bottom: 0;
   }
 
   #tab-mybar #inventory-panel {
-    grid-area: inventory;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-sm);
     align-items: start;
+    align-content: start;
   }
 
   #tab-mybar .inv-section {

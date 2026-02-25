@@ -16,21 +16,23 @@
       <p class="tab-header-sub">持っているお酒にチェック</p>
     </header>
     <div class="tab-body">
-      <div class="search-box">
-        <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <input id="search-inventory" type="text" class="search-input" placeholder="ボトルを検索...">
-        <button id="search-inventory-clear" class="search-clear hidden" type="button">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
-        </button>
-      </div>
-      <div class="mybar-stats">
-        <div class="mybar-stat">
-          <span class="mybar-stat-num" id="stat-bottles">0</span>
-          <span class="mybar-stat-label">ボトル</span>
+      <div class="mybar-sidebar">
+        <div class="search-box">
+          <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input id="search-inventory" type="text" class="search-input" placeholder="ボトルを検索...">
+          <button id="search-inventory-clear" class="search-clear hidden" type="button">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
         </div>
-        <div class="mybar-stat">
-          <span class="mybar-stat-num" id="stat-unlocked">0</span>
-          <span class="mybar-stat-label">作れる杯</span>
+        <div class="mybar-stats">
+          <div class="mybar-stat">
+            <span class="mybar-stat-num" id="stat-bottles">0</span>
+            <span class="mybar-stat-label">ボトル</span>
+          </div>
+          <div class="mybar-stat">
+            <span class="mybar-stat-num" id="stat-unlocked">0</span>
+            <span class="mybar-stat-label">作れる杯</span>
+          </div>
         </div>
       </div>
       <div id="inventory-panel"></div>
