@@ -709,7 +709,7 @@ body {
 
   .tab-page {
     min-height: 100vh;
-    padding-left: 96px;
+    padding-left: 108px;
   }
 
   .tab-header {
@@ -725,7 +725,7 @@ body {
   .tab-body {
     max-width: min(1240px, calc(100vw - 136px));
     margin: 0 auto;
-    padding: 28px 38px 48px;
+    padding: 32px 44px 56px;
   }
 
   .tab-bar {
@@ -733,21 +733,21 @@ body {
     bottom: 0;
     right: auto;
     left: 0;
-    width: 96px;
+    width: 88px;
     height: 100vh;
     border-top: none;
     border-right: 1px solid var(--border-subtle);
     background: rgba(17, 17, 17, 0.92);
     backdrop-filter: blur(10px);
     flex-direction: column;
-    justify-content: center;
-    gap: 14px;
-    padding: 16px 10px;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 28px 10px 20px;
   }
 
   .tab-bar-btn {
     gap: 6px;
-    padding: 10px 4px;
+    padding: 12px 4px;
     border-radius: var(--radius-md);
   }
 
@@ -763,7 +763,7 @@ body {
   #tab-mybar .tab-body {
     display: grid;
     grid-template-columns: minmax(320px, 380px) minmax(0, 1fr);
-    column-gap: var(--space-xl);
+    column-gap: calc(var(--space-xl) + var(--space-xs));
     align-items: start;
   }
 
@@ -786,7 +786,7 @@ body {
   #tab-mybar #inventory-panel {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-sm);
+    gap: var(--space-md);
     align-items: start;
     align-content: start;
   }
