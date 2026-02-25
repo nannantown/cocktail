@@ -508,7 +508,8 @@ body {
 .gradient-standard { background: linear-gradient(135deg, #14120a 0%, #221e10 100%); }
 .gradient-shot     { background: linear-gradient(135deg, #180a0a 0%, #281010 100%); }
 .gradient-hot      { background: linear-gradient(135deg, #18100a 0%, #281808 100%); }
-.gradient-non-alcohol { background: linear-gradient(135deg, #0a180f 0%, #10281a 100%); }
+.gradient-non-alcohol,
+.gradient-mocktail { background: linear-gradient(135deg, #0a180f 0%, #10281a 100%); }
 
 /* ===== 15. Animations ===== */
 @keyframes unlockPulse {

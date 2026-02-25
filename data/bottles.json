@@ -1,381 +1,583 @@
 [
   {
     "id": "dry-gin",
-    "name": { "ja": "ドライジン", "en": "Dry Gin" },
+    "name": {
+      "ja": "ドライジン",
+      "en": "Dry Gin"
+    },
     "type": "spirit",
     "storage": "room_temp",
     "shelf_life": "無期限（開封後も劣化しにくい）",
     "priority": "essential",
     "price_range": "¥1,500〜¥4,000",
     "home_bar_note": "最も多くのカクテルに使われるスピリッツ。まず1本揃えたい",
-    "recommended_brands": ["ビーフィーター", "タンカレー", "ボンベイサファイア"]
+    "recommended_brands": [
+      "ビーフィーター",
+      "タンカレー",
+      "ボンベイサファイア"
+    ]
   },
   {
     "id": "vodka",
-    "name": { "ja": "ウォッカ", "en": "Vodka" },
+    "name": {
+      "ja": "ウォッカ",
+      "en": "Vodka"
+    },
     "type": "spirit",
     "storage": "room_temp",
     "shelf_life": "無期限",
     "priority": "essential",
     "price_range": "¥1,000〜¥3,000",
     "home_bar_note": "クセがなくどんな材料とも合わせやすい万能スピリッツ",
-    "recommended_brands": ["スミノフ", "アブソルート", "グレイグース"]
+    "recommended_brands": [
+      "スミノフ",
+      "アブソルート",
+      "グレイグース"
+    ]
   },
   {
     "id": "citrus-vodka",
-    "name": { "ja": "シトラスウォッカ", "en": "Citrus Vodka" },
+    "name": {
+      "ja": "シトラスウォッカ",
+      "en": "Citrus Vodka"
+    },
     "type": "spirit",
     "storage": "room_temp",
     "shelf_life": "無期限",
     "priority": "optional",
     "price_range": "¥1,500〜¥3,000",
     "home_bar_note": "コスモポリタン用。普通のウォッカ＋レモンピールで代用可",
-    "recommended_brands": ["アブソルート シトロン", "ケテルワン シトロエン"]
+    "recommended_brands": [
+      "アブソルート シトロン",
+      "ケテルワン シトロエン"
+    ]
   },
   {
     "id": "white-rum",
-    "name": { "ja": "ホワイトラム", "en": "White Rum" },
+    "name": {
+      "ja": "ホワイトラム",
+      "en": "White Rum"
+    },
     "type": "spirit",
     "storage": "room_temp",
     "shelf_life": "無期限",
     "priority": "essential",
     "price_range": "¥1,000〜¥2,500",
     "home_bar_note": "ダイキリ、モヒート、ピニャコラーダなどラム系カクテルの基本",
-    "recommended_brands": ["バカルディ スペリオール", "ハバナクラブ 3年"]
+    "recommended_brands": [
+      "バカルディ スペリオール",
+      "ハバナクラブ 3年"
+    ]
   },
   {
     "id": "dark-rum",
-    "name": { "ja": "ダークラム", "en": "Dark Rum" },
+    "name": {
+      "ja": "ダークラム",
+      "en": "Dark Rum"
+    },
     "type": "spirit",
     "storage": "room_temp",
     "shelf_life": "無期限",
     "priority": "recommended",
     "price_range": "¥1,500〜¥3,000",
     "home_bar_note": "マイタイのフロート用。深い風味を加えるアクセントに",
-    "recommended_brands": ["マイヤーズ", "ゴスリング ブラックシール"]
+    "recommended_brands": [
+      "マイヤーズ",
+      "ゴスリング ブラックシール"
+    ]
   },
   {
     "id": "tequila",
-    "name": { "ja": "テキーラ", "en": "Tequila" },
+    "name": {
+      "ja": "テキーラ",
+      "en": "Tequila"
+    },
     "type": "spirit",
     "storage": "room_temp",
     "shelf_life": "無期限",
     "priority": "recommended",
     "price_range": "¥2,000〜¥4,000",
     "home_bar_note": "マルガリータに必須。ブランコ（シルバー）がカクテル向き",
-    "recommended_brands": ["クエルボ エスペシャル", "サウザ シルバー", "エスポロン"]
+    "recommended_brands": [
+      "クエルボ エスペシャル",
+      "サウザ シルバー",
+      "エスポロン"
+    ]
   },
   {
     "id": "bourbon",
-    "name": { "ja": "バーボンウイスキー", "en": "Bourbon Whiskey" },
+    "name": {
+      "ja": "バーボンウイスキー",
+      "en": "Bourbon Whiskey"
+    },
     "type": "spirit",
     "storage": "room_temp",
     "shelf_life": "無期限（開封後1〜2年が目安）",
     "priority": "essential",
     "price_range": "¥2,000〜¥4,000",
     "home_bar_note": "オールドファッションド、ウイスキーサワーなどに。甘みとコクが特徴",
-    "recommended_brands": ["メーカーズマーク", "ワイルドターキー", "バッファロートレース"]
+    "recommended_brands": [
+      "メーカーズマーク",
+      "ワイルドターキー",
+      "バッファロートレース"
+    ]
   },
   {
     "id": "rye-whiskey",
-    "name": { "ja": "ライウイスキー", "en": "Rye Whiskey" },
+    "name": {
+      "ja": "ライウイスキー",
+      "en": "Rye Whiskey"
+    },
     "type": "spirit",
     "storage": "room_temp",
     "shelf_life": "無期限（開封後1〜2年が目安）",
     "priority": "optional",
     "price_range": "¥3,000〜¥5,000",
     "home_bar_note": "マンハッタン用。バーボンで代用可だが、よりドライな味わい",
-    "recommended_brands": ["リッテンハウス", "ブレット ライ", "ワイルドターキー ライ"]
+    "recommended_brands": [
+      "リッテンハウス",
+      "ブレット ライ",
+      "ワイルドターキー ライ"
+    ]
   },
   {
     "id": "irish-whiskey",
-    "name": { "ja": "アイリッシュウイスキー", "en": "Irish Whiskey" },
+    "name": {
+      "ja": "アイリッシュウイスキー",
+      "en": "Irish Whiskey"
+    },
     "type": "spirit",
     "storage": "room_temp",
     "shelf_life": "無期限（開封後1〜2年が目安）",
     "priority": "optional",
     "price_range": "¥2,000〜¥4,000",
     "home_bar_note": "アイリッシュコーヒー用。滑らかな味わいが特徴",
-    "recommended_brands": ["ジェムソン", "ブッシュミルズ"]
+    "recommended_brands": [
+      "ジェムソン",
+      "ブッシュミルズ"
+    ]
   },
   {
     "id": "brandy",
-    "name": { "ja": "ブランデー", "en": "Brandy" },
+    "name": {
+      "ja": "ブランデー",
+      "en": "Brandy"
+    },
     "type": "spirit",
     "storage": "room_temp",
     "shelf_life": "無期限",
     "priority": "optional",
     "price_range": "¥2,000〜¥5,000",
     "home_bar_note": "サイドカー用。VS〜VSOPクラスでカクテルには十分",
-    "recommended_brands": ["レミーマルタン VSOP", "ヘネシー VS"]
+    "recommended_brands": [
+      "レミーマルタン VSOP",
+      "ヘネシー VS"
+    ]
   },
   {
     "id": "cointreau",
-    "name": { "ja": "コアントロー", "en": "Cointreau" },
+    "name": {
+      "ja": "コアントロー",
+      "en": "Cointreau"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "essential",
     "price_range": "¥2,000〜¥3,500",
     "home_bar_note": "マルガリータ、コスモポリタン、サイドカーなど用途が広い最重要リキュール",
-    "recommended_brands": ["コアントロー"]
+    "recommended_brands": [
+      "コアントロー"
+    ]
   },
   {
     "id": "campari",
-    "name": { "ja": "カンパリ", "en": "Campari" },
+    "name": {
+      "ja": "カンパリ",
+      "en": "Campari"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "recommended",
     "price_range": "¥1,500〜¥2,500",
     "home_bar_note": "ネグローニに必須。独特の苦味が大人の味わい",
-    "recommended_brands": ["カンパリ"]
+    "recommended_brands": [
+      "カンパリ"
+    ]
   },
   {
     "id": "kahlua",
-    "name": { "ja": "コーヒーリキュール（カルーア）", "en": "Kahlúa" },
+    "name": {
+      "ja": "コーヒーリキュール（カルーア）",
+      "en": "Kahlúa"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約4年",
     "priority": "recommended",
     "price_range": "¥1,500〜¥2,500",
     "home_bar_note": "エスプレッソマティーニ、B-52に使用。カルーアミルクにも",
-    "recommended_brands": ["カルーア"]
+    "recommended_brands": [
+      "カルーア"
+    ]
   },
   {
     "id": "baileys",
-    "name": { "ja": "ベイリーズ", "en": "Baileys" },
+    "name": {
+      "ja": "ベイリーズ",
+      "en": "Baileys"
+    },
     "type": "liqueur",
     "storage": "refrigerate",
     "shelf_life": "開封後約6ヶ月",
     "priority": "optional",
     "price_range": "¥1,500〜¥2,500",
     "home_bar_note": "B-52用。開封後は冷蔵保存が必要なので注意",
-    "recommended_brands": ["ベイリーズ オリジナル"]
+    "recommended_brands": [
+      "ベイリーズ オリジナル"
+    ]
   },
   {
     "id": "grand-marnier",
-    "name": { "ja": "グランマルニエ", "en": "Grand Marnier" },
+    "name": {
+      "ja": "グランマルニエ",
+      "en": "Grand Marnier"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥2,500〜¥4,000",
     "home_bar_note": "B-52用。コアントローで代用可能な場合も多い",
-    "recommended_brands": ["グランマルニエ コルドンルージュ"]
+    "recommended_brands": [
+      "グランマルニエ コルドンルージュ"
+    ]
   },
   {
     "id": "orange-curacao",
-    "name": { "ja": "オレンジキュラソー", "en": "Orange Curaçao" },
+    "name": {
+      "ja": "オレンジキュラソー",
+      "en": "Orange Curaçao"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥1,000〜¥2,000",
     "home_bar_note": "マイタイ用。コアントローで代用可",
-    "recommended_brands": ["ボルス オレンジキュラソー"]
+    "recommended_brands": [
+      "ボルス オレンジキュラソー"
+    ]
   },
   {
     "id": "aperol",
-    "name": { "ja": "アペロール", "en": "Aperol" },
+    "name": {
+      "ja": "アペロール",
+      "en": "Aperol"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥1,800〜¥2,800",
     "home_bar_note": "スプリッツ専用。カンパリより甘く軽い味わい",
-    "recommended_brands": ["アペロール"]
+    "recommended_brands": [
+      "アペロール"
+    ]
   },
   {
     "id": "dry-vermouth",
-    "name": { "ja": "ドライベルモット", "en": "Dry Vermouth" },
+    "name": {
+      "ja": "ドライベルモット",
+      "en": "Dry Vermouth"
+    },
     "type": "vermouth",
     "storage": "refrigerate",
     "shelf_life": "開封後1〜3ヶ月（要冷蔵）",
     "priority": "essential",
     "price_range": "¥1,000〜¥2,000",
     "home_bar_note": "マティーニに必須。開封後は冷蔵庫で保管すること",
-    "recommended_brands": ["ノイリープラット ドライ", "ドラン ドライ"]
+    "recommended_brands": [
+      "ノイリープラット ドライ",
+      "ドラン ドライ"
+    ]
   },
   {
     "id": "sweet-vermouth",
-    "name": { "ja": "スイートベルモット", "en": "Sweet Vermouth" },
+    "name": {
+      "ja": "スイートベルモット",
+      "en": "Sweet Vermouth"
+    },
     "type": "vermouth",
     "storage": "refrigerate",
     "shelf_life": "開封後1〜3ヶ月（要冷蔵）",
     "priority": "recommended",
     "price_range": "¥1,000〜¥2,000",
     "home_bar_note": "マンハッタン、ネグローニに使用。開封後は冷蔵庫で保管",
-    "recommended_brands": ["カルパノ アンティカフォーミュラ", "チンザノ ロッソ"]
+    "recommended_brands": [
+      "カルパノ アンティカフォーミュラ",
+      "チンザノ ロッソ"
+    ]
   },
   {
     "id": "angostura-bitters",
-    "name": { "ja": "アンゴスチュラビターズ", "en": "Angostura Bitters" },
+    "name": {
+      "ja": "アンゴスチュラビターズ",
+      "en": "Angostura Bitters"
+    },
     "type": "bitters",
     "storage": "room_temp",
     "shelf_life": "実質無期限（数滴ずつ使うので長持ち）",
     "priority": "essential",
     "price_range": "¥800〜¥1,500",
     "home_bar_note": "数滴で味に深みを加える魔法の調味料。1本あれば数年持つ",
-    "recommended_brands": ["アンゴスチュラ"]
+    "recommended_brands": [
+      "アンゴスチュラ"
+    ]
   },
   {
     "id": "tonic-water",
-    "name": { "ja": "トニックウォーター", "en": "Tonic Water" },
+    "name": {
+      "ja": "トニックウォーター",
+      "en": "Tonic Water"
+    },
     "type": "mixer",
     "storage": "room_temp",
     "shelf_life": "開封後は当日中に使い切る",
     "priority": "essential",
     "price_range": "¥150〜¥300（1本）",
     "home_bar_note": "ジントニックの必需品。200mlの小瓶がおすすめ（残さず使い切れる）",
-    "recommended_brands": ["ウィルキンソン", "フィーバーツリー", "シュウェップス"]
+    "recommended_brands": [
+      "ウィルキンソン",
+      "フィーバーツリー",
+      "シュウェップス"
+    ]
   },
   {
     "id": "soda-water",
-    "name": { "ja": "炭酸水（ソーダ）", "en": "Soda Water" },
+    "name": {
+      "ja": "炭酸水（ソーダ）",
+      "en": "Soda Water"
+    },
     "type": "mixer",
     "storage": "room_temp",
     "shelf_life": "開封後は当日中に使い切る",
     "priority": "essential",
     "price_range": "¥100〜¥200（1本）",
     "home_bar_note": "モヒート、スプリッツ等に。炭酸メーカーがあると便利",
-    "recommended_brands": ["ウィルキンソン タンサン", "ペリエ"]
+    "recommended_brands": [
+      "ウィルキンソン タンサン",
+      "ペリエ"
+    ]
   },
   {
     "id": "ginger-beer",
-    "name": { "ja": "ジンジャービア", "en": "Ginger Beer" },
+    "name": {
+      "ja": "ジンジャービア",
+      "en": "Ginger Beer"
+    },
     "type": "mixer",
     "storage": "room_temp",
     "shelf_life": "開封後は当日中に使い切る",
     "priority": "recommended",
     "price_range": "¥200〜¥400（1本）",
     "home_bar_note": "モスコミュール用。ジンジャーエールより辛口で炭酸が強い",
-    "recommended_brands": ["フィーバーツリー", "バンドバーグ"]
+    "recommended_brands": [
+      "フィーバーツリー",
+      "バンドバーグ"
+    ]
   },
   {
     "id": "ginger-ale",
-    "name": { "ja": "ジンジャーエール", "en": "Ginger Ale" },
+    "name": {
+      "ja": "ジンジャーエール",
+      "en": "Ginger Ale"
+    },
     "type": "mixer",
     "storage": "room_temp",
     "shelf_life": "開封後は当日中に使い切る",
     "priority": "recommended",
     "price_range": "¥100〜¥200（1本）",
     "home_bar_note": "シャーリーテンプル用。他のカクテルにも幅広く使える",
-    "recommended_brands": ["ウィルキンソン", "カナダドライ"]
+    "recommended_brands": [
+      "ウィルキンソン",
+      "カナダドライ"
+    ]
   },
   {
     "id": "prosecco",
-    "name": { "ja": "プロセッコ", "en": "Prosecco" },
+    "name": {
+      "ja": "プロセッコ",
+      "en": "Prosecco"
+    },
     "type": "mixer",
     "storage": "refrigerate",
     "shelf_life": "開封後は当日中に使い切る",
     "priority": "optional",
     "price_range": "¥1,000〜¥2,000",
     "home_bar_note": "スプリッツ用。開封後はすぐ炭酸が抜けるので注意",
-    "recommended_brands": ["ミオネット", "ゾーニン"]
+    "recommended_brands": [
+      "ミオネット",
+      "ゾーニン"
+    ]
   },
   {
     "id": "lime-juice",
-    "name": { "ja": "ライムジュース", "en": "Lime Juice" },
+    "name": {
+      "ja": "ライムジュース",
+      "en": "Lime Juice"
+    },
     "type": "juice",
     "storage": "refrigerate",
     "shelf_life": "生搾り：当日中／瓶入り：開封後1〜2週間",
     "priority": "essential",
     "price_range": "¥300〜¥600（ライム3〜4個分）",
     "home_bar_note": "最も使用頻度の高い柑橘。生ライムを搾るのが一番だが、瓶入りでも可",
-    "recommended_brands": ["生ライム推奨", "ポッカ ライム100%"]
+    "recommended_brands": [
+      "生ライム推奨",
+      "ポッカ ライム100%"
+    ]
   },
   {
     "id": "lemon-juice",
-    "name": { "ja": "レモンジュース", "en": "Lemon Juice" },
+    "name": {
+      "ja": "レモンジュース",
+      "en": "Lemon Juice"
+    },
     "type": "juice",
     "storage": "refrigerate",
     "shelf_life": "生搾り：当日中／瓶入り：開封後1〜2週間",
     "priority": "essential",
     "price_range": "¥200〜¥400（レモン2〜3個分）",
     "home_bar_note": "サイドカー、ウイスキーサワーなどに。生レモン推奨",
-    "recommended_brands": ["生レモン推奨", "ポッカ レモン100%"]
+    "recommended_brands": [
+      "生レモン推奨",
+      "ポッカ レモン100%"
+    ]
   },
   {
     "id": "cranberry-juice",
-    "name": { "ja": "クランベリージュース", "en": "Cranberry Juice" },
+    "name": {
+      "ja": "クランベリージュース",
+      "en": "Cranberry Juice"
+    },
     "type": "juice",
     "storage": "refrigerate",
     "shelf_life": "開封後1〜2週間",
     "priority": "optional",
     "price_range": "¥300〜¥600",
     "home_bar_note": "コスモポリタン用。無糖タイプがカクテルには向いている",
-    "recommended_brands": ["オーシャンスプレー"]
+    "recommended_brands": [
+      "オーシャンスプレー"
+    ]
   },
   {
     "id": "pineapple-juice",
-    "name": { "ja": "パイナップルジュース", "en": "Pineapple Juice" },
+    "name": {
+      "ja": "パイナップルジュース",
+      "en": "Pineapple Juice"
+    },
     "type": "juice",
     "storage": "refrigerate",
     "shelf_life": "開封後3〜5日",
     "priority": "optional",
     "price_range": "¥200〜¥400",
     "home_bar_note": "ピニャコラーダ用。100%果汁を使うこと",
-    "recommended_brands": ["デルモンテ", "ドール"]
+    "recommended_brands": [
+      "デルモンテ",
+      "ドール"
+    ]
   },
   {
     "id": "sugar-syrup",
-    "name": { "ja": "シュガーシロップ", "en": "Simple Syrup" },
+    "name": {
+      "ja": "シュガーシロップ",
+      "en": "Simple Syrup"
+    },
     "type": "syrup",
     "storage": "refrigerate",
     "shelf_life": "自家製：冷蔵で約1ヶ月",
     "priority": "essential",
     "price_range": "¥0〜¥500",
     "home_bar_note": "砂糖と水を1:1で煮溶かせば自家製できる。最も汎用性の高いシロップ",
-    "recommended_brands": ["自家製推奨", "モナン ピュアケーンシロップ"]
+    "recommended_brands": [
+      "自家製推奨",
+      "モナン ピュアケーンシロップ"
+    ]
   },
   {
     "id": "grenadine",
-    "name": { "ja": "グレナデンシロップ", "en": "Grenadine Syrup" },
+    "name": {
+      "ja": "グレナデンシロップ",
+      "en": "Grenadine Syrup"
+    },
     "type": "syrup",
     "storage": "refrigerate",
     "shelf_life": "開封後約6ヶ月",
     "priority": "recommended",
     "price_range": "¥500〜¥1,000",
     "home_bar_note": "シャーリーテンプルなどに。赤い色と甘みを加える",
-    "recommended_brands": ["モナン グレナディン"]
+    "recommended_brands": [
+      "モナン グレナディン"
+    ]
   },
   {
     "id": "orgeat",
-    "name": { "ja": "オルゲートシロップ", "en": "Orgeat Syrup" },
+    "name": {
+      "ja": "オルゲートシロップ",
+      "en": "Orgeat Syrup"
+    },
     "type": "syrup",
     "storage": "refrigerate",
     "shelf_life": "開封後約6ヶ月",
     "priority": "optional",
     "price_range": "¥800〜¥1,500",
     "home_bar_note": "マイタイ専用と言っても良い。アーモンド風味のシロップ",
-    "recommended_brands": ["モナン オルゲート", "スモールハンドフーズ"]
+    "recommended_brands": [
+      "モナン オルゲート",
+      "スモールハンドフーズ"
+    ]
   },
   {
     "id": "coconut-milk",
-    "name": { "ja": "ココナッツミルク", "en": "Coconut Milk" },
+    "name": {
+      "ja": "ココナッツミルク",
+      "en": "Coconut Milk"
+    },
     "type": "other",
     "storage": "room_temp",
     "shelf_life": "缶未開封：長期保存可／開封後：冷蔵3〜5日",
     "priority": "optional",
     "price_range": "¥200〜¥400",
     "home_bar_note": "ピニャコラーダ用。ココナッツクリームでもOK",
-    "recommended_brands": ["チャオコー", "ユウキ食品"]
+    "recommended_brands": [
+      "チャオコー",
+      "ユウキ食品"
+    ]
   },
   {
     "id": "heavy-cream",
-    "name": { "ja": "生クリーム", "en": "Heavy Cream" },
+    "name": {
+      "ja": "生クリーム",
+      "en": "Heavy Cream"
+    },
     "type": "other",
     "storage": "refrigerate",
     "shelf_life": "開封後3〜5日",
     "priority": "optional",
     "price_range": "¥200〜¥400",
     "home_bar_note": "アイリッシュコーヒーのフロート用。軽くホイップして使う",
-    "recommended_brands": ["タカナシ 純生クリーム"]
+    "recommended_brands": [
+      "タカナシ 純生クリーム"
+    ]
   },
   {
     "id": "egg",
-    "name": { "ja": "卵（卵白）", "en": "Egg White" },
+    "name": {
+      "ja": "卵（卵白）",
+      "en": "Egg White"
+    },
     "type": "fresh",
     "storage": "refrigerate",
     "shelf_life": "購入後1〜2週間",
@@ -386,7 +588,10 @@
   },
   {
     "id": "sugar-cube",
-    "name": { "ja": "角砂糖", "en": "Sugar Cube" },
+    "name": {
+      "ja": "角砂糖",
+      "en": "Sugar Cube"
+    },
     "type": "pantry",
     "storage": "room_temp",
     "shelf_life": "無期限",
@@ -397,7 +602,10 @@
   },
   {
     "id": "brown-sugar",
-    "name": { "ja": "ブラウンシュガー", "en": "Brown Sugar" },
+    "name": {
+      "ja": "ブラウンシュガー",
+      "en": "Brown Sugar"
+    },
     "type": "pantry",
     "storage": "room_temp",
     "shelf_life": "無期限",
@@ -408,7 +616,10 @@
   },
   {
     "id": "salt",
-    "name": { "ja": "塩", "en": "Salt" },
+    "name": {
+      "ja": "塩",
+      "en": "Salt"
+    },
     "type": "pantry",
     "storage": "room_temp",
     "shelf_life": "無期限",
@@ -419,7 +630,10 @@
   },
   {
     "id": "coffee",
-    "name": { "ja": "コーヒー／エスプレッソ", "en": "Coffee / Espresso" },
+    "name": {
+      "ja": "コーヒー／エスプレッソ",
+      "en": "Coffee / Espresso"
+    },
     "type": "other",
     "storage": "room_temp",
     "shelf_life": "豆：焙煎後1ヶ月",
@@ -430,7 +644,10 @@
   },
   {
     "id": "mint",
-    "name": { "ja": "ミント（フレッシュ）", "en": "Fresh Mint" },
+    "name": {
+      "ja": "ミント（フレッシュ）",
+      "en": "Fresh Mint"
+    },
     "type": "fresh",
     "storage": "refrigerate",
     "shelf_life": "3〜5日（水に挿すと長持ち）",
@@ -441,7 +658,10 @@
   },
   {
     "id": "lime",
-    "name": { "ja": "ライム（生）", "en": "Fresh Lime" },
+    "name": {
+      "ja": "ライム（生）",
+      "en": "Fresh Lime"
+    },
     "type": "fresh",
     "storage": "refrigerate",
     "shelf_life": "1〜2週間",
@@ -452,7 +672,10 @@
   },
   {
     "id": "lemon",
-    "name": { "ja": "レモン（生）", "en": "Fresh Lemon" },
+    "name": {
+      "ja": "レモン（生）",
+      "en": "Fresh Lemon"
+    },
     "type": "fresh",
     "storage": "refrigerate",
     "shelf_life": "1〜2週間",
@@ -463,7 +686,10 @@
   },
   {
     "id": "orange",
-    "name": { "ja": "オレンジ（生）", "en": "Fresh Orange" },
+    "name": {
+      "ja": "オレンジ（生）",
+      "en": "Fresh Orange"
+    },
     "type": "fresh",
     "storage": "refrigerate",
     "shelf_life": "1〜2週間",
@@ -474,7 +700,10 @@
   },
   {
     "id": "olive",
-    "name": { "ja": "オリーブ", "en": "Cocktail Olives" },
+    "name": {
+      "ja": "オリーブ",
+      "en": "Cocktail Olives"
+    },
     "type": "garnish",
     "storage": "refrigerate",
     "shelf_life": "開封後1〜2ヶ月",
@@ -485,18 +714,26 @@
   },
   {
     "id": "maraschino-cherry",
-    "name": { "ja": "マラスキーノチェリー", "en": "Maraschino Cherry" },
+    "name": {
+      "ja": "マラスキーノチェリー",
+      "en": "Maraschino Cherry"
+    },
     "type": "garnish",
     "storage": "refrigerate",
     "shelf_life": "開封後数ヶ月",
     "priority": "recommended",
     "price_range": "¥500〜¥1,000",
     "home_bar_note": "マンハッタン、オールドファッションドなどの飾りに",
-    "recommended_brands": ["ルクサルド"]
+    "recommended_brands": [
+      "ルクサルド"
+    ]
   },
   {
     "id": "coffee-beans",
-    "name": { "ja": "コーヒー豆（飾り用）", "en": "Coffee Beans (Garnish)" },
+    "name": {
+      "ja": "コーヒー豆（飾り用）",
+      "en": "Coffee Beans (Garnish)"
+    },
     "type": "garnish",
     "storage": "room_temp",
     "shelf_life": "焙煎後1ヶ月",
@@ -507,7 +744,10 @@
   },
   {
     "id": "pineapple",
-    "name": { "ja": "パイナップル（生）", "en": "Fresh Pineapple" },
+    "name": {
+      "ja": "パイナップル（生）",
+      "en": "Fresh Pineapple"
+    },
     "type": "fresh",
     "storage": "refrigerate",
     "shelf_life": "カット後2〜3日",
@@ -518,128 +758,193 @@
   },
   {
     "id": "scotch",
-    "name": { "ja": "スコッチウイスキー", "en": "Scotch Whisky" },
+    "name": {
+      "ja": "スコッチウイスキー",
+      "en": "Scotch Whisky"
+    },
     "type": "spirit",
     "storage": "room_temp",
     "shelf_life": "無期限（開封後1〜2年が目安）",
     "priority": "optional",
     "price_range": "¥2,000〜¥5,000",
     "home_bar_note": "ロブロイ、ゴッドファーザーに使用。ブレンデッドがカクテル向き",
-    "recommended_brands": ["ジョニーウォーカー ブラック", "デュワーズ", "フェイマスグラウス"]
+    "recommended_brands": [
+      "ジョニーウォーカー ブラック",
+      "デュワーズ",
+      "フェイマスグラウス"
+    ]
   },
   {
     "id": "amaretto",
-    "name": { "ja": "アマレット", "en": "Amaretto" },
+    "name": {
+      "ja": "アマレット",
+      "en": "Amaretto"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥1,500〜¥2,500",
     "home_bar_note": "アーモンド風味のリキュール。アマレットサワー、ゴッドファーザーに",
-    "recommended_brands": ["ディサローノ"]
+    "recommended_brands": [
+      "ディサローノ"
+    ]
   },
   {
     "id": "blue-curacao",
-    "name": { "ja": "ブルーキュラソー", "en": "Blue Curaçao" },
+    "name": {
+      "ja": "ブルーキュラソー",
+      "en": "Blue Curaçao"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥1,000〜¥2,000",
     "home_bar_note": "ブルーラグーン用。鮮やかな青色を加えるリキュール",
-    "recommended_brands": ["ボルス ブルーキュラソー"]
+    "recommended_brands": [
+      "ボルス ブルーキュラソー"
+    ]
   },
   {
     "id": "creme-de-cacao",
-    "name": { "ja": "クレームドカカオ（ホワイト）", "en": "White Crème de Cacao" },
+    "name": {
+      "ja": "クレームドカカオ（ホワイト）",
+      "en": "White Crème de Cacao"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥1,000〜¥2,000",
     "home_bar_note": "チョコレート風味のリキュール。ブランデーアレキサンダー、グラスホッパーに",
-    "recommended_brands": ["ボルス クレームドカカオ ホワイト"]
+    "recommended_brands": [
+      "ボルス クレームドカカオ ホワイト"
+    ]
   },
   {
     "id": "creme-de-menthe",
-    "name": { "ja": "クレームドミント（グリーン）", "en": "Green Crème de Menthe" },
+    "name": {
+      "ja": "クレームドミント（グリーン）",
+      "en": "Green Crème de Menthe"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥1,000〜¥2,000",
     "home_bar_note": "ミント風味のリキュール。グラスホッパーに使用",
-    "recommended_brands": ["ボルス クレームドミント グリーン"]
+    "recommended_brands": [
+      "ボルス クレームドミント グリーン"
+    ]
   },
   {
     "id": "peach-schnapps",
-    "name": { "ja": "ピーチシュナップス", "en": "Peach Schnapps" },
+    "name": {
+      "ja": "ピーチシュナップス",
+      "en": "Peach Schnapps"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥1,000〜¥2,000",
     "home_bar_note": "セックスオンザビーチなどフルーティーなカクテルに",
-    "recommended_brands": ["デカイパー ピーチツリー"]
+    "recommended_brands": [
+      "デカイパー ピーチツリー"
+    ]
   },
   {
     "id": "champagne",
-    "name": { "ja": "シャンパン／スパークリングワイン", "en": "Champagne / Sparkling Wine" },
+    "name": {
+      "ja": "シャンパン／スパークリングワイン",
+      "en": "Champagne / Sparkling Wine"
+    },
     "type": "mixer",
     "storage": "refrigerate",
     "shelf_life": "開封後は当日中に使い切る",
     "priority": "optional",
     "price_range": "¥1,500〜¥5,000",
     "home_bar_note": "フレンチ75、ミモザに使用。カヴァやスパークリングワインでも代用可",
-    "recommended_brands": ["モエ・エ・シャンドン", "ヴーヴ・クリコ", "フレシネ（カヴァ）"]
+    "recommended_brands": [
+      "モエ・エ・シャンドン",
+      "ヴーヴ・クリコ",
+      "フレシネ（カヴァ）"
+    ]
   },
   {
     "id": "cola",
-    "name": { "ja": "コーラ", "en": "Cola" },
+    "name": {
+      "ja": "コーラ",
+      "en": "Cola"
+    },
     "type": "mixer",
     "storage": "room_temp",
     "shelf_life": "開封後は当日中に使い切る",
     "priority": "recommended",
     "price_range": "¥100〜¥200（1本）",
     "home_bar_note": "キューバリブレ、ロングアイランドアイスティーなどに",
-    "recommended_brands": ["コカ・コーラ", "ペプシ"]
+    "recommended_brands": [
+      "コカ・コーラ",
+      "ペプシ"
+    ]
   },
   {
     "id": "orange-juice",
-    "name": { "ja": "オレンジジュース", "en": "Orange Juice" },
+    "name": {
+      "ja": "オレンジジュース",
+      "en": "Orange Juice"
+    },
     "type": "juice",
     "storage": "refrigerate",
     "shelf_life": "生搾り：当日中／パック：開封後3〜5日",
     "priority": "recommended",
     "price_range": "¥200〜¥400",
     "home_bar_note": "スクリュードライバー、テキーラサンライズ、ミモザなど幅広く使える",
-    "recommended_brands": ["トロピカーナ 100%", "生搾り推奨"]
+    "recommended_brands": [
+      "トロピカーナ 100%",
+      "生搾り推奨"
+    ]
   },
   {
     "id": "grapefruit-juice",
-    "name": { "ja": "グレープフルーツジュース", "en": "Grapefruit Juice" },
+    "name": {
+      "ja": "グレープフルーツジュース",
+      "en": "Grapefruit Juice"
+    },
     "type": "juice",
     "storage": "refrigerate",
     "shelf_life": "生搾り：当日中／パック：開封後3〜5日",
     "priority": "optional",
     "price_range": "¥200〜¥400",
     "home_bar_note": "パローマに使用。100%果汁がおすすめ",
-    "recommended_brands": ["トロピカーナ 100%", "生搾り推奨"]
+    "recommended_brands": [
+      "トロピカーナ 100%",
+      "生搾り推奨"
+    ]
   },
   {
     "id": "tomato-juice",
-    "name": { "ja": "トマトジュース", "en": "Tomato Juice" },
+    "name": {
+      "ja": "トマトジュース",
+      "en": "Tomato Juice"
+    },
     "type": "juice",
     "storage": "refrigerate",
     "shelf_life": "開封後3〜5日",
     "priority": "optional",
     "price_range": "¥200〜¥400",
     "home_bar_note": "ブラッディマリー用。無塩タイプがカクテルに向いている",
-    "recommended_brands": ["カゴメ トマトジュース（食塩無添加）"]
+    "recommended_brands": [
+      "カゴメ トマトジュース（食塩無添加）"
+    ]
   },
   {
     "id": "honey",
-    "name": { "ja": "はちみつ", "en": "Honey" },
+    "name": {
+      "ja": "はちみつ",
+      "en": "Honey"
+    },
     "type": "syrup",
     "storage": "room_temp",
     "shelf_life": "無期限",
@@ -650,29 +955,42 @@
   },
   {
     "id": "tabasco",
-    "name": { "ja": "タバスコ", "en": "Tabasco Sauce" },
+    "name": {
+      "ja": "タバスコ",
+      "en": "Tabasco Sauce"
+    },
     "type": "other",
     "storage": "room_temp",
     "shelf_life": "開封後約5年",
     "priority": "optional",
     "price_range": "¥300〜¥500",
     "home_bar_note": "ブラッディマリーのスパイスに。お好みで量を調整",
-    "recommended_brands": ["タバスコ オリジナル"]
+    "recommended_brands": [
+      "タバスコ オリジナル"
+    ]
   },
   {
     "id": "worcestershire-sauce",
-    "name": { "ja": "ウスターソース", "en": "Worcestershire Sauce" },
+    "name": {
+      "ja": "ウスターソース",
+      "en": "Worcestershire Sauce"
+    },
     "type": "other",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥300〜¥500",
     "home_bar_note": "ブラッディマリーの旨味づけに",
-    "recommended_brands": ["リーペリン"]
+    "recommended_brands": [
+      "リーペリン"
+    ]
   },
   {
     "id": "celery",
-    "name": { "ja": "セロリ", "en": "Celery" },
+    "name": {
+      "ja": "セロリ",
+      "en": "Celery"
+    },
     "type": "fresh",
     "storage": "refrigerate",
     "shelf_life": "1〜2週間",
@@ -683,7 +1001,10 @@
   },
   {
     "id": "nutmeg",
-    "name": { "ja": "ナツメグ", "en": "Nutmeg" },
+    "name": {
+      "ja": "ナツメグ",
+      "en": "Nutmeg"
+    },
     "type": "pantry",
     "storage": "room_temp",
     "shelf_life": "約1年",
@@ -694,156 +1015,282 @@
   },
   {
     "id": "cachaca",
-    "name": { "ja": "カシャーサ", "en": "Cachaça" },
+    "name": {
+      "ja": "カシャーサ",
+      "en": "Cachaça"
+    },
     "type": "spirit",
     "storage": "room_temp",
     "shelf_life": "無期限",
     "priority": "optional",
     "price_range": "¥1,500〜¥3,000",
     "home_bar_note": "ブラジルのサトウキビ蒸留酒。カイピリーニャ専用と言っても良い",
-    "recommended_brands": ["ピトゥー", "レブロン", "サガティバ"]
+    "recommended_brands": [
+      "ピトゥー",
+      "レブロン",
+      "サガティバ"
+    ]
   },
   {
     "id": "galliano",
-    "name": { "ja": "ガリアーノ", "en": "Galliano" },
+    "name": {
+      "ja": "ガリアーノ",
+      "en": "Galliano"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥2,000〜¥3,500",
     "home_bar_note": "バニラとハーブのリキュール。ハーヴェイウォールバンガーに必須",
-    "recommended_brands": ["ガリアーノ ラウテンティコ"]
+    "recommended_brands": [
+      "ガリアーノ ラウテンティコ"
+    ]
   },
   {
     "id": "drambuie",
-    "name": { "ja": "ドランブイ", "en": "Drambuie" },
+    "name": {
+      "ja": "ドランブイ",
+      "en": "Drambuie"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥2,500〜¥4,000",
     "home_bar_note": "スコッチベースのハニーリキュール。ラスティネイルに必須",
-    "recommended_brands": ["ドランブイ"]
+    "recommended_brands": [
+      "ドランブイ"
+    ]
   },
   {
     "id": "creme-de-cassis",
-    "name": { "ja": "クレームドカシス", "en": "Crème de Cassis" },
+    "name": {
+      "ja": "クレームドカシス",
+      "en": "Crème de Cassis"
+    },
     "type": "liqueur",
     "storage": "refrigerate",
     "shelf_life": "開封後約3ヶ月（要冷蔵）",
     "priority": "optional",
     "price_range": "¥1,000〜¥2,000",
     "home_bar_note": "カシスの甘いリキュール。キールロワイヤルに使用",
-    "recommended_brands": ["ルジェ クレームドカシス"]
+    "recommended_brands": [
+      "ルジェ クレームドカシス"
+    ]
   },
   {
     "id": "midori",
-    "name": { "ja": "ミドリ（メロンリキュール）", "en": "Midori Melon Liqueur" },
+    "name": {
+      "ja": "ミドリ（メロンリキュール）",
+      "en": "Midori Melon Liqueur"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥1,500〜¥2,500",
     "home_bar_note": "日本生まれのメロンリキュール。鮮やかな緑色が特徴",
-    "recommended_brands": ["ミドリ"]
+    "recommended_brands": [
+      "ミドリ"
+    ]
   },
   {
     "id": "creme-de-mure",
-    "name": { "ja": "クレームドミュール", "en": "Crème de Mûre" },
+    "name": {
+      "ja": "クレームドミュール",
+      "en": "Crème de Mûre"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約6ヶ月",
     "priority": "optional",
     "price_range": "¥1,500〜¥2,500",
     "home_bar_note": "ブラックベリーのリキュール。ブランブルに必須",
-    "recommended_brands": ["ルジェ クレームドミュール", "ジファール"]
+    "recommended_brands": [
+      "ルジェ クレームドミュール",
+      "ジファール"
+    ]
   },
   {
     "id": "absinthe",
-    "name": { "ja": "アブサン", "en": "Absinthe" },
+    "name": {
+      "ja": "アブサン",
+      "en": "Absinthe"
+    },
     "type": "spirit",
     "storage": "room_temp",
     "shelf_life": "無期限",
     "priority": "optional",
     "price_range": "¥3,000〜¥6,000",
     "home_bar_note": "ニガヨモギの蒸留酒。サゼラックのリンスに数滴使う。少量で長持ち",
-    "recommended_brands": ["ペルノ アブサン", "リカール"]
+    "recommended_brands": [
+      "ペルノ アブサン",
+      "リカール"
+    ]
   },
   {
     "id": "peychauds-bitters",
-    "name": { "ja": "ペイショーズビターズ", "en": "Peychaud's Bitters" },
+    "name": {
+      "ja": "ペイショーズビターズ",
+      "en": "Peychaud's Bitters"
+    },
     "type": "bitters",
     "storage": "room_temp",
     "shelf_life": "実質無期限",
     "priority": "optional",
     "price_range": "¥1,500〜¥2,500",
     "home_bar_note": "ニューオーリンズ発祥のビターズ。サゼラックに必須",
-    "recommended_brands": ["ペイショーズ"]
+    "recommended_brands": [
+      "ペイショーズ"
+    ]
   },
   {
     "id": "cherry-heering",
-    "name": { "ja": "チェリーヒーリング", "en": "Cherry Heering" },
+    "name": {
+      "ja": "チェリーヒーリング",
+      "en": "Cherry Heering"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥2,000〜¥3,500",
     "home_bar_note": "デンマーク産チェリーリキュール。シンガポールスリングに必須",
-    "recommended_brands": ["ヒーリング チェリー"]
+    "recommended_brands": [
+      "ヒーリング チェリー"
+    ]
   },
   {
     "id": "benedictine",
-    "name": { "ja": "ベネディクティン", "en": "Bénédictine" },
+    "name": {
+      "ja": "ベネディクティン",
+      "en": "Bénédictine"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥2,500〜¥4,000",
     "home_bar_note": "ハーブ系リキュール。シンガポールスリングなどに使用",
-    "recommended_brands": ["ベネディクティン D.O.M."]
+    "recommended_brands": [
+      "ベネディクティン D.O.M."
+    ]
   },
   {
     "id": "chartreuse",
-    "name": { "ja": "シャルトリューズ（グリーン）", "en": "Green Chartreuse" },
+    "name": {
+      "ja": "シャルトリューズ（グリーン）",
+      "en": "Green Chartreuse"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥4,000〜¥7,000",
     "home_bar_note": "修道院で作られるハーブリキュール。ラストワードに必須。高価だが少量使い",
-    "recommended_brands": ["シャルトリューズ ヴェール"]
+    "recommended_brands": [
+      "シャルトリューズ ヴェール"
+    ]
   },
   {
     "id": "maraschino-liqueur",
-    "name": { "ja": "マラスキーノリキュール", "en": "Maraschino Liqueur" },
+    "name": {
+      "ja": "マラスキーノリキュール",
+      "en": "Maraschino Liqueur"
+    },
     "type": "liqueur",
     "storage": "room_temp",
     "shelf_life": "開封後約1年",
     "priority": "optional",
     "price_range": "¥2,000〜¥3,500",
     "home_bar_note": "マラスカチェリーの蒸留酒。ラストワード、アヴィエーションに",
-    "recommended_brands": ["ルクサルド マラスキーノ"]
+    "recommended_brands": [
+      "ルクサルド マラスキーノ"
+    ]
   },
   {
     "id": "lillet-blanc",
-    "name": { "ja": "リレブラン", "en": "Lillet Blanc" },
+    "name": {
+      "ja": "リレブラン",
+      "en": "Lillet Blanc"
+    },
     "type": "vermouth",
     "storage": "refrigerate",
     "shelf_life": "開封後1〜3ヶ月（要冷蔵）",
     "priority": "optional",
     "price_range": "¥1,500〜¥2,500",
     "home_bar_note": "フランス産アペリティフワイン。ヴェスパーマティーニに使用",
-    "recommended_brands": ["リレ ブラン"]
+    "recommended_brands": [
+      "リレ ブラン"
+    ]
   },
   {
     "id": "apple-brandy",
-    "name": { "ja": "アップルブランデー（カルヴァドス）", "en": "Apple Brandy / Calvados" },
+    "name": {
+      "ja": "アップルブランデー（カルヴァドス）",
+      "en": "Apple Brandy / Calvados"
+    },
     "type": "spirit",
     "storage": "room_temp",
     "shelf_life": "無期限",
     "priority": "optional",
     "price_range": "¥2,500〜¥5,000",
     "home_bar_note": "りんごから造る蒸留酒。ハーバードクーラーやジャックローズに使用",
-    "recommended_brands": ["カルヴァドス ブラー", "ラード アップルジャック"]
+    "recommended_brands": [
+      "カルヴァドス ブラー",
+      "ラード アップルジャック"
+    ]
+  },
+  {
+    "id": "non-alcoholic-gin",
+    "name": {
+      "ja": "ノンアルコールジン",
+      "en": "Non-Alcoholic Gin"
+    },
+    "type": "other",
+    "storage": "refrigerate",
+    "shelf_life": "開封後1〜2ヶ月（要冷蔵）",
+    "priority": "recommended",
+    "price_range": "¥1,500〜¥3,500",
+    "home_bar_note": "ジントニック系モクテルのベース。香り重視で選ぶと満足度が高い",
+    "recommended_brands": [
+      "Seedlip Garden 108",
+      "NEMA 0% GIN STYLE"
+    ]
+  },
+  {
+    "id": "non-alcoholic-aperitif",
+    "name": {
+      "ja": "ノンアルコールアペリティフ",
+      "en": "Non-Alcoholic Aperitif"
+    },
+    "type": "other",
+    "storage": "refrigerate",
+    "shelf_life": "開封後1〜2ヶ月（要冷蔵）",
+    "priority": "optional",
+    "price_range": "¥1,500〜¥3,500",
+    "home_bar_note": "カンパリ系の苦味をノンアルで再現。ビターなモクテルに使える",
+    "recommended_brands": [
+      "Crodino",
+      "Lyre's Italian Spritz"
+    ]
+  },
+  {
+    "id": "non-alcoholic-vermouth",
+    "name": {
+      "ja": "ノンアルコールベルモット",
+      "en": "Non-Alcoholic Vermouth"
+    },
+    "type": "other",
+    "storage": "refrigerate",
+    "shelf_life": "開封後1〜2ヶ月（要冷蔵）",
+    "priority": "optional",
+    "price_range": "¥1,500〜¥3,500",
+    "home_bar_note": "ハーブ香の厚みを足す補助材。ノグローニ系のバランス取りに有効",
+    "recommended_brands": [
+      "Lyre's Apéritif Rosso",
+      "Martini Vibrante"
+    ]
   }
 ]

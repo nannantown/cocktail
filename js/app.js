@@ -31,7 +31,7 @@ const GLASS_SVG = {
 const DEFAULT_GLASS_SVG = GLASS_SVG['cocktail-glass'];
 const CATEGORY_LABELS = {
   short: 'ショート', long: 'ロング', tropical: 'トロピカル',
-  standard: 'スタンダード', shot: 'ショット', hot: 'ホット', 'non-alcohol': 'ノンアル',
+  standard: 'スタンダード', shot: 'ショット', hot: 'ホット', mocktail: 'モクテル',
 };
 const METHOD_LABELS = {
   shake: 'シェーク', stir: 'ステア', build: 'ビルド', blend: 'ブレンド', layer: 'レイヤー',

@@ -5,42 +5,97 @@
   "definitions": {
     "cocktail": {
       "type": "object",
-      "required": ["id", "name", "category", "method", "ingredients", "required_tools", "instructions"],
+      "required": [
+        "id",
+        "name",
+        "category",
+        "method",
+        "ingredients",
+        "required_tools",
+        "instructions"
+      ],
       "properties": {
-        "id": { "type": "string", "description": "一意の識別子（英語スラッグ）" },
+        "id": {
+          "type": "string",
+          "description": "一意の識別子（英語スラッグ）"
+        },
         "name": {
           "type": "object",
-          "required": ["ja", "en"],
+          "required": [
+            "ja",
+            "en"
+          ],
           "properties": {
-            "ja": { "type": "string" },
-            "en": { "type": "string" }
+            "ja": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            }
           }
         },
         "category": {
           "type": "string",
-          "enum": ["standard", "tropical", "short", "long", "shot", "hot", "non-alcohol"]
+          "enum": [
+            "standard",
+            "tropical",
+            "short",
+            "long",
+            "shot",
+            "hot",
+            "mocktail"
+          ]
         },
         "method": {
           "type": "string",
-          "enum": ["shake", "stir", "build", "blend", "layer"]
+          "enum": [
+            "shake",
+            "stir",
+            "build",
+            "blend",
+            "layer"
+          ]
         },
         "taste": {
           "type": "string",
-          "enum": ["sweet", "dry", "sour", "bitter", "sweet-sour", "refreshing"]
+          "enum": [
+            "sweet",
+            "dry",
+            "sour",
+            "bitter",
+            "sweet-sour",
+            "refreshing"
+          ]
         },
         "alcohol_strength": {
           "type": "string",
-          "enum": ["strong", "medium", "weak", "none"]
+          "enum": [
+            "strong",
+            "medium",
+            "weak",
+            "none"
+          ]
         },
-        "description": { "type": "string" },
+        "description": {
+          "type": "string"
+        },
         "ingredients": {
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["bottle_id", "amount"],
+            "required": [
+              "bottle_id",
+              "amount"
+            ],
             "properties": {
-              "bottle_id": { "type": "string", "description": "bottles.json のIDを参照" },
-              "amount": { "type": "string", "description": "分量（例: 30ml, 1tsp, 適量）" }
+              "bottle_id": {
+                "type": "string",
+                "description": "bottles.json のIDを参照"
+              },
+              "amount": {
+                "type": "string",
+                "description": "分量（例: 30ml, 1tsp, 適量）"
+              }
             }
           }
         },
@@ -48,89 +103,184 @@
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["bottle_id", "amount"],
+            "required": [
+              "bottle_id",
+              "amount"
+            ],
             "properties": {
-              "bottle_id": { "type": "string", "description": "bottles.json のIDを参照" },
-              "amount": { "type": "string" }
+              "bottle_id": {
+                "type": "string",
+                "description": "bottles.json のIDを参照"
+              },
+              "amount": {
+                "type": "string"
+              }
             }
           }
         },
         "required_tools": {
           "type": "array",
-          "items": { "type": "string", "description": "tools.json のIDを参照" }
+          "items": {
+            "type": "string",
+            "description": "tools.json のIDを参照"
+          }
         },
-        "alternative_tools_note": { "type": "string", "description": "代替グラス等の説明" },
+        "alternative_tools_note": {
+          "type": "string",
+          "description": "代替グラス等の説明"
+        },
         "instructions": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
     "bottle": {
       "type": "object",
-      "required": ["id", "name", "type", "storage", "priority"],
+      "required": [
+        "id",
+        "name",
+        "type",
+        "storage",
+        "priority"
+      ],
       "properties": {
-        "id": { "type": "string" },
+        "id": {
+          "type": "string"
+        },
         "name": {
           "type": "object",
-          "required": ["ja", "en"],
+          "required": [
+            "ja",
+            "en"
+          ],
           "properties": {
-            "ja": { "type": "string" },
-            "en": { "type": "string" }
+            "ja": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            }
           }
         },
         "type": {
           "type": "string",
-          "enum": ["spirit", "liqueur", "vermouth", "bitters", "mixer", "juice", "syrup", "fresh", "garnish", "pantry", "other"]
+          "enum": [
+            "spirit",
+            "liqueur",
+            "vermouth",
+            "bitters",
+            "mixer",
+            "juice",
+            "syrup",
+            "fresh",
+            "garnish",
+            "pantry",
+            "other"
+          ]
         },
         "storage": {
           "type": "string",
-          "enum": ["room_temp", "refrigerate", "freezer"],
+          "enum": [
+            "room_temp",
+            "refrigerate",
+            "freezer"
+          ],
           "description": "保存方法"
         },
-        "shelf_life": { "type": "string", "description": "保存期間の目安" },
+        "shelf_life": {
+          "type": "string",
+          "description": "保存期間の目安"
+        },
         "priority": {
           "type": "string",
-          "enum": ["essential", "recommended", "optional"],
+          "enum": [
+            "essential",
+            "recommended",
+            "optional"
+          ],
           "description": "ホームバーでの重要度"
         },
-        "price_range": { "type": "string" },
-        "home_bar_note": { "type": "string", "description": "家庭で使う際のアドバイス" },
+        "price_range": {
+          "type": "string"
+        },
+        "home_bar_note": {
+          "type": "string",
+          "description": "家庭で使う際のアドバイス"
+        },
         "recommended_brands": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
     "tool": {
       "type": "object",
-      "required": ["id", "name", "category", "priority"],
+      "required": [
+        "id",
+        "name",
+        "category",
+        "priority"
+      ],
       "properties": {
-        "id": { "type": "string" },
+        "id": {
+          "type": "string"
+        },
         "name": {
           "type": "object",
-          "required": ["ja", "en"],
+          "required": [
+            "ja",
+            "en"
+          ],
           "properties": {
-            "ja": { "type": "string" },
-            "en": { "type": "string" }
+            "ja": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            }
           }
         },
         "category": {
           "type": "string",
-          "enum": ["mixing", "measuring", "garnish", "glassware", "other"]
+          "enum": [
+            "mixing",
+            "measuring",
+            "garnish",
+            "glassware",
+            "other"
+          ]
         },
         "priority": {
           "type": "string",
-          "enum": ["essential", "recommended", "optional"]
+          "enum": [
+            "essential",
+            "recommended",
+            "optional"
+          ]
         },
-        "price_range": { "type": "string" },
-        "description": { "type": "string" },
-        "home_bar_note": { "type": "string" },
+        "price_range": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "home_bar_note": {
+          "type": "string"
+        },
         "used_for_methods": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
-        "capacity": { "type": "string" }
+        "capacity": {
+          "type": "string"
+        }
       }
     }
   }
